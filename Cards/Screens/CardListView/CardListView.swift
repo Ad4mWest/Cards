@@ -1,57 +1,55 @@
-//
 //  CardListView.swift
 //  Cards
-//
 //  Created by Adam West on 13.01.2024.
-//
 
 import SwiftUI
+import Combine
 
 struct CardListView: View {
-    var card = MockData.sampleCard
-    @State private var cards = MockData.cards
-    @State private var isShowingDetail = false
+    @StateObject var viewModel = CardListViewModel()
     
     var body: some View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(cards) { card in
+                    ForEach(viewModel.cards, id: \.self) { card in
                         CardListCell(card: card)
+                            .onTapGesture {
+                                viewModel.isShowingDetail = true
+                                viewModel.selectedCard = card
+                            }
                     }
                     .onDelete(perform: { indexSet in
-                        cards.remove(atOffsets: indexSet)
+                        viewModel.cards.remove(atOffsets: indexSet)
                     })
                     .onMove(perform: { indices, newOffset in
-                        cards.move(fromOffsets: indices, toOffset: newOffset)
+                        viewModel.cards.move(fromOffsets: indices, toOffset: newOffset)
                     })
-                    .onTapGesture {
-                        isShowingDetail = true
-                    }
+                    
                 }
-                .disabled(isShowingDetail)
+                .disabled(viewModel.isShowingDetail)
                 .navigationTitle("G3n3rate 📇")
                 .toolbar {
                     ToolbarItem(placement: .primaryAction,
                                 content: {
                         Button {
-                            cards.append(card)
+                            viewModel.getPersonName()
                         } label: {
                             Image(systemName: "plus.circle")
-                                .foregroundStyle(.mainApp)
+                                .foregroundColor(.mainApp)
                         }
                     })
                 }
             }
-            .blur(radius: isShowingDetail ? 20 : 0)
+            .blur(radius: viewModel.isShowingDetail ? 20 : 0)
             
-            .onAppear {
-
+            if viewModel.isShowingDetail {
+                if let selectedCard = viewModel.selectedCard {
+                    CardDetailView(card: selectedCard, isShowingDetails: $viewModel.isShowingDetail)
+                }
             }
-            if isShowingDetail {
-                CardDetailView(card: card, isShowingDetails: $isShowingDetail)
-            }
-            if cards.isEmpty {
+            
+            if viewModel.cards.isEmpty {
                 EmptyCardView()
             }
         }
