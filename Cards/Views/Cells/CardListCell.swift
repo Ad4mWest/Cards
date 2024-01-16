@@ -1,9 +1,6 @@
-//
 //  AppetizerListCell.swift
 //  Appotizers
-//
 //  Created by Adam West on 11.01.2024.
-//
 
 import SwiftUI
 
@@ -11,10 +8,9 @@ struct CardListCell: View {
     var card: Card
     
     var body: some View {
-        HStack(spacing: 20) {
-            Image("sticker")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+        HStack(spacing: 20)
+        {
+            AsyncImageView(url: card.imageURL)
                 .frame(width: 120, height: 90)
                 .cornerRadius(8)
             
@@ -22,9 +18,15 @@ struct CardListCell: View {
                 Text(card.name)
                     .font(.title2)
                     .fontWeight(.medium)
-                Text(card.gender)
-                    .foregroundStyle(.gray)
-                    .fontWeight(.semibold)
+                if #available(iOS 16.0, *) {
+                    Text(card.gender)
+                        .foregroundStyle(.gray)
+                        .fontWeight(.semibold)
+                } else {
+                    Text(card.gender)
+                        .foregroundColor(.gray)
+                        .fontWeight(.semibold)
+                }
             }
             .padding(.leading)
         }

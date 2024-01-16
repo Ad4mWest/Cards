@@ -1,9 +1,6 @@
-//
 //  CardTabView.swift
 //  Appotizers
-//
 //  Created by Adam West on 11.01.2024.
-//
 
 import SwiftUI
 
@@ -21,7 +18,7 @@ struct CardTabView: View {
                     Text("Account")
                 }
         }
-        .tint(Color.mainApp)
+        .accentColor(Color.mainApp)
     }
 }
 
