@@ -8,7 +8,7 @@ struct CardAccountView: View {
     var body: some View {
         NavigationView {
             Text("AccountView!")
-                .navigationTitle("🤖 Pro.f1le")
+                .navigationTitle("Profile")
         }
     }
 }

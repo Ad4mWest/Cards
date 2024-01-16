@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0BE2B5676E1002375E2 /* AgeResponse.swift */; };
 		66A2F00F2B5572E200858008 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F00E2B5572E200858008 /* ImageDownloader.swift */; };
-		66A2F0112B5591A700858008 /* CardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0102B5591A700858008 /* CardResponse.swift */; };
+		66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0102B5591A700858008 /* PersonResponse.swift */; };
 		66A2F0142B55AAF700858008 /* CardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0132B55AAF700858008 /* CardInfo.swift */; };
 		66AC605A2B5263C1009BE505 /* CardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60592B5263C1009BE505 /* CardsApp.swift */; };
 		66AC605C2B5263C1009BE505 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC605B2B5263C1009BE505 /* CardListView.swift */; };
@@ -31,8 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		669BD0BE2B5676E1002375E2 /* AgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeResponse.swift; sourceTree = "<group>"; };
 		66A2F00E2B5572E200858008 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
-		66A2F0102B5591A700858008 /* CardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardResponse.swift; sourceTree = "<group>"; };
+		66A2F0102B5591A700858008 /* PersonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonResponse.swift; sourceTree = "<group>"; };
 		66A2F0132B55AAF700858008 /* CardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfo.swift; sourceTree = "<group>"; };
 		66AC60562B5263C1009BE505 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AC60592B5263C1009BE505 /* CardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsApp.swift; sourceTree = "<group>"; };
@@ -163,7 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				66AC609B2B541302009BE505 /* Card.swift */,
-				66A2F0102B5591A700858008 /* CardResponse.swift */,
+				66A2F0102B5591A700858008 /* PersonResponse.swift */,
+				669BD0BE2B5676E1002375E2 /* AgeResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */,
 				66AC605C2B5263C1009BE505 /* CardListView.swift in Sources */,
 				66AC609C2B541302009BE505 /* Card.swift in Sources */,
 				66AC60A22B54178A009BE505 /* EmptyCardView.swift in Sources */,
@@ -309,7 +313,7 @@
 				66AC60A92B542BEE009BE505 /* Alert.swift in Sources */,
 				66AC60922B5411B3009BE505 /* XDismissButton.swift in Sources */,
 				66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */,
-				66A2F0112B5591A700858008 /* CardResponse.swift in Sources */,
+				66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */,
 				66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -426,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

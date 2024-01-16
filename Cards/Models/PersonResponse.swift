@@ -1,10 +1,10 @@
-//  CardResponse.swift
+//  PersonResponse.swift
 //  Cards
 //  Created by Adam West on 15.01.2024.
 
 import Foundation
 
-struct CardResponse: Decodable {
+struct PersonResponse: Decodable {
     let results: [Results]
 }
 

@@ -35,7 +35,7 @@ final class NetworkManager {
             }
             
             do {
-                let decodedResponse = try JSONDecoder().decode(CardResponse.self, from: data)
+                let decodedResponse = try JSONDecoder().decode(PersonResponse.self, from: data)
                 completed(.success(decodedResponse.results[0].name))
             } catch {
                 completed(.failure(APError.invalidData))

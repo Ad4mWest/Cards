@@ -28,7 +28,7 @@ struct CardListView: View {
                     
                 }
                 .disabled(viewModel.isShowingDetail)
-                .navigationTitle("G3n3rate 📇")
+                .navigationTitle("Generate cards")
                 .toolbar {
                     ToolbarItem(placement: .primaryAction,
                                 content: {
