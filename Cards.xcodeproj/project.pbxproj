@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0BE2B5676E1002375E2 /* AgeResponse.swift */; };
+		669BD0C12B568C84002375E2 /* PersonNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C02B568C84002375E2 /* PersonNetworkService.swift */; };
+		669BD0C32B569F2E002375E2 /* GenderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C22B569F2E002375E2 /* GenderResponse.swift */; };
+		669BD0C52B569FE1002375E2 /* NationalityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C42B569FE1002375E2 /* NationalityResponse.swift */; };
+		669BD0C82B56A9D9002375E2 /* PersonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C72B56A9D9002375E2 /* PersonRequest.swift */; };
+		669BD0CA2B56AA4D002375E2 /* AgeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C92B56AA4D002375E2 /* AgeRequest.swift */; };
+		669BD0CC2B56AA61002375E2 /* GenderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0CB2B56AA61002375E2 /* GenderRequest.swift */; };
+		669BD0CE2B56AA78002375E2 /* NationalityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0CD2B56AA78002375E2 /* NationalityRequest.swift */; };
+		669BD0D02B572220002375E2 /* CardListWareframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0CF2B572220002375E2 /* CardListWareframe.swift */; };
 		66A2F00F2B5572E200858008 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F00E2B5572E200858008 /* ImageDownloader.swift */; };
 		66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0102B5591A700858008 /* PersonResponse.swift */; };
 		66A2F0142B55AAF700858008 /* CardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0132B55AAF700858008 /* CardInfo.swift */; };
@@ -23,16 +31,23 @@
 		66AC60A22B54178A009BE505 /* EmptyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A12B54178A009BE505 /* EmptyCardView.swift */; };
 		66AC60A42B5419BE009BE505 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A32B5419BE009BE505 /* CardDetailView.swift */; };
 		66AC60A92B542BEE009BE505 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A82B542BEE009BE505 /* Alert.swift */; };
-		66AC60AB2B542BFB009BE505 /* APError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AA2B542BFB009BE505 /* APError.swift */; };
+		66AC60AB2B542BFB009BE505 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AA2B542BFB009BE505 /* APIError.swift */; };
 		66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AC2B542C0A009BE505 /* Color + Ext.swift */; };
 		66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */; };
-		66AC60B42B5430E7009BE505 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B32B5430E7009BE505 /* NetworkManager.swift */; };
 		66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B52B543746009BE505 /* CardListViewModel.swift */; };
-		66AC60B82B5462BD009BE505 /* NetworkManagerCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B72B5462BD009BE505 /* NetworkManagerCombine.swift */; };
+		66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B72B5462BD009BE505 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		669BD0BE2B5676E1002375E2 /* AgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeResponse.swift; sourceTree = "<group>"; };
+		669BD0C02B568C84002375E2 /* PersonNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonNetworkService.swift; sourceTree = "<group>"; };
+		669BD0C22B569F2E002375E2 /* GenderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderResponse.swift; sourceTree = "<group>"; };
+		669BD0C42B569FE1002375E2 /* NationalityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityResponse.swift; sourceTree = "<group>"; };
+		669BD0C72B56A9D9002375E2 /* PersonRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRequest.swift; sourceTree = "<group>"; };
+		669BD0C92B56AA4D002375E2 /* AgeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRequest.swift; sourceTree = "<group>"; };
+		669BD0CB2B56AA61002375E2 /* GenderRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderRequest.swift; sourceTree = "<group>"; };
+		669BD0CD2B56AA78002375E2 /* NationalityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityRequest.swift; sourceTree = "<group>"; };
+		669BD0CF2B572220002375E2 /* CardListWareframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListWareframe.swift; sourceTree = "<group>"; };
 		66A2F00E2B5572E200858008 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		66A2F0102B5591A700858008 /* PersonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonResponse.swift; sourceTree = "<group>"; };
 		66A2F0132B55AAF700858008 /* CardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfo.swift; sourceTree = "<group>"; };
@@ -49,12 +64,11 @@
 		66AC60A12B54178A009BE505 /* EmptyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCardView.swift; sourceTree = "<group>"; };
 		66AC60A32B5419BE009BE505 /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		66AC60A82B542BEE009BE505 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		66AC60AA2B542BFB009BE505 /* APError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APError.swift; sourceTree = "<group>"; };
+		66AC60AA2B542BFB009BE505 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		66AC60AC2B542C0A009BE505 /* Color + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color + Ext.swift"; sourceTree = "<group>"; };
 		66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRemoteImage.swift; sourceTree = "<group>"; };
-		66AC60B32B5430E7009BE505 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		66AC60B52B543746009BE505 /* CardListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
-		66AC60B72B5462BD009BE505 /* NetworkManagerCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerCombine.swift; sourceTree = "<group>"; };
+		66AC60B72B5462BD009BE505 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +82,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		669BD0C62B56A98C002375E2 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				669BD0C72B56A9D9002375E2 /* PersonRequest.swift */,
+				669BD0C92B56AA4D002375E2 /* AgeRequest.swift */,
+				669BD0CB2B56AA61002375E2 /* GenderRequest.swift */,
+				669BD0CD2B56AA78002375E2 /* NationalityRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		66AC604D2B5263C1009BE505 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +174,7 @@
 				66AC605B2B5263C1009BE505 /* CardListView.swift */,
 				66AC60B52B543746009BE505 /* CardListViewModel.swift */,
 				66AC60A32B5419BE009BE505 /* CardDetailView.swift */,
+				669BD0CF2B572220002375E2 /* CardListWareframe.swift */,
 			);
 			path = CardListView;
 			sourceTree = "<group>";
@@ -167,6 +193,8 @@
 				66AC609B2B541302009BE505 /* Card.swift */,
 				66A2F0102B5591A700858008 /* PersonResponse.swift */,
 				669BD0BE2B5676E1002375E2 /* AgeResponse.swift */,
+				669BD0C22B569F2E002375E2 /* GenderResponse.swift */,
+				669BD0C42B569FE1002375E2 /* NationalityResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -193,7 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				66AC60A82B542BEE009BE505 /* Alert.swift */,
-				66AC60AA2B542BFB009BE505 /* APError.swift */,
+				66AC60AA2B542BFB009BE505 /* APIError.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -218,8 +246,9 @@
 		66AC60B22B5430DE009BE505 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				66AC60B32B5430E7009BE505 /* NetworkManager.swift */,
-				66AC60B72B5462BD009BE505 /* NetworkManagerCombine.swift */,
+				669BD0C62B56A98C002375E2 /* Requests */,
+				66AC60B72B5462BD009BE505 /* NetworkService.swift */,
+				669BD0C02B568C84002375E2 /* PersonNetworkService.swift */,
 				66A2F00E2B5572E200858008 /* ImageDownloader.swift */,
 			);
 			path = Managers;
@@ -295,21 +324,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669BD0D02B572220002375E2 /* CardListWareframe.swift in Sources */,
+				669BD0C12B568C84002375E2 /* PersonNetworkService.swift in Sources */,
+				669BD0CA2B56AA4D002375E2 /* AgeRequest.swift in Sources */,
+				669BD0C52B569FE1002375E2 /* NationalityResponse.swift in Sources */,
 				669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */,
 				66AC605C2B5263C1009BE505 /* CardListView.swift in Sources */,
 				66AC609C2B541302009BE505 /* Card.swift in Sources */,
+				669BD0CE2B56AA78002375E2 /* NationalityRequest.swift in Sources */,
 				66AC60A22B54178A009BE505 /* EmptyCardView.swift in Sources */,
+				669BD0C32B569F2E002375E2 /* GenderResponse.swift in Sources */,
 				66AC60992B54126B009BE505 /* CardAccountView.swift in Sources */,
 				66A2F0142B55AAF700858008 /* CardInfo.swift in Sources */,
-				66AC60AB2B542BFB009BE505 /* APError.swift in Sources */,
+				66AC60AB2B542BFB009BE505 /* APIError.swift in Sources */,
 				66AC60A42B5419BE009BE505 /* CardDetailView.swift in Sources */,
 				66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */,
+				669BD0C82B56A9D9002375E2 /* PersonRequest.swift in Sources */,
 				66AC60A02B5416C6009BE505 /* CardTabView.swift in Sources */,
-				66AC60B82B5462BD009BE505 /* NetworkManagerCombine.swift in Sources */,
+				669BD0CC2B56AA61002375E2 /* GenderRequest.swift in Sources */,
+				66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */,
 				66AC605A2B5263C1009BE505 /* CardsApp.swift in Sources */,
 				66A2F00F2B5572E200858008 /* ImageDownloader.swift in Sources */,
 				66AC60902B5411B3009BE505 /* CardListCell.swift in Sources */,
-				66AC60B42B5430E7009BE505 /* NetworkManager.swift in Sources */,
 				66AC60A92B542BEE009BE505 /* Alert.swift in Sources */,
 				66AC60922B5411B3009BE505 /* XDismissButton.swift in Sources */,
 				66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */,

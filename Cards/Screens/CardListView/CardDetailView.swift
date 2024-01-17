@@ -42,6 +42,15 @@ struct CardDetailView: View {
     }
 }
 
-#Preview {
-    CardDetailView(card: MockData.sampleCard, isShowingDetails: .constant(true))
+struct CardDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardDetailView(card:
+            Card(id: 001,
+            name: "Adam",
+            imageURL: "",
+            age: 5,
+            gender: "male",
+            nationality: "Ru"),
+                       isShowingDetails: .constant(true))
+    }
 }

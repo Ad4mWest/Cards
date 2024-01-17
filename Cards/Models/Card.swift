@@ -12,15 +12,3 @@ struct Card: Identifiable, Decodable, Hashable {
     let gender: String
     let nationality: String
 }
-
-struct MockData {
-    static let sampleCard = Card(
-        id: 001,
-        name: "Adam West",
-        imageURL: String(),
-        age: 5,
-        gender: "Male",
-        nationality: "Russian")
-    
-    static let cards = [sampleCard, sampleCard]
-}

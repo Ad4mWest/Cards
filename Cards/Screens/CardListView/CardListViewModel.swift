@@ -12,25 +12,56 @@ final class CardListViewModel: ObservableObject {
     @Published var isShowingDetail = false
     @Published var selectedCard: Card?
     private var id: Int = 0
+    private var name = "adam"
     
     private var cancellables = Set<AnyCancellable>()
-    private var apiClient = NetworkManagerCombine()
+    private var apiClient: PersonNetworkService
     
-    func getPersonName() {
+    init(apiClient: PersonNetworkService) {
+        self.apiClient = apiClient 
+    }
+    
+    func getNewCard() {
         id += 1
-        apiClient.fetchDataPerson()
+        apiClient.randomPerson()
+            .combineLatest(apiClient.randomAge(name: name),
+                           //apiClient.randomGender(name: name),
+                           apiClient.randomNationality(name: name))
             .sink { completion in
                 if case .failure(let error) = completion {
-                    assertionFailure(error.localizedDescription)
+                    print(error.localizedDescription)
                 }
-            } receiveValue: { person in
+            } receiveValue: { (person, age,  nationality) in // gender,
+                guard let person = person.results.first else { return }
+                guard let nationality = nationality.country.first else { return }
+                self.name = person.name.first
                 self.cards.append(Card(
                     id: self.id,
-                    name: "\(person.results[0].name.title) \(person.results[0].name.first) \(person.results[0].name.last)",
-                    imageURL: person.results[0].picture.large,
-                    age: 5,
-                    gender: "Male",
-                    nationality: "Russian"))
+                    name: person.name.title + " " + person.name.first + " " + person.name.last,
+                    imageURL: person.picture.large,
+                    age: age.age,
+                    gender: person.gender, // gender.gender,
+                    nationality: nationality.country_id))
+                
+            }
+            .store(in: &cancellables)
+        
+        apiClient.randomAge(name: name)
+            .sink { _ in } receiveValue: { person in
+                print(person.age)
+            }
+            .store(in: &cancellables)
+        
+//        apiClient.randomGender(name: name)
+//            .sink { _ in } receiveValue: { person in
+//                print(person.gender)
+//            }
+//            .store(in: &cancellables)
+        
+        apiClient.randomNationality(name: name)
+            .compactMap { $0.country.first }
+            .sink { _ in } receiveValue: { person in
+                print(person.country_id)
             }
             .store(in: &cancellables)
     }

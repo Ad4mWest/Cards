@@ -15,6 +15,8 @@ struct EmptyCardView: View {
     }
 }
 
-#Preview {
-    EmptyCardView()
+struct EmptyCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        EmptyCardView()
+    }
 }

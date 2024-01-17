@@ -13,6 +13,8 @@ struct CardAccountView: View {
     }
 }
 
-#Preview {
-    CardAccountView()
+struct CardAccountView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardAccountView()
+    }
 }

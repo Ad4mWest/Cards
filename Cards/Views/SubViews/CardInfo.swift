@@ -21,6 +21,8 @@ struct CardInfo: View {
     }
 }
 
-#Preview {
-    CardInfo(title: String(), text: String())
+struct CardInfo_Previews: PreviewProvider {
+    static var previews: some View {
+        CardInfo(title: String(), text: String())
+    }
 }

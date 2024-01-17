@@ -6,7 +6,13 @@ import SwiftUI
 import Combine
 
 struct CardListView: View {
-    @StateObject var viewModel = CardListViewModel()
+    //@StateObject var viewModel = CardListViewModel(apiClient: PersonNetworkServiceImpl())
+    
+    @StateObject private var viewModel: CardListViewModel
+    
+    init(viewModel: CardListViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ZStack {
@@ -33,10 +39,10 @@ struct CardListView: View {
                     ToolbarItem(placement: .primaryAction,
                                 content: {
                         Button {
-                            viewModel.getPersonName()
+                            viewModel.getNewCard()
                         } label: {
                             Image(systemName: "plus.circle")
-                                .foregroundColor(.mainApp)
+                                .foregroundColor(.mainAppC)
                         }
                     })
                 }
@@ -56,6 +62,8 @@ struct CardListView: View {
     }
 }
 
-#Preview {
-    CardListView()
+struct CardListView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardListView(viewModel: CardListViewModel(apiClient: PersonNetworkServiceImpl()))
+    }
 }
