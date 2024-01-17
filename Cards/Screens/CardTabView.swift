@@ -5,9 +5,12 @@
 import SwiftUI
 
 struct CardTabView: View {
+    private let builer = CardListWareframe()
+    
     var body: some View {
         TabView {
-            CardListView()
+            //CardListView()
+            builer.madeCardList()
                 .tabItem {
                     Image(systemName: "lanyardcard.fill")
                     Text("Cards")
@@ -18,10 +21,12 @@ struct CardTabView: View {
                     Text("Account")
                 }
         }
-        .accentColor(Color.mainApp)
+        .accentColor(Color.mainAppC)
     }
 }
 
-#Preview {
-    CardTabView()
+struct CardTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardTabView()
+    }
 }

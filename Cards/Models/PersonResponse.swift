@@ -5,21 +5,22 @@
 import Foundation
 
 struct PersonResponse: Decodable {
-    let results: [Results]
-}
-
-struct Results: Decodable {
-    let name: Person
-    let picture: Picture
+    let results: [Person]
 }
 
 struct Person: Decodable {
+    let gender: String
+    let name: PersonName
+    let picture: PersonPicture
+}
+
+struct PersonName: Decodable {
     let title: String
     let first: String
     let last: String
 }
 
-struct Picture: Decodable {
+struct PersonPicture: Decodable {
     let large: String
     let medium: String
     let thumbnail: String

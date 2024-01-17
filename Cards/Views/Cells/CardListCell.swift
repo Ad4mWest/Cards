@@ -33,6 +33,14 @@ struct CardListCell: View {
     }
 }
 
-#Preview {
-    CardListCell(card: MockData.sampleCard)
+struct CardListCell_Previews: PreviewProvider {
+    static var previews: some View {
+        CardListCell(card: Card(
+            id: 001,
+            name: "Adam",
+            imageURL: "",
+            age: 5,
+            gender: "male",
+            nationality: "Ru"))
+    }
 }
