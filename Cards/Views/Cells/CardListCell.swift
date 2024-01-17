@@ -10,7 +10,7 @@ struct CardListCell: View {
     var body: some View {
         HStack(spacing: 20)
         {
-            AsyncImageView(url: card.imageURL)
+            CardRemoteImage(url: card.imageURL)
                 .frame(width: 120, height: 90)
                 .cornerRadius(8)
             
@@ -36,11 +36,13 @@ struct CardListCell: View {
 struct CardListCell_Previews: PreviewProvider {
     static var previews: some View {
         CardListCell(card: Card(
-            id: 001,
+            id: UUID(),
             name: "Adam",
             imageURL: "",
             age: 5,
             gender: "male",
-            nationality: "Ru"))
+            nationality: "Ru",
+            email: "",
+            phone: ""))
     }
 }

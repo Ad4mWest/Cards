@@ -5,10 +5,12 @@
 import Foundation
 
 struct Card: Identifiable, Decodable, Hashable {
-    var id: Int
+    var id: UUID
     let name: String
     let imageURL: String
     let age: Int
     let gender: String
     let nationality: String
+    let email: String
+    let phone: String
 }

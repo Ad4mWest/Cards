@@ -18,11 +18,11 @@ extension NetworkService {
             .mapError { error in
                         switch error {
                         case is URLError:
-                            return APIError.invalidURL
+                            return error
                         case is DecodingError:
-                            return APIError.decodingError
+                            return error
                         default:
-                            return APIError.unableToComplete
+                            return error
                         }
                     }
             .eraseToAnyPublisher()

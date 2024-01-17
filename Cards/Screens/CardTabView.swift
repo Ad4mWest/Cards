@@ -5,12 +5,11 @@
 import SwiftUI
 
 struct CardTabView: View {
-    private let builer = CardListWareframe()
+    private let cardList = CardListWireframe()
     
     var body: some View {
         TabView {
-            //CardListView()
-            builer.madeCardList()
+            cardList.madeCardList()
                 .tabItem {
                     Image(systemName: "lanyardcard.fill")
                     Text("Cards")

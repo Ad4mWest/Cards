@@ -6,14 +6,18 @@ import SwiftUI
 import Combine
 
 final class ImageDownloader: ObservableObject {
+    // MARK: Private properties
     @Published private(set) var image: UIImage?
+    
     private let url: String
     private var cancellable: AnyCancellable?
     
+    // MARK: Initialization
     init(url: String) {
         self.url = url
     }
     
+    // MARK: Public methods
     func start() {
         guard let urlString = URL(string: url) else {
             return
@@ -29,6 +33,7 @@ final class ImageDownloader: ObservableObject {
     func stop() {
         cancellable?.cancel()
     }
+    
     deinit {
         cancellable?.cancel()
     }

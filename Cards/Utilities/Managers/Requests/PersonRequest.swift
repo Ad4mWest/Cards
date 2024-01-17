@@ -5,5 +5,5 @@
 import Foundation
 
 enum PersonRequest {
-    static let url = "https://randomuser.me/api/?inc=gender,name,picture"
+    static let url = "https://randomuser.me/api/?inc=gender,name,email,phone,picture"
 }
