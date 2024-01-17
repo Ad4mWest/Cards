@@ -11,6 +11,8 @@ struct PersonResponse: Decodable {
 struct Person: Decodable {
     let gender: String
     let name: PersonName
+    let email: String
+    let phone: String
     let picture: PersonPicture
 }
 

@@ -5,7 +5,8 @@
 import SwiftUI
 import Combine
 
-struct AsyncImageView: View {
+struct CardRemoteImage: View {
+    // MARK: Private properties
     @ObservedObject private var downloader: ImageDownloader
     
     private var image: some View {
@@ -18,10 +19,12 @@ struct AsyncImageView: View {
         }
     }
     
+    // MARK: Initialization
     init(url: String) {
         downloader = ImageDownloader(url: url)
     }
     
+    // MARK: Lifecycle
     var body: some View {
         image
             .onAppear {

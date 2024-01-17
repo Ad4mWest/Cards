@@ -5,7 +5,7 @@
 import Foundation
 
 enum APIError: Error {
-    case invalidURL
+    case invalidURL(String)
     case invalidResponse
     case invalidData
     case decodingError

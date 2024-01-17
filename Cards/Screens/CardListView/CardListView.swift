@@ -6,24 +6,28 @@ import SwiftUI
 import Combine
 
 struct CardListView: View {
-    //@StateObject var viewModel = CardListViewModel(apiClient: PersonNetworkServiceImpl())
+    // MARK: Private properties
+    @ObservedObject private var viewModel: CardListViewModel
     
-    @StateObject private var viewModel: CardListViewModel
+    private let cardDetail = CardDetailWireframe()
     
+    // MARK: Initialization
     init(viewModel: CardListViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
     
+    // MARK: Lifecycle
     var body: some View {
         ZStack {
             NavigationView {
                 List {
                     ForEach(viewModel.cards, id: \.self) { card in
                         CardListCell(card: card)
-                            .onTapGesture {
-                                viewModel.isShowingDetail = true
-                                viewModel.selectedCard = card
-                            }
+                        NavigationLink("Details") {
+                            cardDetail.madeCardDetail(card: card)
+                        } 
+                        .foregroundColor(.mainApp)
+                        .font(.title3)
                     }
                     .onDelete(perform: { indexSet in
                         viewModel.cards.remove(atOffsets: indexSet)
@@ -33,7 +37,6 @@ struct CardListView: View {
                     })
                     
                 }
-                .disabled(viewModel.isShowingDetail)
                 .navigationTitle("Generate cards")
                 .toolbar {
                     ToolbarItem(placement: .primaryAction,
@@ -45,13 +48,6 @@ struct CardListView: View {
                                 .foregroundColor(.mainAppC)
                         }
                     })
-                }
-            }
-            .blur(radius: viewModel.isShowingDetail ? 20 : 0)
-            
-            if viewModel.isShowingDetail {
-                if let selectedCard = viewModel.selectedCard {
-                    CardDetailView(card: selectedCard, isShowingDetails: $viewModel.isShowingDetail)
                 }
             }
             
