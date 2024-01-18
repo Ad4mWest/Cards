@@ -9,7 +9,7 @@ struct CardListView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardListViewModel
     
-    private let cardDetail = CardDetailWireframe()
+    private let cardListWireframe = CardDetailWireframe()
     
     // MARK: Initialization
     init(viewModel: CardListViewModel) {
@@ -22,12 +22,11 @@ struct CardListView: View {
             NavigationView {
                 List {
                     ForEach(viewModel.cards, id: \.self) { card in
-                        CardListCell(card: card)
-                        NavigationLink("Details") {
-                            cardDetail.madeCardDetail(card: card)
-                        } 
-                        .foregroundColor(.mainApp)
-                        .font(.title3)
+                        NavigationLink {
+                            cardListWireframe.makeCardDetail(card: card)
+                        } label: {
+                            CardListCell(card: card)
+                        }
                     }
                     .onDelete(perform: { indexSet in
                         viewModel.cards.remove(atOffsets: indexSet)

@@ -9,7 +9,7 @@ struct CardTabView: View {
     
     var body: some View {
         TabView {
-            cardList.madeCardList()
+            cardList.makeCardList()
                 .tabItem {
                     Image(systemName: "lanyardcard.fill")
                     Text("Cards")

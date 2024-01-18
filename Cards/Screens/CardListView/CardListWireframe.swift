@@ -5,9 +5,9 @@
 import SwiftUI
 
 final class CardListWireframe {
-    func madeCardList() -> AnyView {
-        let apiClient = PersonNetworkServiceImpl()
-        let cardListViewModel = CardListViewModel(apiClient: apiClient)
+    func makeCardList() -> AnyView {
+        let personNetworkService = PersonNetworkServiceImpl()
+        let cardListViewModel = CardListViewModel(apiClient: personNetworkService)
         let cardListView = CardListView(viewModel: cardListViewModel)
         return AnyView(cardListView)
     }
