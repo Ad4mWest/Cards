@@ -187,10 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				66AC609B2B541302009BE505 /* Card.swift */,
-				66A2F0102B5591A700858008 /* PersonResponse.swift */,
-				669BD0BE2B5676E1002375E2 /* AgeResponse.swift */,
-				669BD0C42B569FE1002375E2 /* NationalityResponse.swift */,
-				665F738A2B591AD8005279CD /* GenderResponse.swift */,
+				66CCB1722B5955B6008214B2 /* NetworkModels */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,6 +246,17 @@
 				66A2F00E2B5572E200858008 /* ImageDownloader.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		66CCB1722B5955B6008214B2 /* NetworkModels */ = {
+			isa = PBXGroup;
+			children = (
+				66A2F0102B5591A700858008 /* PersonResponse.swift */,
+				669BD0BE2B5676E1002375E2 /* AgeResponse.swift */,
+				669BD0C42B569FE1002375E2 /* NationalityResponse.swift */,
+				665F738A2B591AD8005279CD /* GenderResponse.swift */,
+			);
+			path = NetworkModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

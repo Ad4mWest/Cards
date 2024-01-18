@@ -8,10 +8,12 @@ struct NationalityResponse: Decodable {
     let count: Int
     let name: String
     let country: [Country]
+    
+    struct Country: Decodable {
+        let country_id: String
+        let probability: Double
+    }
 }
 
-struct Country: Decodable {
-    let country_id: String
-    let probability: Double
-}
+
 

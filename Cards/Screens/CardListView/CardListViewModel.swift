@@ -8,16 +8,14 @@ import Combine
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var cards: [Card] = []
-    @Published var alertItem: AlertItem?
-    @Published var isLoading = false
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
     private let personNetworkService: PersonNetworkService
     
     // MARK: Initialization
-    init(apiClient: PersonNetworkService) {
-        self.personNetworkService = apiClient
+    init(personNetworkService: PersonNetworkService) {
+        self.personNetworkService = personNetworkService
     }
     
     /// Combine data from Apies to Card
@@ -30,7 +28,6 @@ final class CardListViewModel: ObservableObject {
     
     func getNewCard() {
         personNetworkService.randomPerson()
-            .compactMap { $0.results.first }
             .sink { _ in } receiveValue: { person in
                 self.getPersonDescription(withPerson: person)
             }

@@ -6,14 +6,14 @@ import Combine
 import Foundation
 
 protocol PersonNetworkService {
-    func randomPerson() -> AnyPublisher<PersonResponse, Error>
+    func randomPerson() -> AnyPublisher<Person, Error>
     func randomAge(name: String) -> AnyPublisher<AgeResponse, Error>
     func randomGender(name: String) -> AnyPublisher<GenderResponse, Error>
     func randomNationality(name: String) -> AnyPublisher<NationalityResponse, Error>
 }
 
 final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
-    func randomPerson() -> AnyPublisher<PersonResponse, Error> {
+    func randomPerson() -> AnyPublisher<Person, Error> {
         guard let url = URL(string: PersonNetworkConstants.personRequest) else {
             return Fail(error: NSError(
                 domain: "\(APIError.invalidURL("PersonResponse"))",
@@ -22,9 +22,18 @@ final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
             .eraseToAnyPublisher()
         }
         let request = URLRequest(url: url)
-        print(request)
         return fetchData(request: request)
-    }
+            .tryMap { (response: PersonResponse) -> Person in
+                  guard let response = response.results.first else {
+                      throw NSError(
+                        domain: "\(APIError.invalidData("Empty results"))",
+                        code: -10001,
+                        userInfo: nil)
+                  }
+                  return response
+              }
+              .eraseToAnyPublisher()
+          }
     
     func randomAge(name: String) -> AnyPublisher<AgeResponse, Error> {
         guard let url = URL(string: PersonNetworkConstants.ageRequest + name) else {
@@ -35,7 +44,6 @@ final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
             .eraseToAnyPublisher()
         }
         let request = URLRequest(url: url)
-        print(request)
         return fetchData(request: request)
     }
     
@@ -48,7 +56,6 @@ final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
             .eraseToAnyPublisher()
         }
         let request = URLRequest(url: url)
-        print(request)
         return fetchData(request: request)
     }
     
