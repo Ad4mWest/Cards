@@ -35,7 +35,8 @@ struct CardListCell: View {
 
 struct CardListCell_Previews: PreviewProvider {
     static var previews: some View {
-        CardListCell(card: Card(
+        CardListCell(card: 
+                        Card(
             id: UUID(),
             name: "Adam",
             imageURL: "",
@@ -43,6 +44,7 @@ struct CardListCell_Previews: PreviewProvider {
             gender: "male",
             nationality: "Ru",
             email: "",
-            phone: ""))
+            phone: ""
+                        ))
     }
 }

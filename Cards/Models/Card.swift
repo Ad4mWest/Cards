@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct Card: Identifiable, Decodable, Hashable {
+struct Card: Identifiable, Hashable {
     var id: UUID
     let name: String
     let imageURL: String
