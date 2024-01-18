@@ -6,8 +6,8 @@ import Foundation
 
 enum APIError: Error {
     case invalidURL(String)
-    case invalidResponse
-    case invalidData
-    case decodingError
-    case unableToComplete
+    case invalidResponse(Error)
+    case invalidData(Error)
+    case decodingError(Error)
+    case unableToComplete(Error)
 }

@@ -15,16 +15,6 @@ extension NetworkService {
             .map { $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
-            .mapError { error in
-                        switch error {
-                        case is URLError:
-                            return error
-                        case is DecodingError:
-                            return error
-                        default:
-                            return error
-                        }
-                    }
             .eraseToAnyPublisher()
     }
 }

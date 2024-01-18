@@ -5,7 +5,7 @@
 import SwiftUI
 
 final class CardDetailWireframe {
-    func madeCardDetail(card: Card) -> AnyView {
+    func makeCardDetail(card: Card) -> AnyView {
         let cardDetailViewModel = CardDetailViewModel(card: card)
         let cardDetailView = CardDetailView(viewModel: cardDetailViewModel)
         return AnyView(cardDetailView)
