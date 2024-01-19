@@ -23,7 +23,7 @@ final class CardListViewModel: ObservableObject {
     ///         - randomPerson()
     ///         - randomAge(name: )
     ///         - randomNationality(name: )
-    ///         - randomGender(name: )
+    ///         //- randomGender(name: )
     /// - Results: Card()
     
     func getNewCard() {
@@ -35,14 +35,19 @@ final class CardListViewModel: ObservableObject {
     }
     
     private func getPersonDescription(withPerson person: Person) {
-        personNetworkService.randomAge(name: person.name.first)
-            .combineLatest(personNetworkService.randomNationality(name: person.name.first))
-                           //personNetworkService.randomGender(name: person.name.first))
+        guard let personName = person.name.first.safePercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return
+        }
+        personNetworkService.randomAge(name: personName)
+            .combineLatest(
+                personNetworkService.randomNationality(name: personName),
+                personNetworkService.randomGender(name: personName)
+            )
             .sink { completion in
                 if case .failure(let error) = completion {
                     print(error.localizedDescription)
                 }
-            } receiveValue: { (age, nationality) in //, gender) in
+            } receiveValue: { (age, nationality, gender) in
                 let id = UUID()
                 guard let nationality = nationality.country.first else { return }
                 let card = Card(
@@ -50,8 +55,8 @@ final class CardListViewModel: ObservableObject {
                     name: person.name.title + " " + person.name.first + " " + person.name.last,
                     imageURL: person.picture.large,
                     age: age.age,
-                    gender: person.gender, //gender.gender ?? "Agender",
-                    nationality: nationality.country_id,
+                    gender: gender.gender ?? "Agender",
+                    nationality: nationality.countryId,
                     email: person.email,
                     phone: person.phone
                 )

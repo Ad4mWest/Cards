@@ -5,8 +5,15 @@
 import SwiftUI
 
 struct CardInfoView: View {
-    let title: String
-    let text: String
+    // MARK: Private properties
+    private let title: String
+    private let text: String
+    
+    // MARK: Initialization
+    init(title: String, text: String) {
+        self.title = title
+        self.text = text
+    }
     
     var body: some View {
         VStack(spacing: 5) {

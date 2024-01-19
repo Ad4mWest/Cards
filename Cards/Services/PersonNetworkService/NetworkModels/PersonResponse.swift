@@ -14,16 +14,19 @@ struct Person: Decodable {
     let email: String
     let phone: String
     let picture: PersonPicture
+    
+    struct PersonName: Decodable {
+        let title: String
+        let first: String
+        let last: String
+    }
+    
+    struct PersonPicture: Decodable {
+        let large: String
+        let medium: String
+        let thumbnail: String
+    }
 }
 
-struct PersonName: Decodable {
-    let title: String
-    let first: String
-    let last: String
-}
 
-struct PersonPicture: Decodable {
-    let large: String
-    let medium: String
-    let thumbnail: String
-}
+

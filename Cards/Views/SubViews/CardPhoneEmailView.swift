@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct CardPhoneEmailView: View {
-    var email: String
-    var phone: String
+    // MARK: Private properties
+    private var email: String
+    private var phone: String
+    
+    // MARK: Initialization
+    init(email: String, phone: String) {
+        self.email = email
+        self.phone = phone
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {

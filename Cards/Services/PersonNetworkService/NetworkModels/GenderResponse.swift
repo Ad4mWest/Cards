@@ -5,8 +5,8 @@
 import Foundation
 
 struct GenderResponse: Decodable {
-    let count: Int
-    let name: String
+    let count: Int?
+    let name: String?
     let gender: String?
-    let probability: Int
+    let probability: Int?
 }
