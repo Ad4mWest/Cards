@@ -5,33 +5,37 @@
 import SwiftUI
 import Combine
 
+final class ImageProvider: ObservableObject {
+    @Published var image = UIImage(named: "labelPlaceholder")!
+    
+    private var cancellable: AnyCancellable?
+    private let imageLoader = NetworkImageLoader()
+
+    func loadImage(url: URL) {
+        self.cancellable = imageLoader.publisher(for: url)
+            .sink(receiveCompletion: { failure in
+            print(failure)
+        }, receiveValue: { image in
+            self.image = image
+        })
+    }
+}
+
 struct CardRemoteImage: View {
-    // MARK: Private properties
-    @ObservedObject private var downloader: ImageDownloader
+    @StateObject private var viewModel = ImageProvider()
     
-    private var image: some View {
-        Group {
-            if downloader.image != nil {
-                Image(uiImage: downloader.image!).resizable()
-            } else {
-                ProgressView()
-            }
-        }
-    }
+    var url: URL?
     
-    // MARK: Initialization
     init(url: String) {
-        downloader = ImageDownloader(url: url)
+        self.url = URL(string: url)
     }
-    
-    // MARK: Lifecycle
     var body: some View {
-        image
+        Image(uiImage: viewModel.image)
             .onAppear {
-                downloader.start()
-            }
-            .onDisappear {
-                downloader.stop()
+                guard let url else {
+                    return
+                }
+                viewModel.loadImage(url: url)
             }
     }
 }

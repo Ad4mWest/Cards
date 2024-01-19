@@ -71,3 +71,12 @@ final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
         return fetchData(request: request)
     }
 }
+
+private extension PersonNetworkServiceImpl {
+    enum PersonNetworkConstants {
+        static let personRequest = "https://randomuser.me/api/?inc=gender,name,email,phone,picture"
+        static let ageRequest = "https://api.agify.io/?name="
+        static let nationalityRequest = "https://api.nationalize.io/?name="
+        static let genderRequest = "https://api.genderize.io?name="
+    }
+}

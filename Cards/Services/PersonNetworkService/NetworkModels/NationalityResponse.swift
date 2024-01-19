@@ -10,7 +10,11 @@ struct NationalityResponse: Decodable {
     let country: [Country]
     
     struct Country: Decodable {
-        let country_id: String
+        enum CodingKeys: String, CodingKey {
+            case countryId = "country_id"
+            case probability
+        }
+        let countryId: String
         let probability: Double
     }
 }

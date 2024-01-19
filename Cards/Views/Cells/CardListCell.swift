@@ -5,7 +5,13 @@
 import SwiftUI
 
 struct CardListCell: View {
-    var card: Card
+    // MARK: Private properties
+    private var card: Card
+    
+    // MARK: Initialization
+    init(card: Card) {
+        self.card = card
+    }
     
     var body: some View {
         HStack(spacing: 20)
