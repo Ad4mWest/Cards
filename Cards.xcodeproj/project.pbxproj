@@ -7,18 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665F738A2B591AD8005279CD /* GenderResponse.swift */; };
+		6691F1B22B58060100465E12 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691F1B12B58060100465E12 /* CardDetailViewModel.swift */; };
+		6691F1B42B5816E800465E12 /* CardDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691F1B32B5816E800465E12 /* CardDetailWireframe.swift */; };
+		6691F1B62B5838B000465E12 /* CardPhoneEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691F1B52B5838B000465E12 /* CardPhoneEmailView.swift */; };
+		6697CDB42B5A7DED003B8F38 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697CDB32B5A7DED003B8F38 /* String + Ext.swift */; };
+		6697CDB62B5AB0AA003B8F38 /* NetworkImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697CDB52B5AB0AA003B8F38 /* NetworkImageLoader.swift */; };
+		669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0BE2B5676E1002375E2 /* AgeResponse.swift */; };
+		669BD0C12B568C84002375E2 /* PersonNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C02B568C84002375E2 /* PersonNetworkService.swift */; };
+		669BD0C52B569FE1002375E2 /* NationalityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C42B569FE1002375E2 /* NationalityResponse.swift */; };
+		669BD0D02B572220002375E2 /* CardListWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0CF2B572220002375E2 /* CardListWireframe.swift */; };
+		66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0102B5591A700858008 /* PersonResponse.swift */; };
+		66A2F0142B55AAF700858008 /* CardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0132B55AAF700858008 /* CardInfoView.swift */; };
 		66AC605A2B5263C1009BE505 /* CardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60592B5263C1009BE505 /* CardsApp.swift */; };
-		66AC605C2B5263C1009BE505 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC605B2B5263C1009BE505 /* ContentView.swift */; };
+		66AC605C2B5263C1009BE505 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC605B2B5263C1009BE505 /* CardListView.swift */; };
 		66AC605E2B5263C2009BE505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66AC605D2B5263C2009BE505 /* Assets.xcassets */; };
 		66AC60612B5263C2009BE505 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66AC60602B5263C2009BE505 /* Preview Assets.xcassets */; };
+		66AC60902B5411B3009BE505 /* CardListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60882B5411B3009BE505 /* CardListCell.swift */; };
+		66AC60992B54126B009BE505 /* CardAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60982B54126B009BE505 /* CardAccountView.swift */; };
+		66AC609C2B541302009BE505 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC609B2B541302009BE505 /* Card.swift */; };
+		66AC60A02B5416C6009BE505 /* CardTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC609F2B5416C6009BE505 /* CardTabView.swift */; };
+		66AC60A22B54178A009BE505 /* EmptyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A12B54178A009BE505 /* EmptyCardView.swift */; };
+		66AC60A42B5419BE009BE505 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A32B5419BE009BE505 /* CardDetailView.swift */; };
+		66AC60A92B542BEE009BE505 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A82B542BEE009BE505 /* Alert.swift */; };
+		66AC60AB2B542BFB009BE505 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AA2B542BFB009BE505 /* APIError.swift */; };
+		66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AC2B542C0A009BE505 /* Color + Ext.swift */; };
+		66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */; };
+		66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B52B543746009BE505 /* CardListViewModel.swift */; };
+		66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B72B5462BD009BE505 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		665F738A2B591AD8005279CD /* GenderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderResponse.swift; sourceTree = "<group>"; };
+		6691F1B12B58060100465E12 /* CardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewModel.swift; sourceTree = "<group>"; };
+		6691F1B32B5816E800465E12 /* CardDetailWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailWireframe.swift; sourceTree = "<group>"; };
+		6691F1B52B5838B000465E12 /* CardPhoneEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPhoneEmailView.swift; sourceTree = "<group>"; };
+		6697CDB32B5A7DED003B8F38 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
+		6697CDB52B5AB0AA003B8F38 /* NetworkImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageLoader.swift; sourceTree = "<group>"; };
+		669BD0BE2B5676E1002375E2 /* AgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeResponse.swift; sourceTree = "<group>"; };
+		669BD0C02B568C84002375E2 /* PersonNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonNetworkService.swift; sourceTree = "<group>"; };
+		669BD0C42B569FE1002375E2 /* NationalityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityResponse.swift; sourceTree = "<group>"; };
+		669BD0CF2B572220002375E2 /* CardListWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListWireframe.swift; sourceTree = "<group>"; };
+		66A2F0102B5591A700858008 /* PersonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonResponse.swift; sourceTree = "<group>"; };
+		66A2F0132B55AAF700858008 /* CardInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoView.swift; sourceTree = "<group>"; };
 		66AC60562B5263C1009BE505 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AC60592B5263C1009BE505 /* CardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsApp.swift; sourceTree = "<group>"; };
-		66AC605B2B5263C1009BE505 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		66AC605B2B5263C1009BE505 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		66AC605D2B5263C2009BE505 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66AC60602B5263C2009BE505 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		66AC60882B5411B3009BE505 /* CardListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListCell.swift; sourceTree = "<group>"; };
+		66AC60982B54126B009BE505 /* CardAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAccountView.swift; sourceTree = "<group>"; };
+		66AC609B2B541302009BE505 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		66AC609F2B5416C6009BE505 /* CardTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTabView.swift; sourceTree = "<group>"; };
+		66AC60A12B54178A009BE505 /* EmptyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCardView.swift; sourceTree = "<group>"; };
+		66AC60A32B5419BE009BE505 /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
+		66AC60A82B542BEE009BE505 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		66AC60AA2B542BFB009BE505 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		66AC60AC2B542C0A009BE505 /* Color + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color + Ext.swift"; sourceTree = "<group>"; };
+		66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRemoteImage.swift; sourceTree = "<group>"; };
+		66AC60B52B543746009BE505 /* CardListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
+		66AC60B72B5462BD009BE505 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +80,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6691F1B02B5805D800465E12 /* CardDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60A32B5419BE009BE505 /* CardDetailView.swift */,
+				6691F1B12B58060100465E12 /* CardDetailViewModel.swift */,
+				6691F1B32B5816E800465E12 /* CardDetailWireframe.swift */,
+			);
+			path = CardDetailView;
+			sourceTree = "<group>";
+		};
 		66AC604D2B5263C1009BE505 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +109,12 @@
 		66AC60582B5263C1009BE505 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				66AC60952B5411FB009BE505 /* Screens */,
+				66AC60862B5411B3009BE505 /* Views */,
+				66AC609A2B5412F1009BE505 /* Models */,
+				66AC60A62B542B1D009BE505 /* Services */,
+				66AC60A52B542B00009BE505 /* Extensions */,
 				66AC60592B5263C1009BE505 /* CardsApp.swift */,
-				66AC605B2B5263C1009BE505 /* ContentView.swift */,
 				66AC605D2B5263C2009BE505 /* Assets.xcassets */,
 				66AC605F2B5263C2009BE505 /* Preview Content */,
 			);
@@ -65,6 +127,128 @@
 				66AC60602B5263C2009BE505 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		66AC60862B5411B3009BE505 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60AF2B542E7E009BE505 /* Images */,
+				66AC60AE2B542E6C009BE505 /* SubViews */,
+				66AC60872B5411B3009BE505 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		66AC60872B5411B3009BE505 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60882B5411B3009BE505 /* CardListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		66AC60952B5411FB009BE505 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				66AC609F2B5416C6009BE505 /* CardTabView.swift */,
+				66AC60962B541244009BE505 /* CardListView */,
+				6691F1B02B5805D800465E12 /* CardDetailView */,
+				66AC60972B54124B009BE505 /* AccountView */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		66AC60962B541244009BE505 /* CardListView */ = {
+			isa = PBXGroup;
+			children = (
+				66AC605B2B5263C1009BE505 /* CardListView.swift */,
+				66AC60B52B543746009BE505 /* CardListViewModel.swift */,
+				669BD0CF2B572220002375E2 /* CardListWireframe.swift */,
+			);
+			path = CardListView;
+			sourceTree = "<group>";
+		};
+		66AC60972B54124B009BE505 /* AccountView */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60982B54126B009BE505 /* CardAccountView.swift */,
+			);
+			path = AccountView;
+			sourceTree = "<group>";
+		};
+		66AC609A2B5412F1009BE505 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66AC609B2B541302009BE505 /* Card.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		66AC60A52B542B00009BE505 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60AC2B542C0A009BE505 /* Color + Ext.swift */,
+				6697CDB32B5A7DED003B8F38 /* String + Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		66AC60A62B542B1D009BE505 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60B72B5462BD009BE505 /* NetworkService.swift */,
+				6697CDB52B5AB0AA003B8F38 /* NetworkImageLoader.swift */,
+				66AC60B22B5430DE009BE505 /* PersonNetworkService */,
+				66AC60A72B542B31009BE505 /* Alerts */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		66AC60A72B542B31009BE505 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60A82B542BEE009BE505 /* Alert.swift */,
+				66AC60AA2B542BFB009BE505 /* APIError.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		66AC60AE2B542E6C009BE505 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60A12B54178A009BE505 /* EmptyCardView.swift */,
+				66A2F0132B55AAF700858008 /* CardInfoView.swift */,
+				6691F1B52B5838B000465E12 /* CardPhoneEmailView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		66AC60AF2B542E7E009BE505 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		66AC60B22B5430DE009BE505 /* PersonNetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				669BD0C02B568C84002375E2 /* PersonNetworkService.swift */,
+				66CCB1722B5955B6008214B2 /* NetworkModels */,
+			);
+			path = PersonNetworkService;
+			sourceTree = "<group>";
+		};
+		66CCB1722B5955B6008214B2 /* NetworkModels */ = {
+			isa = PBXGroup;
+			children = (
+				66A2F0102B5591A700858008 /* PersonResponse.swift */,
+				669BD0BE2B5676E1002375E2 /* AgeResponse.swift */,
+				669BD0C42B569FE1002375E2 /* NationalityResponse.swift */,
+				665F738A2B591AD8005279CD /* GenderResponse.swift */,
+			);
+			path = NetworkModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +321,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66AC605C2B5263C1009BE505 /* ContentView.swift in Sources */,
+				669BD0D02B572220002375E2 /* CardListWireframe.swift in Sources */,
+				669BD0C12B568C84002375E2 /* PersonNetworkService.swift in Sources */,
+				6697CDB42B5A7DED003B8F38 /* String + Ext.swift in Sources */,
+				669BD0C52B569FE1002375E2 /* NationalityResponse.swift in Sources */,
+				669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */,
+				66AC605C2B5263C1009BE505 /* CardListView.swift in Sources */,
+				66AC609C2B541302009BE505 /* Card.swift in Sources */,
+				66AC60A22B54178A009BE505 /* EmptyCardView.swift in Sources */,
+				6691F1B22B58060100465E12 /* CardDetailViewModel.swift in Sources */,
+				6691F1B62B5838B000465E12 /* CardPhoneEmailView.swift in Sources */,
+				66AC60992B54126B009BE505 /* CardAccountView.swift in Sources */,
+				66A2F0142B55AAF700858008 /* CardInfoView.swift in Sources */,
+				66AC60AB2B542BFB009BE505 /* APIError.swift in Sources */,
+				66AC60A42B5419BE009BE505 /* CardDetailView.swift in Sources */,
+				66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */,
+				66AC60A02B5416C6009BE505 /* CardTabView.swift in Sources */,
+				6697CDB62B5AB0AA003B8F38 /* NetworkImageLoader.swift in Sources */,
+				66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */,
+				665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */,
 				66AC605A2B5263C1009BE505 /* CardsApp.swift in Sources */,
+				66AC60902B5411B3009BE505 /* CardListCell.swift in Sources */,
+				66AC60A92B542BEE009BE505 /* Alert.swift in Sources */,
+				66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */,
+				66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */,
+				66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */,
+				6691F1B42B5816E800465E12 /* CardDetailWireframe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -254,7 +462,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -280,6 +488,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,6 +518,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
