@@ -1,9 +1,6 @@
-//
 //  CardsApp.swift
 //  Cards
-//
 //  Created by Adam West on 13.01.2024.
-//
 
 import SwiftUI
 
@@ -11,7 +8,7 @@ import SwiftUI
 struct CardsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CardTabView()
         }
     }
 }
