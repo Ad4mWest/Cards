@@ -34,7 +34,6 @@ struct CardListView: View {
                     .onMove(perform: { indices, newOffset in
                         viewModel.cards.move(fromOffsets: indices, toOffset: newOffset)
                     })
-                    
                 }
                 .navigationTitle("Generate cards")
                 .toolbar {
@@ -53,6 +52,12 @@ struct CardListView: View {
             if viewModel.cards.isEmpty {
                 EmptyCardView()
             }
+        }
+        .alert(item: $viewModel.alertItem) { alertItem in
+            Alert(
+                title: alertItem.title,
+                message: alertItem.message,
+                dismissButton: alertItem.dismissButton)
         }
     }
 }

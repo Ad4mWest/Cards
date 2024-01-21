@@ -8,6 +8,7 @@ import Combine
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var cards: [Card] = []
+    @Published var alertItem: AlertItem?
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
@@ -23,12 +24,16 @@ final class CardListViewModel: ObservableObject {
     ///         - randomPerson()
     ///         - randomAge(name: )
     ///         - randomNationality(name: )
-    ///         //- randomGender(name: )
+    ///         - randomGender(name: )
     /// - Results: Card()
     
     func getNewCard() {
         personNetworkService.randomPerson()
-            .sink { _ in } receiveValue: { person in
+            .sink { completion in
+                if case .failure = completion {
+                    self.alertItem = AlertContext.invalidData
+                }
+            } receiveValue: { person in
                 self.getPersonDescription(withPerson: person)
             }
             .store(in: &cancellables)
@@ -44,8 +49,8 @@ final class CardListViewModel: ObservableObject {
                 personNetworkService.randomGender(name: personName)
             )
             .sink { completion in
-                if case .failure(let error) = completion {
-                    print(error.localizedDescription)
+                if case .failure = completion {
+                    self.alertItem = AlertContext.invalidResponse
                 }
             } receiveValue: { (age, nationality, gender) in
                 let id = UUID()

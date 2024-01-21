@@ -6,6 +6,7 @@ import SwiftUI
 
 struct CardTabView: View {
     private let cardList = CardListWireframe()
+    private let cardAccount = CardAccountWireframe()
     
     var body: some View {
         TabView {
@@ -14,7 +15,7 @@ struct CardTabView: View {
                     Image(systemName: "lanyardcard.fill")
                     Text("Cards")
                 }
-            CardAccountView()
+            cardAccount.makeAccountView()
                 .tabItem {
                     Image(systemName: "person.text.rectangle")
                     Text("Account")

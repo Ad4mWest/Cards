@@ -4,13 +4,26 @@
 
 import Foundation
 
-struct Card: Identifiable, Hashable {
+struct Card: Identifiable, Hashable, Codable {
     var id: UUID
-    let name: String
-    let imageURL: String
-    let age: Int
-    let gender: String
-    let nationality: String
-    let email: String
-    let phone: String
+    var name: String
+    var imageURL: String
+    var age: Int
+    var gender: String
+    var nationality: String
+    var email: String
+    var phone: String
+}
+
+extension Card {
+    init() {
+        self.id = UUID()
+        self.name = String()
+        self.imageURL = String()
+        self.age = Int()
+        self.gender = String()
+        self.nationality = String()
+        self.email = String()
+        self.phone = String()
+    }
 }
