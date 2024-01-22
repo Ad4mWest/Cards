@@ -7,12 +7,13 @@ import Combine
 
 struct CardListView: View {
     // MARK: Private properties
-    @StateObject private var viewModel: CardListViewModel
-    private let cardListWireframe = CardDetailWireframe()
+    @ObservedObject private var viewModel: CardListViewModel
+    private let cardListWireframe: CardDetailWireframe
     
     // MARK: Initialization
     init(viewModel: CardListViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
+        self.cardListWireframe = CardDetailWireframe()
     }
     
     // MARK: Lifecycle

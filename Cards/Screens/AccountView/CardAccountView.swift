@@ -6,11 +6,11 @@ import SwiftUI
 
 struct CardAccountView: View {
     // MARK: Private properties
-    @StateObject private var viewModel: CardAccountViewModel
+    @ObservedObject private var viewModel: CardAccountViewModel
     
     // MARK: Initialization
     init(viewModel: CardAccountViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
     
     // MARK: Lifecycle
