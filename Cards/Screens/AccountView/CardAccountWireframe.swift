@@ -7,7 +7,7 @@ import SwiftUI
 final class CardAccountWireframe {
     func makeAccountView() -> AnyView {
         let card = Card()
-        let statePackageImpl = StatePackageImpl(data: card)
+        let statePackageImpl = ProfileStatePackage(data: card)
         let cardAccountViewModel = CardAccountViewModel(cardStatePackage: statePackageImpl)
         let cardAccountView = CardAccountView(viewModel: cardAccountViewModel)
         return AnyView(cardAccountView)

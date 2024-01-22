@@ -6,11 +6,11 @@ import SwiftUI
 
 struct CardAccountView: View {
     // MARK: Private properties
-    @ObservedObject private var viewModel: CardAccountViewModel
+    @StateObject private var viewModel: CardAccountViewModel
     
     // MARK: Initialization
     init(viewModel: CardAccountViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     // MARK: Lifecycle
@@ -18,22 +18,22 @@ struct CardAccountView: View {
         NavigationView {
             Form {
                 Section(header: Text("Personal Info")) {
-                    TextField("Full name", text: $viewModel.cardStatePackage.data.name)
+                    TextField("Full name", text: $viewModel.profileStatePackage.data.name)
                     
                     Toggle(isOn: $viewModel.gender, label: {
                         viewModel.gender ? Text("Female") : Text("Male")
                     })
                     .toggleStyle(SwitchToggleStyle(tint: .mainAppC))
                     
-                    Picker(selection: $viewModel.cardStatePackage.data.nationality) {
-                        ForEach(CardAccountViewModel.nationality, id: \.self) { nationality in
+                    Picker(selection: $viewModel.profileStatePackage.data.nationality) {
+                        ForEach(Card.nationality, id: \.self) { nationality in
                             Text(nationality)
                         }
                     } label: {
                         Text("Nationality")
                     } .pickerStyle(.automatic)
                     
-                    Picker(selection: $viewModel.cardStatePackage.data.age) {
+                    Picker(selection: $viewModel.profileStatePackage.data.age) {
                         ForEach(0..<110, id: \.self) { age in
                             Text("\(age)")
                         }
@@ -42,11 +42,11 @@ struct CardAccountView: View {
                     } .pickerStyle(.automatic)
                 }
                 Section(header: Text("Contacts")) {
-                    TextField("Email", text: $viewModel.cardStatePackage.data.email)
+                    TextField("Email", text: $viewModel.profileStatePackage.data.email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                    TextField("Phone without code", text: $viewModel.cardStatePackage.data.phone)
+                    TextField("Phone without code", text: $viewModel.profileStatePackage.data.phone)
                         .keyboardType(.phonePad)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
@@ -59,7 +59,7 @@ struct CardAccountView: View {
                     } .foregroundColor(.red)
                 }
             }
-            .navigationTitle("Profile")
+            .navigationTitle("Your Profile")
         }
         .onAppear {
             viewModel.retrieveCardData()
@@ -80,7 +80,7 @@ struct CardAccountView_Previews: PreviewProvider {
             viewModel:
                 CardAccountViewModel(
                     cardStatePackage:
-                        StatePackageImpl(
+                        ProfileStatePackage(
                             data:
                                 Card()
                         )))

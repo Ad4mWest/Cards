@@ -12,11 +12,22 @@ final class CardListViewModel: ObservableObject {
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
+    private var cardStatePackage: any CardStatePackage<Card>
     private let personNetworkService: PersonNetworkService
-    
+
     // MARK: Initialization
-    init(personNetworkService: PersonNetworkService) {
+    init(personNetworkService: PersonNetworkService, cardStatePackage: any CardStatePackage<Card>) {
         self.personNetworkService = personNetworkService
+        self.cardStatePackage = cardStatePackage 
+    }
+    
+    // MARK: Public methods
+    func loadCardsFormStore() {
+        cards = cardStatePackage.loadFromStore()
+    }
+    
+    func saveCardsToStore() {
+        cardStatePackage.saveToStore(toArray: cards)
     }
     
     /// Combine data from Apies to Card

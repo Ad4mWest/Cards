@@ -7,13 +7,12 @@ import Combine
 
 struct CardListView: View {
     // MARK: Private properties
-    @ObservedObject private var viewModel: CardListViewModel
-    
+    @StateObject private var viewModel: CardListViewModel
     private let cardListWireframe = CardDetailWireframe()
     
     // MARK: Initialization
     init(viewModel: CardListViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     // MARK: Lifecycle
@@ -53,6 +52,12 @@ struct CardListView: View {
                 EmptyCardView()
             }
         }
+        .onAppear {
+            viewModel.loadCardsFormStore()
+        }
+        .onDisappear {
+            viewModel.saveCardsToStore()
+        }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(
                 title: alertItem.title,
@@ -66,7 +71,10 @@ struct CardListView_Previews: PreviewProvider {
     static var previews: some View {
         CardListView(
             viewModel: CardListViewModel(
-                personNetworkService: PersonNetworkServiceImpl()
+                personNetworkService:
+                    PersonNetworkServiceImpl(),
+                cardStatePackage:
+                    CardStatePackageImpl<Card>()
             ))
     }
 }

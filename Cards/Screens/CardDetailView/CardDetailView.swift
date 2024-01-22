@@ -19,8 +19,6 @@ struct CardDetailView: View {
             ZStack {
                 Divider()
                 CardRemoteImage(url: viewModel.card.imageURL)
-                    .frame(width: 225, height: 225)
-                    .clipShape(Circle())
                     .shadow(color: .mainAppC, radius: 20)
             }
             Text(viewModel.card.name)

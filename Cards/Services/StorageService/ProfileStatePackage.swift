@@ -4,14 +4,7 @@
 
 import SwiftUI
 
-//protocol StatePackage {
-//    associatedtype T where T: Codable
-//    var data: T { get set }
-//    func saveToStore()
-//    func loadFromStore()
-//}
-
-final class StatePackageImpl<T: Codable>: ObservableObject { //, StatePackage {
+final class ProfileStatePackage<T: Codable>: ObservableObject {
     typealias TypeData = T
     
     // MARK: Public Properties
@@ -25,7 +18,7 @@ final class StatePackageImpl<T: Codable>: ObservableObject { //, StatePackage {
     //MARK: - Defining that we save our data in the Documents folder
     static func persistentFileURL() -> URL {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return url.appendingPathComponent("Card.json")
+        return url.appendingPathComponent("\(TypeData.self).json")
     }
 
     // MARK: Save
@@ -34,7 +27,7 @@ final class StatePackageImpl<T: Codable>: ObservableObject { //, StatePackage {
             let url = Self.persistentFileURL()
             try JSONEncoder().encode(data).write(to: url)
         } catch {
-            assertionFailure("Can't be Saved")
+            assertionFailure(APIError.invalidDecoding("Unnabled to encode").localizedDescription)
         }
     }
     
@@ -44,8 +37,7 @@ final class StatePackageImpl<T: Codable>: ObservableObject { //, StatePackage {
             data = try JSONDecoder().decode(TypeData.self,
                                             from: Data(contentsOf: Self.persistentFileURL()))
         } catch {
-            print("Can't be Loaded")
-            //data = Card() as! T
+           print("Empty statement")
         }
     }
 }

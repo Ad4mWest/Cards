@@ -31,11 +31,15 @@ struct CardRemoteImage: View {
     }
     var body: some View {
         Image(uiImage: viewModel.image)
+            .resizable()
+            .frame(width: 225, height: 225)
+            .clipShape(Circle())
             .onAppear {
                 guard let url else {
                     return
                 }
                 viewModel.loadImage(url: url)
             }
+            
     }
 }
