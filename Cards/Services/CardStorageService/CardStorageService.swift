@@ -22,8 +22,9 @@ final class CardStorageService: ObservableObject {
     }
     
     // MARK: Read
-    func loadFromStorageCards() {
+    func loadFromStorageCards() -> [Card] {
         cards = fileStorageService.loadFromStore()
+        return cards
     }
     
     // MARK: Edit
@@ -36,8 +37,6 @@ final class CardStorageService: ObservableObject {
     func deleteCard(atOffsets indexSet: IndexSet) {
         cards.remove(atOffsets: indexSet)
         fileStorageService.saveToStore(toArray: cards)
-    }
-    
-    
+    }   
 }
 

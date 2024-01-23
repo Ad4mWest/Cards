@@ -9,6 +9,7 @@ final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
     @ObservedObject var cardStorageService: CardStorageService
     @Published var alertItem: AlertItem?
+    @Published var cards: [Card] = []
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
@@ -21,6 +22,25 @@ final class CardListViewModel: ObservableObject {
     }
     
     // MARK: Public methods
+    func remove(atOffsets indexSet: IndexSet) {
+        cards.remove(atOffsets: indexSet)
+        cardStorageService.deleteCard(atOffsets: indexSet)
+    }
+    
+    func onMove(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
+        cards.move(
+            fromOffsets: indices,
+            toOffset: newOffset
+        )
+        cardStorageService.changePositionOfCards(
+            fromOffsets: indices,
+            toOffset: newOffset
+        )
+    }
+    
+    func loadFromStorage() {
+        cards = cardStorageService.loadFromStorageCards()
+    }
     
     func getNewCard() {
         personNetworkService.randomPerson()
@@ -45,25 +65,28 @@ final class CardListViewModel: ObservableObject {
             )
             .sink { completion in
                 if case .failure = completion {
-                    self.alertItem = AlertContext.invalidResponse
+                    self.createNewCard(person, nil, nil, nil)
                 }
             } receiveValue: { (age, nationality, gender) in
-                let id = UUID()
-                guard let nationality = nationality.country.first else { return }
-                let card = Card(
-                    id: id,
-                    name: person.name.title + " " + person.name.first + " " + person.name.last,
-                    imageURL: person.picture.large,
-                    age: age.age,
-                    gender: gender.gender ?? "Agender",
-                    nationality: nationality.countryId,
-                    email: person.email,
-                    phone: person.phone
-                )
-                DispatchQueue.main.async {
-                    self.cardStorageService.createNewCard(forCards: card)
-                }
+                self.createNewCard(person, age, nationality, gender)
             }
             .store(in: &cancellables)
+    }
+    
+    // MARK: Private methods
+    private func createNewCard(_ person: Person,_ age: AgeResponse?,_ nationality: NationalityResponse?,_ gender: GenderResponse?) {
+        let id = UUID()
+        let card = Card(
+            id: id,
+            name: person.name.title + " " + person.name.first + " " + person.name.last,
+            imageURL: person.picture.large,
+            age: age?.age ?? Int(),
+            gender: gender?.gender ?? "Agender",
+            nationality: nationality?.country.first?.countryId ?? String(),
+            email: person.email,
+            phone: person.phone
+        )
+        cards.append(card)
+        cardStorageService.createNewCard(forCards: card)
     }
 }

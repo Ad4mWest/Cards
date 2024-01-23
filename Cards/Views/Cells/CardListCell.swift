@@ -50,7 +50,6 @@ struct CardListCell_Previews: PreviewProvider {
             gender: "male",
             nationality: "Ru",
             email: "",
-            phone: ""
-                        ))
+            phone: "")) 
     }
 }

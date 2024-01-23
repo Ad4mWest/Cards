@@ -20,22 +20,19 @@ struct CardListView: View {
     var body: some View {
         ZStack {
             NavigationView {
-                List {
-                    ForEach($viewModel.cardStorageService.cards, id: \.self) { card in
+                List() {
+                    ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(card: card.wrappedValue)
+                            cardListWireframe.makeCardDetail(card: card)
                         } label: {
-                            CardListCell(card: card.wrappedValue)
+                            CardListCell(card: card)
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        viewModel.cardStorageService.deleteCard(atOffsets: indexSet)
+                        viewModel.remove(atOffsets: indexSet)
                     })
                     .onMove(perform: { indices, newOffset in
-                        viewModel.cardStorageService.changePositionOfCards(
-                            fromOffsets: indices,
-                            toOffset: newOffset
-                        )
+                        viewModel.onMove(fromOffsets: indices, toOffset: newOffset)
                     })
                 }
                 .navigationTitle("Generate cards")
@@ -52,12 +49,12 @@ struct CardListView: View {
                 }
             }
             
-            if viewModel.cardStorageService.cards.isEmpty {
+            if viewModel.cards.isEmpty {
                 EmptyCardView()
             }
         }
         .onAppear {
-            viewModel.cardStorageService.loadFromStorageCards()
+            viewModel.loadFromStorage()
         }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(
