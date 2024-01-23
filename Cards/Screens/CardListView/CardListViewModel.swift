@@ -7,7 +7,7 @@ import Combine
 
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
-    @ObservedObject var cardStorageService: CardStorageService
+    @Published var cardStorageService: CardStorageService
     @Published var alertItem: AlertItem?
     @Published var cards: [Card] = []
     
@@ -28,14 +28,8 @@ final class CardListViewModel: ObservableObject {
     }
     
     func onMove(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
-        cards.move(
-            fromOffsets: indices,
-            toOffset: newOffset
-        )
-        cardStorageService.changePositionOfCards(
-            fromOffsets: indices,
-            toOffset: newOffset
-        )
+        cards.move(fromOffsets: indices, toOffset: newOffset)
+        cardStorageService.changePositionOfCards(fromOffsets: indices, toOffset: newOffset)
     }
     
     func loadFromStorage() {

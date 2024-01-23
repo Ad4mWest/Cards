@@ -7,7 +7,7 @@ import SwiftUI
 final class CardListWireframe {
     func makeCardList() -> AnyView {
         let fileStorageService = FileStorageServiceImpl<Card>()
-        let cardStorageService = CardStorageService(fileStorageService: fileStorageService)
+        let cardStorageService = CardStorageServiceImpl(fileStorageService: fileStorageService)
         let personNetworkService = PersonNetworkServiceImpl()
         let cardListViewModel = CardListViewModel(
             personNetworkService: personNetworkService,

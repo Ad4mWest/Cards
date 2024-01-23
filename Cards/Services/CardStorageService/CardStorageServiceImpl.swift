@@ -4,9 +4,16 @@
 
 import SwiftUI
 
-final class CardStorageService: ObservableObject {
+protocol CardStorageService {
+    func createNewCard(forCards card: Card)
+    func loadFromStorageCards() -> [Card]
+    func changePositionOfCards(fromOffsets indices: IndexSet, toOffset newOffset: Int)
+    func deleteCard(atOffsets indexSet: IndexSet)
+}
+
+final class CardStorageServiceImpl: CardStorageService {
     // MARK: Public Properties
-    @Published var cards: [Card]
+    private var cards: [Card]
     private var fileStorageService: any FileStorageService<Card>
     
     // MARK: Initialization
