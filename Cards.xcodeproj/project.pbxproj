@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		664EBF962B5FD094004AAE13 /* CardStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664EBF952B5FD094004AAE13 /* CardStorageService.swift */; };
 		665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665F738A2B591AD8005279CD /* GenderResponse.swift */; };
 		66689BB42B5BC47300D8C165 /* CardAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */; };
 		6691F1B22B58060100465E12 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691F1B12B58060100465E12 /* CardDetailViewModel.swift */; };
@@ -18,7 +19,7 @@
 		669BD0C12B568C84002375E2 /* PersonNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C02B568C84002375E2 /* PersonNetworkService.swift */; };
 		669BD0C52B569FE1002375E2 /* NationalityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C42B569FE1002375E2 /* NationalityResponse.swift */; };
 		669BD0D02B572220002375E2 /* CardListWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0CF2B572220002375E2 /* CardListWireframe.swift */; };
-		669F28932B5EBF8D00822D52 /* CardStatePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F28922B5EBF8D00822D52 /* CardStatePackage.swift */; };
+		669F28932B5EBF8D00822D52 /* FileStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F28922B5EBF8D00822D52 /* FileStorageService.swift */; };
 		66A2E1EB2B5D543800268BA6 /* CardAccountWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2E1EA2B5D543800268BA6 /* CardAccountWireframe.swift */; };
 		66A2E1EF2B5D61EB00268BA6 /* ProfileStatePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2E1EE2B5D61EB00268BA6 /* ProfileStatePackage.swift */; };
 		66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2F0102B5591A700858008 /* PersonResponse.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		664EBF952B5FD094004AAE13 /* CardStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStorageService.swift; sourceTree = "<group>"; };
 		665F738A2B591AD8005279CD /* GenderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderResponse.swift; sourceTree = "<group>"; };
 		66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAccountViewModel.swift; sourceTree = "<group>"; };
 		6691F1B12B58060100465E12 /* CardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewModel.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 		669BD0C02B568C84002375E2 /* PersonNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonNetworkService.swift; sourceTree = "<group>"; };
 		669BD0C42B569FE1002375E2 /* NationalityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityResponse.swift; sourceTree = "<group>"; };
 		669BD0CF2B572220002375E2 /* CardListWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListWireframe.swift; sourceTree = "<group>"; };
-		669F28922B5EBF8D00822D52 /* CardStatePackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatePackage.swift; sourceTree = "<group>"; };
+		669F28922B5EBF8D00822D52 /* FileStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageService.swift; sourceTree = "<group>"; };
 		66A2E1EA2B5D543800268BA6 /* CardAccountWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAccountWireframe.swift; sourceTree = "<group>"; };
 		66A2E1EE2B5D61EB00268BA6 /* ProfileStatePackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStatePackage.swift; sourceTree = "<group>"; };
 		66A2F0102B5591A700858008 /* PersonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonResponse.swift; sourceTree = "<group>"; };
@@ -88,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		664EBF942B5FD02A004AAE13 /* CardStorageService */ = {
+			isa = PBXGroup;
+			children = (
+				664EBF952B5FD094004AAE13 /* CardStorageService.swift */,
+				66A2E1EE2B5D61EB00268BA6 /* ProfileStatePackage.swift */,
+			);
+			path = CardStorageService;
+			sourceTree = "<group>";
+		};
 		6691F1B02B5805D800465E12 /* CardDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +121,7 @@
 		66A2E1ED2B5D61CA00268BA6 /* StorageService */ = {
 			isa = PBXGroup;
 			children = (
-				669F28922B5EBF8D00822D52 /* CardStatePackage.swift */,
-				66A2E1EE2B5D61EB00268BA6 /* ProfileStatePackage.swift */,
+				669F28922B5EBF8D00822D52 /* FileStorageService.swift */,
 			);
 			path = StorageService;
 			sourceTree = "<group>";
@@ -225,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				66A2E1ED2B5D61CA00268BA6 /* StorageService */,
+				664EBF942B5FD02A004AAE13 /* CardStorageService */,
 				66A2E1EC2B5D616E00268BA6 /* NetworkService */,
 				66AC60B22B5430DE009BE505 /* PersonNetworkService */,
 			);
@@ -361,7 +372,7 @@
 				6691F1B62B5838B000465E12 /* CardPhoneEmailView.swift in Sources */,
 				66AC60992B54126B009BE505 /* CardAccountView.swift in Sources */,
 				66A2F0142B55AAF700858008 /* CardInfoView.swift in Sources */,
-				669F28932B5EBF8D00822D52 /* CardStatePackage.swift in Sources */,
+				669F28932B5EBF8D00822D52 /* FileStorageService.swift in Sources */,
 				66AC60AB2B542BFB009BE505 /* APIError.swift in Sources */,
 				66AC60A42B5419BE009BE505 /* CardDetailView.swift in Sources */,
 				66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */,
@@ -377,6 +388,7 @@
 				66AC60A92B542BEE009BE505 /* Alert.swift in Sources */,
 				66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */,
 				66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */,
+				664EBF962B5FD094004AAE13 /* CardStorageService.swift in Sources */,
 				66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */,
 				6691F1B42B5816E800465E12 /* CardDetailWireframe.swift in Sources */,
 			);

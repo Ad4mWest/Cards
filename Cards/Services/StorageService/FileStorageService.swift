@@ -4,13 +4,13 @@
 
 import SwiftUI
 
-protocol CardStatePackage<TypeData> {
+protocol FileStorageService<TypeData> {
     associatedtype TypeData
     func saveToStore(toArray array: [TypeData])
     func loadFromStore() -> [TypeData]
 }
 
-final class CardStatePackageImpl<T: Codable>: CardStatePackage {
+final class FileStorageServiceImpl<T: Codable>: FileStorageService {
     typealias TypeData = T
     
     // MARK: Private properties

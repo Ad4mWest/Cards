@@ -21,18 +21,21 @@ struct CardListView: View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(viewModel.cards, id: \.self) { card in
+                    ForEach($viewModel.cardStorageService.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(card: card)
+                            cardListWireframe.makeCardDetail(card: card.wrappedValue)
                         } label: {
-                            CardListCell(card: card)
+                            CardListCell(card: card.wrappedValue)
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        viewModel.cards.remove(atOffsets: indexSet)
+                        viewModel.cardStorageService.deleteCard(atOffsets: indexSet)
                     })
                     .onMove(perform: { indices, newOffset in
-                        viewModel.cards.move(fromOffsets: indices, toOffset: newOffset)
+                        viewModel.cardStorageService.changePositionOfCards(
+                            fromOffsets: indices,
+                            toOffset: newOffset
+                        )
                     })
                 }
                 .navigationTitle("Generate cards")
@@ -49,15 +52,12 @@ struct CardListView: View {
                 }
             }
             
-            if viewModel.cards.isEmpty {
+            if viewModel.cardStorageService.cards.isEmpty {
                 EmptyCardView()
             }
         }
         .onAppear {
-            viewModel.loadCardsFormStore()
-        }
-        .onDisappear {
-            viewModel.saveCardsToStore()
+            viewModel.cardStorageService.loadFromStorageCards()
         }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(
@@ -74,8 +74,10 @@ struct CardListView_Previews: PreviewProvider {
             viewModel: CardListViewModel(
                 personNetworkService:
                     PersonNetworkServiceImpl(),
-                cardStatePackage:
-                    CardStatePackageImpl<Card>()
-            ))
+                cardStorageService:
+                    CardStorageService(
+                        fileStorageService:
+                            FileStorageServiceImpl()
+                    )))
     }
 }

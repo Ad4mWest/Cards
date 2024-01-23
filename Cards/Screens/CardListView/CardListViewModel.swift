@@ -2,41 +2,25 @@
 //  Appotizers
 //  Created by Adam West on 11.01.2024.
 
-import Foundation
+import SwiftUI
 import Combine
 
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
-    @Published var cards: [Card] = []
+    @ObservedObject var cardStorageService: CardStorageService
     @Published var alertItem: AlertItem?
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
-    private var cardStatePackage: any CardStatePackage<Card>
     private let personNetworkService: PersonNetworkService
 
     // MARK: Initialization
-    init(personNetworkService: PersonNetworkService, cardStatePackage: any CardStatePackage<Card>) {
+    init(personNetworkService: PersonNetworkService, cardStorageService: CardStorageService) {
         self.personNetworkService = personNetworkService
-        self.cardStatePackage = cardStatePackage 
+        self.cardStorageService = cardStorageService
     }
     
     // MARK: Public methods
-    func loadCardsFormStore() {
-        cards = cardStatePackage.loadFromStore()
-    }
-    
-    func saveCardsToStore() {
-        cardStatePackage.saveToStore(toArray: cards)
-    }
-    
-    /// Combine data from Apies to Card
-    /// - Parameters:
-    ///         - randomPerson()
-    ///         - randomAge(name: )
-    ///         - randomNationality(name: )
-    ///         - randomGender(name: )
-    /// - Results: Card()
     
     func getNewCard() {
         personNetworkService.randomPerson()
@@ -76,7 +60,9 @@ final class CardListViewModel: ObservableObject {
                     email: person.email,
                     phone: person.phone
                 )
-                self.cards.append(card)
+                DispatchQueue.main.async {
+                    self.cardStorageService.createNewCard(forCards: card)
+                }
             }
             .store(in: &cancellables)
     }
