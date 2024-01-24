@@ -18,14 +18,14 @@ struct CardAccountView: View {
         NavigationView {
             Form {
                 Section(header: Text("Personal Info")) {
-                    TextField("Full name", text: $viewModel.profileStatePackage.data.name)
+                    TextField("Full name", text: $viewModel.card.name)
                     
                     Toggle(isOn: $viewModel.gender, label: {
                         viewModel.gender ? Text("Female") : Text("Male")
                     })
                     .toggleStyle(SwitchToggleStyle(tint: .mainAppC))
                     
-                    Picker(selection: $viewModel.profileStatePackage.data.nationality) {
+                    Picker(selection: $viewModel.card.nationality) {
                         ForEach(Card.nationality, id: \.self) { nationality in
                             Text(nationality)
                         }
@@ -33,7 +33,7 @@ struct CardAccountView: View {
                         Text("Nationality")
                     } .pickerStyle(.automatic)
                     
-                    Picker(selection: $viewModel.profileStatePackage.data.age) {
+                    Picker(selection: $viewModel.card.age) {
                         ForEach(0..<110, id: \.self) { age in
                             Text("\(age)")
                         }
@@ -42,11 +42,11 @@ struct CardAccountView: View {
                     } .pickerStyle(.automatic)
                 }
                 Section(header: Text("Contacts")) {
-                    TextField("Email", text: $viewModel.profileStatePackage.data.email)
+                    TextField("Email", text: $viewModel.card.email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                    TextField("Phone without code", text: $viewModel.profileStatePackage.data.phone)
+                    TextField("Phone without code", text: $viewModel.card.phone)
                         .keyboardType(.phonePad)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
@@ -79,10 +79,7 @@ struct CardAccountView_Previews: PreviewProvider {
         CardAccountView(
             viewModel:
                 CardAccountViewModel(
-                    cardStatePackage:
-                        ProfileStatePackage(
-                            data:
-                                Card()
-                        )))
+                    profileStorageService:  ProfileStorageServiceImpl()
+                ))
     }
 }

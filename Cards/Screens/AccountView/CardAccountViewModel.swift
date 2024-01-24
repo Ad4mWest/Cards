@@ -6,22 +6,25 @@ import SwiftUI
 
 final class CardAccountViewModel: ObservableObject {
     // MARK: Public Properties
-    @Published var profileStatePackage: ProfileStatePackage<Card>
+    @Published var card: Card = Card()
     @Published var alertItem: AlertItem?
     @Published var gender: Bool
     
+    // MARK: Private properties
+    private let profileStorageService: ProfileStorageService
+    
     var isValidForm: Bool {
-        guard !profileStatePackage.data.name.isEmpty && !profileStatePackage.data.email.isEmpty && !profileStatePackage.data.phone.isEmpty else {
+        guard !card.name.isEmpty && !card.email.isEmpty && !card.phone.isEmpty else {
             alertItem = AlertContext.invalidForm
             return false
         }
         
-        guard profileStatePackage.data.email.isValidEmail else {
+        guard card.email.isValidEmail else {
             alertItem = AlertContext.invalidEmail
             return false
         }
         
-        guard profileStatePackage.data.phone.isValidPhone else {
+        guard card.phone.isValidPhone else {
             alertItem = AlertContext.invalidForm
             return false
         }
@@ -29,51 +32,23 @@ final class CardAccountViewModel: ObservableObject {
     }
     
     // MARK: Initialization
-    init(cardStatePackage: ProfileStatePackage<Card>, gender: Bool = false) {
-        self.profileStatePackage = cardStatePackage
+    init(profileStorageService: ProfileStorageService, gender: Bool = false) {
+        self.profileStorageService = profileStorageService
         self.gender = gender
     }
     
     // MARK: Public methods
     func retrieveCardData() {
-        profileStatePackage.loadFromStore()
-        profileStatePackage.data.gender == "Female" ? (self.gender = true) : (self.gender = false)
+        card = profileStorageService.loadFromStore()
+        card.gender == "Female" ? (self.gender = true) : (self.gender = false)
     }
     
     func saveChangesProfile() {
         guard isValidForm else {
             return
         }
-        gender ? (profileStatePackage.data.gender = "Female") : (profileStatePackage.data.gender = "Male")
-        profileStatePackage.saveToStore()
+        gender ? (card.gender = "Female") : (card.gender = "Male")
+        profileStorageService.saveToStore(forCards: card)
         alertItem = AlertContext.userSaveSuccess
     }
 }
-
-//    func saveChangesProfile() {
-//        guard isValidForm else {
-//            return
-//        }
-//        do {
-//            gender ? (card.gender = "Female") : (card.gender = "Male")
-//            let data = try JSONEncoder().encode(card)
-//            cardData = data
-//            alertItem = AlertContext.userSaveSuccess
-//        } catch {
-//            alertItem = AlertContext.invalidUserData
-//        }
-//    }
-    
-//    func retrieveCardData() {
-//        guard let cardData else {
-//            return
-//        }
-//        do {
-//            let card = try JSONDecoder().decode(Card.self, from: cardData)
-//            self.card = card
-//            card.gender == "Female" ? (self.gender = true) : (self.gender = false)
-//
-//        } catch {
-//            alertItem = AlertContext.invalidUserData
-//        }
-//    }
