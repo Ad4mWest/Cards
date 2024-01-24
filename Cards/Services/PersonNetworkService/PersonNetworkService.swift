@@ -45,6 +45,7 @@ final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
         }
         let request = URLRequest(url: url)
         return fetchData(request: request)
+            
     }
     
     func randomNationality(name: String) -> AnyPublisher<NationalityResponse, Error> {

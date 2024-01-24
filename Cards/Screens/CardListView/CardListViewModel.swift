@@ -7,14 +7,14 @@ import Combine
 
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
-    @Published var cardStorageService: CardStorageService
     @Published var alertItem: AlertItem?
     @Published var cards: [Card] = []
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
     private let personNetworkService: PersonNetworkService
-
+    private let cardStorageService: CardStorageService
+    
     // MARK: Initialization
     init(personNetworkService: PersonNetworkService, cardStorageService: CardStorageService) {
         self.personNetworkService = personNetworkService
@@ -23,19 +23,19 @@ final class CardListViewModel: ObservableObject {
     
     // MARK: Public methods
     func remove(atOffsets indexSet: IndexSet) {
-        cards.remove(atOffsets: indexSet)
         cardStorageService.deleteCard(atOffsets: indexSet)
+        cards = cardStorageService.loadFromStorageCards()
     }
     
     func onMove(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
-        cards.move(fromOffsets: indices, toOffset: newOffset)
         cardStorageService.changePositionOfCards(fromOffsets: indices, toOffset: newOffset)
+        cards = cardStorageService.loadFromStorageCards()
     }
     
     func loadFromStorage() {
         cards = cardStorageService.loadFromStorageCards()
     }
-    
+   
     func getNewCard() {
         personNetworkService.randomPerson()
             .sink { completion in
@@ -80,7 +80,11 @@ final class CardListViewModel: ObservableObject {
             email: person.email,
             phone: person.phone
         )
-        cards.append(card)
-        cardStorageService.createNewCard(forCards: card)
+        appendNewCard(forCard: card)
+    }
+    
+    private func appendNewCard(forCard card: Card) {
+        cardStorageService.appendNewCard(forCards: card)
+        cards = cardStorageService.loadFromStorageCards()
     }
 }

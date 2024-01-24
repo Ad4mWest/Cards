@@ -5,42 +5,37 @@
 import SwiftUI
 
 protocol FileStorageService<TypeData> {
-    associatedtype TypeData
-    func saveToStore(toArray array: [TypeData])
-    func loadFromStore() -> [TypeData]
+    associatedtype TypeData: Codable
+    func saveToStore(forObject object: TypeData) throws
+    func loadFromStore() throws -> TypeData
 }
 
-final class FileStorageServiceImpl<T: Codable>: FileStorageService {
-    typealias TypeData = T
-    
-    // MARK: Private properties
-    private var arrayData: [TypeData] = []
-    
+extension FileStorageService {
     //MARK: - Defining that we save our data in the Documents folder
     static func persistentFileURL() -> URL {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return url.appendingPathComponent("\(TypeData.self)Array.json")
+        return url.appendingPathComponent("\(TypeData.self).json")
     }
 
     // MARK: Save
-    func saveToStore(toArray array: [TypeData]) {
-        arrayData = array
+    func saveToStore(forObject object: TypeData) throws {
         do {
             let url = Self.persistentFileURL()
-            try JSONEncoder().encode(arrayData).write(to: url)
+            try JSONEncoder().encode(object).write(to: url)
         } catch {
-            assertionFailure(APIError.invalidDecoding("Unnabled to encode").localizedDescription)
+           throw APIError.invalidDecoding("Unnabled to encode")
         }
     }
     
     // MARK: Load
-    func loadFromStore() -> [TypeData] {
+    func loadFromStore() throws -> TypeData {
+        let object: TypeData
         do {
-            arrayData = try JSONDecoder().decode([TypeData].self,
-                                            from: Data(contentsOf: Self.persistentFileURL()))
+            object = try JSONDecoder()
+                .decode(TypeData.self, from: Data(contentsOf: Self.persistentFileURL()))
         } catch {
-            arrayData = []
+            throw APIError.invalidDecoding("Unnabled to decode")
         }
-        return arrayData
+        return object
     }
 }

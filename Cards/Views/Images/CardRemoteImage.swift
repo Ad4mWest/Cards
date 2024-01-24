@@ -13,8 +13,10 @@ final class ImageProvider: ObservableObject {
 
     func loadImage(url: URL) {
         self.cancellable = imageLoader.publisher(for: url)
-            .sink(receiveCompletion: { failure in
-            print(failure)
+            .sink(receiveCompletion: { completion in
+                if case .failure = completion {
+                    self.image = UIImage(named: "labelPlaceholder")!
+                }
         }, receiveValue: { image in
             self.image = image
         })

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		664EBF962B5FD094004AAE13 /* CardStorageServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664EBF952B5FD094004AAE13 /* CardStorageServiceImpl.swift */; };
+		664EBF962B5FD094004AAE13 /* CardStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664EBF952B5FD094004AAE13 /* CardStorageService.swift */; };
 		665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665F738A2B591AD8005279CD /* GenderResponse.swift */; };
 		66689BB42B5BC47300D8C165 /* CardAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */; };
 		6691F1B22B58060100465E12 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691F1B12B58060100465E12 /* CardDetailViewModel.swift */; };
@@ -43,7 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		664EBF952B5FD094004AAE13 /* CardStorageServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStorageServiceImpl.swift; sourceTree = "<group>"; };
+		664EBF952B5FD094004AAE13 /* CardStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStorageService.swift; sourceTree = "<group>"; };
 		665F738A2B591AD8005279CD /* GenderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderResponse.swift; sourceTree = "<group>"; };
 		66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAccountViewModel.swift; sourceTree = "<group>"; };
 		6691F1B12B58060100465E12 /* CardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewModel.swift; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		664EBF942B5FD02A004AAE13 /* CardStorageService */ = {
 			isa = PBXGroup;
 			children = (
-				664EBF952B5FD094004AAE13 /* CardStorageServiceImpl.swift */,
+				664EBF952B5FD094004AAE13 /* CardStorageService.swift */,
 				66A2E1EE2B5D61EB00268BA6 /* ProfileStatePackage.swift */,
 			);
 			path = CardStorageService;
@@ -388,7 +388,7 @@
 				66AC60A92B542BEE009BE505 /* Alert.swift in Sources */,
 				66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */,
 				66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */,
-				664EBF962B5FD094004AAE13 /* CardStorageServiceImpl.swift in Sources */,
+				664EBF962B5FD094004AAE13 /* CardStorageService.swift in Sources */,
 				66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */,
 				6691F1B42B5816E800465E12 /* CardDetailWireframe.swift in Sources */,
 			);

@@ -72,9 +72,7 @@ struct CardListView_Previews: PreviewProvider {
                 personNetworkService:
                     PersonNetworkServiceImpl(),
                 cardStorageService:
-                    CardStorageServiceImpl(
-                        fileStorageService:
-                            FileStorageServiceImpl()
-                    )))
+                    CardStorageServiceImpl()
+            ))
     }
 }
