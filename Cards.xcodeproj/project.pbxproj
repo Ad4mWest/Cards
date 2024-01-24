@@ -10,9 +10,11 @@
 		664EBF962B5FD094004AAE13 /* CardStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664EBF952B5FD094004AAE13 /* CardStorageService.swift */; };
 		665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665F738A2B591AD8005279CD /* GenderResponse.swift */; };
 		66689BB42B5BC47300D8C165 /* CardAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */; };
+		66804E202B61994000C407B9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66804E1F2B61994000C407B9 /* ActivityIndicator.swift */; };
+		66804E222B6199D900C407B9 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66804E212B6199D900C407B9 /* View + Extension.swift */; };
 		6691F1B22B58060100465E12 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691F1B12B58060100465E12 /* CardDetailViewModel.swift */; };
 		6691F1B42B5816E800465E12 /* CardDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691F1B32B5816E800465E12 /* CardDetailWireframe.swift */; };
-		6697CDB42B5A7DED003B8F38 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697CDB32B5A7DED003B8F38 /* String + Ext.swift */; };
+		6697CDB42B5A7DED003B8F38 /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697CDB32B5A7DED003B8F38 /* String + Extension.swift */; };
 		6697CDB62B5AB0AA003B8F38 /* NetworkImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697CDB52B5AB0AA003B8F38 /* NetworkImageLoader.swift */; };
 		669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0BE2B5676E1002375E2 /* AgeResponse.swift */; };
 		669BD0C12B568C84002375E2 /* PersonNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BD0C02B568C84002375E2 /* PersonNetworkService.swift */; };
@@ -34,7 +36,7 @@
 		66AC60A42B5419BE009BE505 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A32B5419BE009BE505 /* CardDetailView.swift */; };
 		66AC60A92B542BEE009BE505 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60A82B542BEE009BE505 /* Alert.swift */; };
 		66AC60AB2B542BFB009BE505 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AA2B542BFB009BE505 /* APIError.swift */; };
-		66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AC2B542C0A009BE505 /* Color + Ext.swift */; };
+		66AC60AD2B542C0A009BE505 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60AC2B542C0A009BE505 /* Color + Extension.swift */; };
 		66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */; };
 		66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B52B543746009BE505 /* CardListViewModel.swift */; };
 		66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B72B5462BD009BE505 /* NetworkService.swift */; };
@@ -44,9 +46,11 @@
 		664EBF952B5FD094004AAE13 /* CardStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStorageService.swift; sourceTree = "<group>"; };
 		665F738A2B591AD8005279CD /* GenderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderResponse.swift; sourceTree = "<group>"; };
 		66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAccountViewModel.swift; sourceTree = "<group>"; };
+		66804E1F2B61994000C407B9 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		66804E212B6199D900C407B9 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		6691F1B12B58060100465E12 /* CardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewModel.swift; sourceTree = "<group>"; };
 		6691F1B32B5816E800465E12 /* CardDetailWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailWireframe.swift; sourceTree = "<group>"; };
-		6697CDB32B5A7DED003B8F38 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
+		6697CDB32B5A7DED003B8F38 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		6697CDB52B5AB0AA003B8F38 /* NetworkImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageLoader.swift; sourceTree = "<group>"; };
 		669BD0BE2B5676E1002375E2 /* AgeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeResponse.swift; sourceTree = "<group>"; };
 		669BD0C02B568C84002375E2 /* PersonNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonNetworkService.swift; sourceTree = "<group>"; };
@@ -69,7 +73,7 @@
 		66AC60A32B5419BE009BE505 /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		66AC60A82B542BEE009BE505 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		66AC60AA2B542BFB009BE505 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		66AC60AC2B542C0A009BE505 /* Color + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color + Ext.swift"; sourceTree = "<group>"; };
+		66AC60AC2B542C0A009BE505 /* Color + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 		66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRemoteImage.swift; sourceTree = "<group>"; };
 		66AC60B52B543746009BE505 /* CardListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
 		66AC60B72B5462BD009BE505 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -221,8 +225,9 @@
 		66AC60A52B542B00009BE505 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				66AC60AC2B542C0A009BE505 /* Color + Ext.swift */,
-				6697CDB32B5A7DED003B8F38 /* String + Ext.swift */,
+				66AC60AC2B542C0A009BE505 /* Color + Extension.swift */,
+				6697CDB32B5A7DED003B8F38 /* String + Extension.swift */,
+				66804E212B6199D900C407B9 /* View + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				66AC60A12B54178A009BE505 /* EmptyCardView.swift */,
+				66804E1F2B61994000C407B9 /* ActivityIndicator.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -356,7 +362,7 @@
 			files = (
 				669BD0D02B572220002375E2 /* CardListWireframe.swift in Sources */,
 				669BD0C12B568C84002375E2 /* PersonNetworkService.swift in Sources */,
-				6697CDB42B5A7DED003B8F38 /* String + Ext.swift in Sources */,
+				6697CDB42B5A7DED003B8F38 /* String + Extension.swift in Sources */,
 				669BD0C52B569FE1002375E2 /* NationalityResponse.swift in Sources */,
 				669BD0BF2B5676E1002375E2 /* AgeResponse.swift in Sources */,
 				66AC605C2B5263C1009BE505 /* CardListView.swift in Sources */,
@@ -370,8 +376,10 @@
 				66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */,
 				66AC60A02B5416C6009BE505 /* CardTabView.swift in Sources */,
 				6697CDB62B5AB0AA003B8F38 /* NetworkImageLoader.swift in Sources */,
+				66804E202B61994000C407B9 /* ActivityIndicator.swift in Sources */,
 				66689BB42B5BC47300D8C165 /* CardAccountViewModel.swift in Sources */,
 				66A2E1EB2B5D543800268BA6 /* CardAccountWireframe.swift in Sources */,
+				66804E222B6199D900C407B9 /* View + Extension.swift in Sources */,
 				66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */,
 				66A2E1EF2B5D61EB00268BA6 /* ProfileStorageService.swift in Sources */,
 				665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */,
@@ -381,7 +389,7 @@
 				66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */,
 				66A2F0112B5591A700858008 /* PersonResponse.swift in Sources */,
 				664EBF962B5FD094004AAE13 /* CardStorageService.swift in Sources */,
-				66AC60AD2B542C0A009BE505 /* Color + Ext.swift in Sources */,
+				66AC60AD2B542C0A009BE505 /* Color + Extension.swift in Sources */,
 				6691F1B42B5816E800465E12 /* CardDetailWireframe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,8 +14,7 @@ struct CardListCell: View {
     }
     
     var body: some View {
-        HStack(spacing: 20)
-        {
+        HStack(spacing: 20) {
             CardRemoteImage(url: card.imageURL)
                 .frame(width: 120, height: 90)
                 .cornerRadius(8)

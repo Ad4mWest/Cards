@@ -8,7 +8,9 @@ import Combine
 struct CardListView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardListViewModel
+    @State private var isLoading = true
     private let cardListWireframe: CardDetailWireframe
+    
     
     // MARK: Initialization
     init(viewModel: CardListViewModel) {
@@ -18,8 +20,12 @@ struct CardListView: View {
     
     // MARK: Lifecycle
     var body: some View {
-        ZStack {
             NavigationView {
+                ZStack {
+                    ActivityIndicator(isAnimating: isLoading) {
+                        $0.color = .mainAppC
+                        $0.hidesWhenStopped = false
+                    }
                 List() {
                     ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
@@ -40,6 +46,7 @@ struct CardListView: View {
                     ToolbarItem(placement: .primaryAction,
                                 content: {
                         Button {
+                            isLoading.toggle()
                             viewModel.getNewCard()
                         } label: {
                             Image(systemName: "plus.circle")

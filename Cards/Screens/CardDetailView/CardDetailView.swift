@@ -22,9 +22,9 @@ struct CardDetailView: View {
                 CardRemoteImage(url: viewModel.card.imageURL)
                     .shadow(color: .mainAppC, radius: 20)
             }
-            Text(viewModel.card.name)
-                .font(.title2)
-                .fontWeight(.semibold)
+            TextField("Enter your Name", text: $viewModel.card.name)
+                .font(Font.title2.weight(.bold))
+                .multilineTextAlignment(.center)
             
             VStack(spacing: 10) {
                 HStack(spacing: 5) {
@@ -87,7 +87,7 @@ struct CardDetailView: View {
                     CardDetailViewModel(
                         card:
                             Card(id: UUID(),
-                                 name: "Adam",
+                                 name: "Adam West",
                                  imageURL: "",
                                  age: 5,
                                  gender: "male",

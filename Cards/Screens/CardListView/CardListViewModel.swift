@@ -80,7 +80,7 @@ final class CardListViewModel: ObservableObject {
         let id = UUID()
         let card = Card(
             id: id,
-            name: person.name.title + " " + person.name.first + " " + person.name.last,
+            name: person.name.first + " " + person.name.last,
             imageURL: person.picture.large,
             age: age?.age ?? Int(),
             gender: gender?.gender ?? "Agender",
