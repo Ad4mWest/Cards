@@ -7,6 +7,7 @@ import SwiftUI
 struct CardDetailView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardDetailViewModel
+    @EnvironmentObject private var cardListModel: CardListViewModel
     
     // MARK: Initialization
     init(viewModel: CardDetailViewModel) {
@@ -25,39 +26,73 @@ struct CardDetailView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
             
-            VStack(spacing: 20) {
-                HStack(spacing: 20) {                    CardInfoView(title: "Gender",
-                                 text: "\(viewModel.card.gender)")
-                    CardInfoView(title: "Age",
-                                 text: "\(viewModel.card.age)")
-                    CardInfoView(title: "Nationality",
-                                 text: "\(viewModel.card.nationality)")
+            VStack(spacing: 10) {
+                HStack(spacing: 5) {
+                    VStack(spacing: 5) {
+                        Text("Gender")
+                            .bold()
+                            .font(.title2)
+                        TextField("Gender", text: $viewModel.card.gender)
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    VStack(spacing: 5) {
+                        Text("Age")
+                            .bold()
+                            .font(.title2)
+                        TextField("Age", value: $viewModel.card.age, formatter: NumberFormatter())
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    VStack(spacing: 5) {
+                        Text("Nationality")
+                            .bold()
+                            .font(.title2)
+                        TextField("Nationality", text: $viewModel.card.nationality)
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
                 }
                 Spacer()
-                VStack(alignment: .leading) {
-                    CardPhoneEmailView(
-                        email: viewModel.card.email,
-                        phone: viewModel.card.phone)
-                }
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Email")
+                        .bold()
+                        .font(.title2)
+                    TextField("Nationality", text: $viewModel.card.email)
+                        .font(.title3)
+                        .foregroundColor(.gray)
+                    Text("Phone")
+                        .bold()
+                        .font(.title2)
+                    TextField("Nationality", text: $viewModel.card.phone)
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                } .padding(30)
+                Spacer()
             }
-            Spacer()
+        }
+            .onDisappear {
+                cardListModel.editCurrentCard(forCards: viewModel.card)
+            }
         }
     }
-}
-
-struct CardDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardDetailView(
-            viewModel:
-                CardDetailViewModel(
-                    card:
-                        Card(id: UUID(),
-                             name: "Adam",
-                             imageURL: "",
-                             age: 5,
-                             gender: "male",
-                             nationality: "Ru",
-                             email: "adam.west@example.com",
-                             phone: "(272) 790-0888")))
+    
+    struct CardDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            CardDetailView(
+                viewModel:
+                    CardDetailViewModel(
+                        card:
+                            Card(id: UUID(),
+                                 name: "Adam",
+                                 imageURL: "",
+                                 age: 5,
+                                 gender: "male",
+                                 nationality: "Ru",
+                                 email: "adam.west@example.com",
+                                 phone: "(272) 790-0888")))
+        }
     }
-}

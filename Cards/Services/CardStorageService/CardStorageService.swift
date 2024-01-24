@@ -9,6 +9,7 @@ protocol CardStorageService {
     func loadFromStorageCards() -> [Card]
     func changePositionOfCards(fromOffsets indices: IndexSet, toOffset newOffset: Int)
     func deleteCard(atOffsets indexSet: IndexSet)
+    func editCurrentCard(forCards card: Card)
 }
 
 struct CardContainer: Codable {
@@ -44,6 +45,17 @@ final class CardStorageServiceImpl: CardStorageService, FileStorageService {
     // MARK: Edit
     func changePositionOfCards(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
         container.cards.move(fromOffsets: indices, toOffset: newOffset)
+        do {
+            try saveToStore(forObject: container)
+        } catch {
+            assertionFailure(APIError.invalidDecoding("Unnabled to save").localizedDescription)
+        }
+    }
+    
+    func editCurrentCard(forCards card: Card) {
+        if let row = container.cards.firstIndex(where: {$0.id == card.id}) {
+            container.cards[row] = card
+        }
         do {
             try saveToStore(forObject: container)
         } catch {

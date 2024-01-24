@@ -16,14 +16,14 @@ extension FileStorageService {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return url.appendingPathComponent("\(TypeData.self).json")
     }
-
+    
     // MARK: Save
     func saveToStore(forObject object: TypeData) throws {
         do {
             let url = Self.persistentFileURL()
             try JSONEncoder().encode(object).write(to: url)
         } catch {
-           throw APIError.invalidDecoding("Unnabled to encode")
+            throw APIError.invalidDecoding("Unnabled to encode")
         }
     }
     

@@ -23,7 +23,7 @@ struct CardListView: View {
                 List() {
                     ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(card: card)
+                            cardListWireframe.makeCardDetail(card: card).environmentObject(viewModel)
                         } label: {
                             CardListCell(card: card)
                         }

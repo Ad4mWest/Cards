@@ -16,7 +16,10 @@ final class CardListViewModel: ObservableObject {
     private let cardStorageService: CardStorageService
     
     // MARK: Initialization
-    init(personNetworkService: PersonNetworkService, cardStorageService: CardStorageService) {
+    init(
+        personNetworkService: PersonNetworkService,
+        cardStorageService: CardStorageService
+    ) {
         self.personNetworkService = personNetworkService
         self.cardStorageService = cardStorageService
     }
@@ -35,6 +38,11 @@ final class CardListViewModel: ObservableObject {
     func loadFromStorage() {
         cards = cardStorageService.loadFromStorageCards()
     }
+    
+    func editCurrentCard(forCards card: Card) {
+        cardStorageService.editCurrentCard(forCards: card)
+        cards = cardStorageService.loadFromStorageCards()
+    }
    
     func getNewCard() {
         personNetworkService.randomPerson()
@@ -48,6 +56,7 @@ final class CardListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    // MARK: Private methods
     private func getPersonDescription(withPerson person: Person) {
         guard let personName = person.name.first.safePercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
@@ -67,7 +76,6 @@ final class CardListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    // MARK: Private methods
     private func createNewCard(_ person: Person,_ age: AgeResponse?,_ nationality: NationalityResponse?,_ gender: GenderResponse?) {
         let id = UUID()
         let card = Card(

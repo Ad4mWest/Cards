@@ -2,7 +2,7 @@
 //  Cards
 //  Created by Adam West on 17.01.2024.
 
-import Foundation
+import SwiftUI
 
 final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
