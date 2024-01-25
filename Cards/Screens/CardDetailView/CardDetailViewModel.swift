@@ -7,19 +7,28 @@ import SwiftUI
 final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var card: Card
+    @Published var alertItem: AlertItem?
     
     // MARK: Private properties
+    private var containerCard: Card = Card()
     private let cardStorageService: CardStorageService
     
     // MARK: Initialization
     init(card: Card, cardStorageService: CardStorageService) {
         self.card = card
         self.cardStorageService = cardStorageService
+        containerCard = card
     }
     
     // MARK: Public methods
     func editCurrentCard(forCards card: Card, toCards cards: Cards) {
         cardStorageService.editCurrentCard(forCards: card)
         cards.cards = cardStorageService.loadFromStorageCards()
+        alertItem = AlertContext.userSaveSuccess
+    }
+    
+    func discardChanges() {
+        card = containerCard
+        alertItem = AlertContext.discardCardChanges
     }
 }

@@ -16,7 +16,7 @@ struct CardDetailView: View {
     
     // MARK: Lifecycle
     var body: some View {
-        VStack(spacing: 30) {
+        VStack(spacing: 25) {
             ZStack {
                 Divider()
                 CardRemoteImage(url: viewModel.card.imageURL)
@@ -25,58 +25,80 @@ struct CardDetailView: View {
             TextField("Enter your Name", text: $viewModel.card.name)
                 .font(Font.title2.weight(.bold))
                 .multilineTextAlignment(.center)
-            
-            VStack(spacing: 10) {
-                HStack(spacing: 5) {
-                    VStack(spacing: 5) {
-                        Text("Gender")
-                            .bold()
-                            .font(.title2)
-                        TextField("Gender", text: $viewModel.card.gender)
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    VStack(spacing: 5) {
-                        Text("Age")
-                            .bold()
-                            .font(.title2)
-                        TextField("Age", value: $viewModel.card.age, formatter: NumberFormatter())
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    VStack(spacing: 5) {
-                        Text("Nationality")
-                            .bold()
-                            .font(.title2)
-                        TextField("Nationality", text: $viewModel.card.nationality)
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                }
-                Spacer()
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Email")
+            HStack() {
+                VStack(spacing: 5) {
+                    Text("Gender")
                         .bold()
                         .font(.title2)
-                    TextField("Nationality", text: $viewModel.card.email)
-                        .font(.title3)
-                        .foregroundColor(.gray)
-                    Text("Phone")
-                        .bold()
-                        .font(.title2)
-                    TextField("Nationality", text: $viewModel.card.phone)
+                    TextField("Gender", text: $viewModel.card.gender)
                         .font(.title3)
                         .foregroundColor(.secondary)
-                } .padding(30)
-                Spacer()
+                        .multilineTextAlignment(.center)
+                }
+                VStack(spacing: 5) {
+                    Text("Age")
+                        .bold()
+                        .font(.title2)
+                    TextField("Age", value: $viewModel.card.age, formatter: NumberFormatter())
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+                VStack(spacing: 5) {
+                    Text("Nationality")
+                        .bold()
+                        .font(.title2)
+                    TextField("Nationality", text: $viewModel.card.nationality)
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                }
             }
-        }
-        .onDisappear {
-            viewModel.editCurrentCard(forCards: viewModel.card, toCards: cards)
-        }
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Email")
+                    .bold()
+                    .font(.title2)
+                TextField("Nationality", text: $viewModel.card.email)
+                    .font(.title3)
+                    .foregroundColor(.gray)
+                Text("Phone")
+                    .bold()
+                    .font(.title2)
+                TextField("Nationality", text: $viewModel.card.phone)
+                    .font(.title3)
+                    .foregroundColor(.secondary)
+            }
+            HStack() {
+                Button {
+                    viewModel.discardChanges()
+                } label: {
+                    Text("Discard")
+                }
+                .frame(width: 100, height: 50)
+                .background(Color.gray)
+                .foregroundColor(.black)
+                .cornerRadius(15)
+                Spacer()
+                Button {
+                    viewModel.editCurrentCard(
+                        forCards: viewModel.card,
+                        toCards: cards
+                    )
+                } label: {
+                    Text("Save")
+                }.frame(width: 100, height: 50)
+                    .background(Color.gray)
+                    .foregroundColor(.black)
+                    .cornerRadius(15)
+            }
+            Spacer()
+        }.padding(20)
+            .alert(item: $viewModel.alertItem) { alertItem in
+                Alert(
+                    title: alertItem.title,
+                    message: alertItem.message,
+                    dismissButton: alertItem.dismissButton)
+            }
     }
 }
 

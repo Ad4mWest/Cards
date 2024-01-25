@@ -43,6 +43,10 @@ struct AlertContext {
                                             message: Text("Your profile information was successfully saved."),
                                             dismissButton: .default(Text("OK")))
     
+    static let discardCardChanges  = AlertItem(title: Text("Changes Cancelled"),
+                                            message: Text("Your profile information was successfully discard."),
+                                            dismissButton: .default(Text("OK")))
+    
     static let invalidUserData  = AlertItem(title: Text("Profile Error"),
                                             message: Text("There was an error saving or retrieving your profile."),
                                             dismissButton: .default(Text("OK")))
