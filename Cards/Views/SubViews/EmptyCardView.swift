@@ -6,7 +6,7 @@ import SwiftUI
 
 struct EmptyCardView: View {
     var body: some View {
-       VStack {
+        VStack {
             Image("emptyCard")
                 .resizable()
                 .aspectRatio(contentMode: .fit)

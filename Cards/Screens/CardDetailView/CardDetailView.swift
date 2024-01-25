@@ -7,7 +7,7 @@ import SwiftUI
 struct CardDetailView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardDetailViewModel
-    @EnvironmentObject private var cardListModel: CardListViewModel
+    @EnvironmentObject private var cards: Cards
     
     // MARK: Initialization
     init(viewModel: CardDetailViewModel) {
@@ -74,25 +74,29 @@ struct CardDetailView: View {
                 Spacer()
             }
         }
-            .onDisappear {
-                cardListModel.editCurrentCard(forCards: viewModel.card)
-            }
+        .onDisappear {
+            viewModel.editCurrentCard(forCards: viewModel.card, toCards: cards)
         }
     }
-    
-    struct CardDetailView_Previews: PreviewProvider {
-        static var previews: some View {
-            CardDetailView(
-                viewModel:
-                    CardDetailViewModel(
-                        card:
-                            Card(id: UUID(),
-                                 name: "Adam West",
-                                 imageURL: "",
-                                 age: 5,
-                                 gender: "male",
-                                 nationality: "Ru",
-                                 email: "adam.west@example.com",
-                                 phone: "(272) 790-0888")))
-        }
+}
+
+struct CardDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardDetailView(
+            viewModel:
+                CardDetailViewModel(
+                    card:
+                        Card(id: UUID(),
+                             name: "Adam West",
+                             imageURL: "",
+                             age: 5,
+                             gender: "male",
+                             nationality: "Ru",
+                             email: "adam.west@example.com",
+                             phone: "(272) 790-0888"),
+                    cardStorageService:
+                        CardStorageServiceImpl()
+                )
+        )
     }
+}

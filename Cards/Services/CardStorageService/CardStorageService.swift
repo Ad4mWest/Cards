@@ -18,54 +18,59 @@ struct CardContainer: Codable {
 
 final class CardStorageServiceImpl: CardStorageService, FileStorageService {
     typealias TypeData = CardContainer
-    
-    // MARK: Private properties
-    private var container = CardContainer(cards: [])
-    
+
     // MARK: Create
     func appendNewCard(forCards card: Card) {
+        var container = loadContainer()
         container.cards.append(card)
-        do {
-            try saveToStore(forObject: container)
-        } catch {
-            assertionFailure(APIError.invalidDecoding("Unnabled to save").localizedDescription)
-        }
+        saveToContainer(forContainer: container)
     }
     
     // MARK: Read
     func loadFromStorageCards() -> [Card] {
-        do {
-            container = try loadFromStore()
-            return container.cards
-        } catch {
-            return []
-        }
+        let container = loadContainer()
+        return container.cards
     }
     
     // MARK: Edit
     func changePositionOfCards(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
+        var container = loadContainer()
         container.cards.move(fromOffsets: indices, toOffset: newOffset)
-        do {
-            try saveToStore(forObject: container)
-        } catch {
-            assertionFailure(APIError.invalidDecoding("Unnabled to save").localizedDescription)
-        }
+        saveToContainer(forContainer: container)
     }
     
     func editCurrentCard(forCards card: Card) {
+        var container = loadContainer()
         if let row = container.cards.firstIndex(where: {$0.id == card.id}) {
             container.cards[row] = card
         }
-        do {
-            try saveToStore(forObject: container)
-        } catch {
-            assertionFailure(APIError.invalidDecoding("Unnabled to save").localizedDescription)
-        }
+        saveToContainer(forContainer: container)
     }
     
     // MARK: Delete
     func deleteCard(atOffsets indexSet: IndexSet) {
+        var container = loadContainer()
         container.cards.remove(atOffsets: indexSet)
+        saveToContainer(forContainer: container)
+    }
+    
+    
+}
+
+// - MARK: Private methods
+private extension CardStorageServiceImpl {
+    func loadContainer() -> CardContainer {
+        var container: CardContainer
+        do {
+            container = try loadFromStore()
+            return container
+        } catch {
+            assertionFailure(APIError.invalidDecoding("Unnabled to load").localizedDescription)
+            return CardContainer(cards: [])
+        }
+    }
+    
+    func saveToContainer(forContainer container: CardContainer) {
         do {
             try saveToStore(forObject: container)
         } catch {
@@ -73,4 +78,3 @@ final class CardStorageServiceImpl: CardStorageService, FileStorageService {
         }
     }
 }
-

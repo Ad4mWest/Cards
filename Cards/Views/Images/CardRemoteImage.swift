@@ -10,16 +10,16 @@ final class ImageProvider: ObservableObject {
     
     private var cancellable: AnyCancellable?
     private let imageLoader = NetworkImageLoader()
-
+    
     func loadImage(url: URL) {
         self.cancellable = imageLoader.publisher(for: url)
             .sink(receiveCompletion: { completion in
                 if case .failure = completion {
                     self.image = UIImage(named: "labelPlaceholder")!
                 }
-        }, receiveValue: { image in
-            self.image = image
-        })
+            }, receiveValue: { image in
+                self.image = image
+            })
     }
 }
 
@@ -42,6 +42,5 @@ struct CardRemoteImage: View {
                 }
                 viewModel.loadImage(url: url)
             }
-            
     }
 }

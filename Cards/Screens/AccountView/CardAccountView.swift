@@ -80,6 +80,7 @@ struct CardAccountView_Previews: PreviewProvider {
             viewModel:
                 CardAccountViewModel(
                     profileStorageService:  ProfileStorageServiceImpl()
-                ))
+                )
+        )
     }
 }

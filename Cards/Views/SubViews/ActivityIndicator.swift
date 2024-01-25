@@ -12,7 +12,7 @@ struct ActivityIndicator: UIViewRepresentable {
     var configuration = {
         (indicator: UIView) in
     }
-
+    
     // MARK: Public methods
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UIView {
         return UIView()

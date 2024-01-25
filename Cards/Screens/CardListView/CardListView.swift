@@ -20,16 +20,16 @@ struct CardListView: View {
     
     // MARK: Lifecycle
     var body: some View {
-            NavigationView {
-                ZStack {
-                    ActivityIndicator(isAnimating: isLoading) {
-                        $0.color = .mainAppC
-                        $0.hidesWhenStopped = false
-                    }
+        NavigationView {
+            ZStack {
+                ActivityIndicator(isAnimating: isLoading) {
+                    $0.color = .mainAppC
+                    $0.hidesWhenStopped = false
+                }
                 List() {
-                    ForEach(viewModel.cards, id: \.self) { card in
+                    ForEach(viewModel.cards.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(card: card).environmentObject(viewModel)
+                            cardListWireframe.makeCardDetail(card: card).environmentObject(viewModel.cards)
                         } label: {
                             CardListCell(card: card)
                         }
@@ -56,7 +56,7 @@ struct CardListView: View {
                 }
             }
             
-            if viewModel.cards.isEmpty {
+            if viewModel.cards.cards.isEmpty {
                 EmptyCardView()
             }
         }
@@ -76,10 +76,9 @@ struct CardListView_Previews: PreviewProvider {
     static var previews: some View {
         CardListView(
             viewModel: CardListViewModel(
-                personNetworkService:
-                    PersonNetworkServiceImpl(),
-                cardStorageService:
-                    CardStorageServiceImpl()
-            ))
+                personNetworkService: PersonNetworkServiceImpl(),
+                cardStorageService: CardStorageServiceImpl()
+            )
+        )
     }
 }
