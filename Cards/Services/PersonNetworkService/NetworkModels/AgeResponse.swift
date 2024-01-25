@@ -8,6 +8,12 @@ struct AgeResponse: Decodable {
     let count: Int
     let name: String
     let age: Int
+    
+    init() {
+        self.count = 0
+        self.name = String()
+        self.age = 33
+    }
 }
 
 

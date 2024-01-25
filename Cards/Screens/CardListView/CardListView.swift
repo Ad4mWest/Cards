@@ -27,9 +27,9 @@ struct CardListView: View {
                     $0.hidesWhenStopped = false
                 }
                 List() {
-                    ForEach(viewModel.cards.cards, id: \.self) { card in
+                    ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(card: card).environmentObject(viewModel.cards)
+                            cardListWireframe.makeCardDetail(card: card).environmentObject(viewModel.cardContainer)
                         } label: {
                             CardListCell(card: card)
                         }
@@ -56,12 +56,15 @@ struct CardListView: View {
                 }
             }
             
-            if viewModel.cards.cards.isEmpty {
+            if viewModel.cards.isEmpty {
                 EmptyCardView()
             }
         }
         .onAppear {
             viewModel.loadFromStorage()
+        }
+        .onDisappear {
+            viewModel.loadContainerCard()
         }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(

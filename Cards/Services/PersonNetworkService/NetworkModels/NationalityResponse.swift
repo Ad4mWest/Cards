@@ -17,6 +17,17 @@ struct NationalityResponse: Decodable {
         let countryId: String
         let probability: Double
     }
+    
+    init() {
+        self.count = 0
+        self.name = String()
+        self.country = [
+            Country(
+            countryId: "RU",
+            probability: 0
+            )
+        ]
+    }
 }
 
 

@@ -53,8 +53,6 @@ final class CardStorageServiceImpl: CardStorageService, FileStorageService {
         container.cards.remove(atOffsets: indexSet)
         saveToContainer(forContainer: container)
     }
-    
-    
 }
 
 // - MARK: Private methods

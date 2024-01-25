@@ -8,7 +8,8 @@ import Combine
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
-    var cards: Cards = Cards()
+    @Published var cards: [Card] = []
+    var cardContainer: Cards = Cards()
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
@@ -22,22 +23,25 @@ final class CardListViewModel: ObservableObject {
     ) {
         self.personNetworkService = personNetworkService
         self.cardStorageService = cardStorageService
-        loadFromStorage()
     }
     
     // MARK: Public methods
     func remove(atOffsets indexSet: IndexSet) {
         cardStorageService.deleteCard(atOffsets: indexSet)
-        cards.cards = cardStorageService.loadFromStorageCards()
+        cards = cardStorageService.loadFromStorageCards()
     }
     
     func onMove(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
         cardStorageService.changePositionOfCards(fromOffsets: indices, toOffset: newOffset)
-        cards.cards = cardStorageService.loadFromStorageCards()
+        cards = cardStorageService.loadFromStorageCards()
     }
     
     func loadFromStorage() {
-        cards.cards = cardStorageService.loadFromStorageCards()
+        cards = cardStorageService.loadFromStorageCards()
+    }
+    
+    func loadContainerCard() {
+        cardContainer.cards = cards
     }
     
     func getNewCard() {
@@ -57,30 +61,31 @@ final class CardListViewModel: ObservableObject {
         guard let personName = person.name.first.safePercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
-        personNetworkService.randomAge(name: personName)
-            .combineLatest(
-                personNetworkService.randomNationality(name: personName),
-                personNetworkService.randomGender(name: personName)
-            )
-            .sink { completion in
-                if case .failure = completion {
-                    self.createNewCard(person, nil, nil, nil)
+        do {
+            let randomAge = try personNetworkService.randomAge(name: personName)
+            let randomNationality = try personNetworkService.randomNationality(name: personName)
+            let randomGender = try personNetworkService.randomGender(name: personName)
+            
+            randomAge
+                .combineLatest(randomNationality, randomGender)
+                .sink { (age, nationality, gender) in
+                    self.createNewCard(person, age, nationality, gender)
                 }
-            } receiveValue: { (age, nationality, gender) in
-                self.createNewCard(person, age, nationality, gender)
-            }
-            .store(in: &cancellables)
+                .store(in: &cancellables)
+        } catch(let error) {
+            print(error)
+        }
     }
     
-    private func createNewCard(_ person: Person,_ age: AgeResponse?,_ nationality: NationalityResponse?,_ gender: GenderResponse?) {
+    private func createNewCard(_ person: Person,_ age: AgeResponse,_ nationality: NationalityResponse,_ gender: GenderResponse) {
         let id = UUID()
         let card = Card(
             id: id,
             name: person.name.first + " " + person.name.last,
             imageURL: person.picture.large,
-            age: age?.age ?? Int(),
-            gender: gender?.gender ?? "Agender",
-            nationality: nationality?.country.first?.countryId ?? String(),
+            age: age.age,
+            gender: gender.gender ?? String(),
+            nationality: nationality.country.first?.countryId ?? String(),
             email: person.email,
             phone: person.phone
         )
@@ -89,6 +94,6 @@ final class CardListViewModel: ObservableObject {
     
     private func appendNewCard(forCard card: Card) {
         cardStorageService.appendNewCard(forCards: card)
-        cards.cards = cardStorageService.loadFromStorageCards()
+        loadFromStorage()
     }
 }
