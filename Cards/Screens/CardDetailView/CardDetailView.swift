@@ -111,6 +111,8 @@ struct CardDetailView: View {
             .onDisappear {
                 if !viewModel.discardButtonDisabled {
                     viewModel.discardChanges()
+                } else {
+                    viewModel.saveContainer()
                 }
                 viewModel.discardButtonDisabled = false
             }

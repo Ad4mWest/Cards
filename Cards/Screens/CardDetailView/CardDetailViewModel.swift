@@ -24,7 +24,7 @@ final class CardDetailViewModel: ObservableObject {
     init(card: Card, cardStorageService: CardStorageService) {
         self.card = card
         self.cardStorageService = cardStorageService
-        containerCard = card
+        self.saveContainer()
     }
     
     // MARK: Public methods
@@ -37,5 +37,9 @@ final class CardDetailViewModel: ObservableObject {
     func discardChanges() {
         card = containerCard
         alertItem = AlertContext.discardCardChanges
+    }
+    
+    func saveContainer() {
+        containerCard = card
     }
 }
