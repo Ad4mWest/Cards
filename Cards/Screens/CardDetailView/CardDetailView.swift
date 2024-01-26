@@ -72,10 +72,13 @@ struct CardDetailView: View {
                 Button {
                     viewModel.discardChanges()
                 } label: {
+                    viewModel.discardButtonDisabled ?
+                    Text("Disabled") :
                     Text("Discard")
                 }
+                .disabled(viewModel.discardButtonDisabled)
                 .frame(width: 100, height: 50)
-                .foregroundColor(.black)
+                .foregroundColor(.mainAppC)
                 .background(
                     Capsule()
                         .strokeBorder(
@@ -85,6 +88,7 @@ struct CardDetailView: View {
                 )
                 Spacer()
                 Button {
+                    viewModel.discardButtonDisabled = true
                     viewModel.editCurrentCard(
                         forCards: viewModel.card,
                         toCards: cards
@@ -93,7 +97,7 @@ struct CardDetailView: View {
                     Text("Save")
                 }
                 .frame(width: 100, height: 50)
-                .foregroundColor(.black)
+                .foregroundColor(.mainAppC)
                 .background(
                     Capsule()
                         .strokeBorder(
@@ -104,6 +108,12 @@ struct CardDetailView: View {
             }
             Spacer()
         }.padding(20)
+            .onDisappear {
+                if !viewModel.discardButtonDisabled {
+                    viewModel.discardChanges()
+                }
+                viewModel.discardButtonDisabled = false
+            }
             .alert(item: $viewModel.alertItem) { alertItem in
                 Alert(
                     title: alertItem.title,

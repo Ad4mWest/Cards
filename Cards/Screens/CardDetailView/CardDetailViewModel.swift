@@ -8,6 +8,7 @@ final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var card: Card
     @Published var alertItem: AlertItem?
+    @Published var discardButtonDisabled = false
     var angularGradient: AngularGradient {
         AngularGradient(
             gradient: self.colors,
