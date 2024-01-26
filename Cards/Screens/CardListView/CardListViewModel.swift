@@ -8,7 +8,6 @@ import Combine
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
-    @Published var isLoading = true
     @Published var cards: [Card] = []
     var detailCard: Cards = Cards()
     

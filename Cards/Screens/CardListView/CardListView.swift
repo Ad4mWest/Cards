@@ -43,7 +43,6 @@ struct CardListView: View {
                     ToolbarItem(placement: .primaryAction,
                                 content: {
                         Button {
-                            viewModel.isLoading.toggle()
                             viewModel.getNewCard()
                         } label: {
                             Image(systemName: "plus.circle")
