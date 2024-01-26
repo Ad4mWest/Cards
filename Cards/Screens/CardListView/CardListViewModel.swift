@@ -8,8 +8,9 @@ import Combine
 final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
+    @Published var isLoading = true
     @Published var cards: [Card] = []
-    var cardContainer: Cards = Cards()
+    var detailCard: Cards = Cards()
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
@@ -40,8 +41,8 @@ final class CardListViewModel: ObservableObject {
         cards = cardStorageService.loadFromStorageCards()
     }
     
-    func loadContainerCard() {
-        cardContainer.cards = cards
+    func saveDetailCards() {
+        detailCard.cards = cards
     }
     
     func getNewCard() {
@@ -77,7 +78,12 @@ final class CardListViewModel: ObservableObject {
         }
     }
     
-    private func createNewCard(_ person: Person,_ age: AgeResponse,_ nationality: NationalityResponse,_ gender: GenderResponse) {
+    private func createNewCard(
+        _ person: Person,
+        _ age: AgeResponse,
+        _ nationality: NationalityResponse,
+        _ gender: GenderResponse
+    ) {
         let id = UUID()
         let card = Card(
             id: id,

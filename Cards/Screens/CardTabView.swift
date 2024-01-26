@@ -1,13 +1,15 @@
 //  CardTabView.swift
-//  Appotizers
+//  Cards
 //  Created by Adam West on 11.01.2024.
 
 import SwiftUI
 
 struct CardTabView: View {
+    // MARK: Private properties
     private let cardList = CardListWireframe()
     private let cardAccount = CardAccountWireframe()
     
+    // MARK: Lifecycle
     var body: some View {
         TabView {
             cardList.makeCardList()

@@ -8,8 +8,14 @@ final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var card: Card
     @Published var alertItem: AlertItem?
+    var angularGradient: AngularGradient {
+        AngularGradient(
+            gradient: self.colors,
+            center: .center)
+    }
     
     // MARK: Private properties
+    private var colors = Gradient(colors: [.red, .yellow, .green, .blue, .purple])
     private var containerCard: Card = Card()
     private let cardStorageService: CardStorageService
     

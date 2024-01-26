@@ -13,6 +13,7 @@ struct CardListCell: View {
         self.card = card
     }
     
+    // MARK: Lifecycle
     var body: some View {
         HStack(spacing: 20) {
             CardRemoteImage(url: card.imageURL)

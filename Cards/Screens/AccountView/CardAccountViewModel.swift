@@ -8,7 +8,6 @@ final class CardAccountViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var card: Card = Card()
     @Published var alertItem: AlertItem?
-    @Published var gender: Bool
     
     // MARK: Private properties
     private let profileStorageService: ProfileStorageService
@@ -32,22 +31,19 @@ final class CardAccountViewModel: ObservableObject {
     }
     
     // MARK: Initialization
-    init(profileStorageService: ProfileStorageService, gender: Bool = false) {
+    init(profileStorageService: ProfileStorageService) {
         self.profileStorageService = profileStorageService
-        self.gender = gender
     }
     
     // MARK: Public methods
     func retrieveCardData() {
-        card = profileStorageService.loadFromStore()
-        card.gender == "Female" ? (self.gender = true) : (self.gender = false)
+        card = profileStorageService.loadFromStorage()
     }
     
     func saveChangesProfile() {
         guard isValidForm else {
             return
         }
-        gender ? (card.gender = "Female") : (card.gender = "Male")
         profileStorageService.saveToStore(forCards: card)
         alertItem = AlertContext.userSaveSuccess
     }

@@ -75,9 +75,14 @@ struct CardDetailView: View {
                     Text("Discard")
                 }
                 .frame(width: 100, height: 50)
-                .background(Color.gray)
                 .foregroundColor(.black)
-                .cornerRadius(15)
+                .background(
+                    Capsule()
+                        .strokeBorder(
+                            viewModel.angularGradient,
+                            lineWidth: 3
+                        )
+                )
                 Spacer()
                 Button {
                     viewModel.editCurrentCard(
@@ -86,10 +91,16 @@ struct CardDetailView: View {
                     )
                 } label: {
                     Text("Save")
-                }.frame(width: 100, height: 50)
-                    .background(Color.gray)
-                    .foregroundColor(.black)
-                    .cornerRadius(15)
+                }
+                .frame(width: 100, height: 50)
+                .foregroundColor(.black)
+                .background(
+                    Capsule()
+                        .strokeBorder(
+                            viewModel.angularGradient,
+                            lineWidth: 3
+                        )
+                )
             }
             Spacer()
         }.padding(20)

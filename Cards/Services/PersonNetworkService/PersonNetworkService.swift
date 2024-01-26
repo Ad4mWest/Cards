@@ -13,6 +13,7 @@ protocol PersonNetworkService {
 }
 
 final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
+    // MARK: Public methods
     func randomPerson() -> AnyPublisher<Person, Error> {
         guard let url = URL(string: PersonNetworkConstants.personRequest) else {
             return Fail(error: NSError(

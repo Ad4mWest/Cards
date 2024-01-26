@@ -6,48 +6,44 @@ import SwiftUI
 
 protocol ProfileStorageService {
     func saveToStore(forCards card: Card)
-    func loadFromStore() -> Card
-}
-
-struct ProfileContainer: Codable {
-    var profile: Card
+    func loadFromStorage() -> Card
 }
 
 final class ProfileStorageServiceImpl: ProfileStorageService, FileStorageService  {
-    typealias TypeData = ProfileContainer
+    typealias TypeData = Card
     
     // MARK: Save
     func saveToStore(forCards card: Card) {
         var container = loadContainer()
-        container.profile = card
+        container = card
         saveToContainer(forContainer: container)
     }
     
     // MARK: Read
-    func loadFromStore() -> Card {
+    func loadFromStorage() -> Card {
         let container = loadContainer()
-        return container.profile
+        return container
     }
 }
- 
+
 // - MARK: Private methods
 private extension ProfileStorageServiceImpl {
-    private func loadContainer() -> ProfileContainer {
-        var container: ProfileContainer
+    private func loadContainer() -> Card {
+        var container: Card
         do {
             container = try loadFromStore()
             return container
         } catch {
-            assertionFailure(APIError.invalidDecoding("Unnabled to load").localizedDescription)
-            return ProfileContainer(profile: Card())
+            print(APIError.invalidDecoding("Unnabled to load").localizedDescription)
+            return Card()
         }
     }
     
-    private func saveToContainer(forContainer container: ProfileContainer) {
+    private func saveToContainer(forContainer container: Card) {
         do {
             try saveToStore(forObject: container)
         } catch {
-            assertionFailure(APIError.invalidDecoding("Unnabled to save").localizedDescription)
+            print(APIError.invalidDecoding("Unnabled to save").localizedDescription)
         }
     }
 }

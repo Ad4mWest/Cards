@@ -20,10 +20,7 @@ struct CardAccountView: View {
                 Section(header: Text("Personal Info")) {
                     TextField("Full name", text: $viewModel.card.name)
                     
-                    Toggle(isOn: $viewModel.gender, label: {
-                        viewModel.gender ? Text("Female") : Text("Male")
-                    })
-                    .toggleStyle(SwitchToggleStyle(tint: .mainAppC))
+                    TextField("Gender", text: $viewModel.card.gender)
                     
                     Picker(selection: $viewModel.card.nationality) {
                         ForEach(Card.nationality, id: \.self) { nationality in
@@ -56,7 +53,7 @@ struct CardAccountView: View {
                         viewModel.saveChangesProfile()
                     } label: {
                         Text("Save profile")
-                    } .foregroundColor(.red)
+                    } .foregroundColor(.mainAppC)
                 }
             }
             .navigationTitle("Your Profile")

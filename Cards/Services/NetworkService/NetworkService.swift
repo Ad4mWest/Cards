@@ -5,7 +5,7 @@
 import Foundation
 import Combine
 
-enum APiError: Error, LocalizedError {
+enum NetworkError: Error, LocalizedError {
     case unknown, apiError(reason: String)
     
     var errorDescription: String? {
@@ -27,15 +27,15 @@ extension NetworkService {
         return URLSession.DataTaskPublisher(request: request, session: .shared)
             .tryMap { data, response in
                 guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-                    throw APiError.unknown
+                    throw NetworkError.unknown
                 }
                 return data
             }
             .mapError { error in
-                if let error = error as? APiError {
+                if let error = error as? NetworkError {
                     return error
                 } else {
-                    return APiError.apiError(reason: error.localizedDescription)
+                    return NetworkError.apiError(reason: error.localizedDescription)
                 }
             }
             .decode(type: T.self, decoder: JSONDecoder())

@@ -8,9 +8,7 @@ import Combine
 struct CardListView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardListViewModel
-    @State private var isLoading = true
     private let cardListWireframe: CardDetailWireframe
-    
     
     // MARK: Initialization
     init(viewModel: CardListViewModel) {
@@ -22,14 +20,13 @@ struct CardListView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                ActivityIndicator(isAnimating: isLoading) {
-                    $0.color = .mainAppC
-                    $0.hidesWhenStopped = false
-                }
                 List() {
                     ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(card: card).environmentObject(viewModel.cardContainer)
+                            cardListWireframe.makeCardDetail(
+                                card: card).environmentObject(
+                                    viewModel.detailCard
+                                )
                         } label: {
                             CardListCell(card: card)
                         }
@@ -46,7 +43,7 @@ struct CardListView: View {
                     ToolbarItem(placement: .primaryAction,
                                 content: {
                         Button {
-                            isLoading.toggle()
+                            viewModel.isLoading.toggle()
                             viewModel.getNewCard()
                         } label: {
                             Image(systemName: "plus.circle")
@@ -54,23 +51,23 @@ struct CardListView: View {
                         }
                     })
                 }
-            }
-            
-            if viewModel.cards.isEmpty {
-                EmptyCardView()
+                if viewModel.cards.isEmpty {
+                    EmptyCardView()
+                }
             }
         }
         .onAppear {
             viewModel.loadFromStorage()
         }
         .onDisappear {
-            viewModel.loadContainerCard()
+            viewModel.saveDetailCards()
         }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(
                 title: alertItem.title,
                 message: alertItem.message,
-                dismissButton: alertItem.dismissButton)
+                dismissButton: alertItem.dismissButton
+            )
         }
     }
 }
