@@ -24,9 +24,9 @@ struct CardListView: View {
                     ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
                             cardListWireframe.makeCardDetail(
-                                card: card).environmentObject(
-                                    viewModel.detailCard
-                                )
+                                card: card,
+                                delegate: viewModel
+                            )
                         } label: {
                             CardListCell(card: card)
                         }
@@ -57,9 +57,6 @@ struct CardListView: View {
         }
         .onAppear {
             viewModel.loadFromStorage()
-        }
-        .onDisappear {
-            viewModel.saveDetailCards()
         }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(

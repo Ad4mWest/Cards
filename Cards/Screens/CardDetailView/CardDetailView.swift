@@ -7,7 +7,6 @@ import SwiftUI
 struct CardDetailView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardDetailViewModel
-    @EnvironmentObject private var cards: Cards
     
     // MARK: Initialization
     init(viewModel: CardDetailViewModel) {
@@ -16,112 +15,102 @@ struct CardDetailView: View {
     
     // MARK: Lifecycle
     var body: some View {
-        VStack(spacing: 25) {
-            ZStack {
-                Divider()
-                CardRemoteImage(url: viewModel.card.imageURL)
-                    .shadow(color: .mainAppC, radius: 20)
-            }
-            TextField("Enter your Name", text: $viewModel.card.name)
-                .font(Font.title2.weight(.bold))
-                .multilineTextAlignment(.center)
-            HStack() {
-                VStack(spacing: 5) {
-                    Text("Gender")
+        HStack {
+            VStack(spacing: 25) {
+                ZStack {
+                    Divider()
+                    CardRemoteImage(url: viewModel.card.imageURL)
+                        .shadow(color: .mainAppC, radius: 20)
+                }
+                TextField("Enter your Name", text: $viewModel.card.name)
+                    .font(Font.title2.weight(.bold))
+                    .multilineTextAlignment(.center)
+                HStack() {
+                    VStack(spacing: 5) {
+                        Text("Gender")
+                            .bold()
+                            .font(.title2)
+                        TextField("Gender", text: $viewModel.card.gender)
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    VStack(spacing: 5) {
+                        Text("Age")
+                            .bold()
+                            .font(.title2)
+                        TextField("Age", value: $viewModel.card.age, formatter: NumberFormatter())
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    VStack(spacing: 5) {
+                        Text("Nationality")
+                            .bold()
+                            .font(.title2)
+                        TextField("Nationality", text: $viewModel.card.nationality)
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Email")
                         .bold()
                         .font(.title2)
-                    TextField("Gender", text: $viewModel.card.gender)
+                    TextField("Nationality", text: $viewModel.card.email)
                         .font(.title3)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                VStack(spacing: 5) {
-                    Text("Age")
+                        .foregroundColor(.gray)
+                    Text("Phone")
                         .bold()
                         .font(.title2)
-                    TextField("Age", value: $viewModel.card.age, formatter: NumberFormatter())
+                    TextField("Nationality", text: $viewModel.card.phone)
                         .font(.title3)
                         .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
                 }
-                VStack(spacing: 5) {
-                    Text("Nationality")
-                        .bold()
-                        .font(.title2)
-                    TextField("Nationality", text: $viewModel.card.nationality)
-                        .font(.title3)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-            }
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Email")
-                    .bold()
-                    .font(.title2)
-                TextField("Nationality", text: $viewModel.card.email)
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                Text("Phone")
-                    .bold()
-                    .font(.title2)
-                TextField("Nationality", text: $viewModel.card.phone)
-                    .font(.title3)
-                    .foregroundColor(.secondary)
-            }
-            HStack() {
-                Button {
-                    viewModel.discardChanges()
-                } label: {
-                    viewModel.discardButtonDisabled ?
-                    Text("Disabled") :
-                    Text("Discard")
-                }
-                .disabled(viewModel.discardButtonDisabled)
-                .frame(width: 100, height: 50)
-                .foregroundColor(.mainAppC)
-                .background(
-                    Capsule()
-                        .strokeBorder(
-                            viewModel.angularGradient,
-                            lineWidth: 3
-                        )
-                )
-                Spacer()
-                Button {
-                    viewModel.discardButtonDisabled = true
-                    viewModel.editCurrentCard(
-                        forCards: viewModel.card,
-                        toCards: cards
+                HStack() {
+                    Button {
+                        viewModel.discardChanges()
+                    } label: {
+                        Text("Discard")
+                    }
+                    .frame(width: 100, height: 50)
+                    .foregroundColor(.mainAppC)
+                    .background(
+                        Capsule()
+                            .strokeBorder(
+                                viewModel.angularGradient,
+                                lineWidth: 3
+                            )
                     )
-                } label: {
-                    Text("Save")
+                    Spacer()
+                    Button {
+                        viewModel.saveCurrentCard()
+                    } label: {
+                        Text("Save")
+                    }
+                    .frame(width: 100, height: 50)
+                    .foregroundColor(.mainAppC)
+                    .background(
+                        Capsule()
+                            .strokeBorder(
+                                viewModel.angularGradient,
+                                lineWidth: 3
+                            )
+                    )
                 }
-                .frame(width: 100, height: 50)
-                .foregroundColor(.mainAppC)
-                .background(
-                    Capsule()
-                        .strokeBorder(
-                            viewModel.angularGradient,
-                            lineWidth: 3
-                        )
-                )
-            }
-            Spacer()
-        }.padding(20)
-            .onDisappear {
-                if !viewModel.discardButtonDisabled {
+                Spacer()
+            }.padding(20)
+                .onDisappear {
                     viewModel.discardChanges()
-                } else {
-                    viewModel.saveContainer()
                 }
-                viewModel.discardButtonDisabled = false
+                .alert(item: $viewModel.alertItem) { alertItem in
+                    Alert(
+                        title: alertItem.title,
+                        message: alertItem.message,
+                        dismissButton: alertItem.dismissButton)
             }
-            .alert(item: $viewModel.alertItem) { alertItem in
-                Alert(
-                    title: alertItem.title,
-                    message: alertItem.message,
-                    dismissButton: alertItem.dismissButton)
-            }
+        }
     }
 }
 
@@ -140,7 +129,8 @@ struct CardDetailView_Previews: PreviewProvider {
                              email: "adam.west@example.com",
                              phone: "(272) 790-0888"),
                     cardStorageService:
-                        CardStorageServiceImpl()
+                        CardStorageServiceImpl(), 
+                    delegate: nil
                 )
         )
     }

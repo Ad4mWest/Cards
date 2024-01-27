@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		66316FBD2B627D5200616118 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66316FBC2B627D5200616118 /* Cards.swift */; };
 		664EBF962B5FD094004AAE13 /* CardStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664EBF952B5FD094004AAE13 /* CardStorageService.swift */; };
 		665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665F738A2B591AD8005279CD /* GenderResponse.swift */; };
 		66689BB42B5BC47300D8C165 /* CardAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */; };
@@ -44,7 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		66316FBC2B627D5200616118 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		664EBF952B5FD094004AAE13 /* CardStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStorageService.swift; sourceTree = "<group>"; };
 		665F738A2B591AD8005279CD /* GenderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderResponse.swift; sourceTree = "<group>"; };
 		66689BB32B5BC47300D8C165 /* CardAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAccountViewModel.swift; sourceTree = "<group>"; };
@@ -227,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				66AC609B2B541302009BE505 /* Card.swift */,
-				66316FBC2B627D5200616118 /* Cards.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -390,7 +387,6 @@
 				66804E202B61994000C407B9 /* ActivityIndicator.swift in Sources */,
 				66689BB42B5BC47300D8C165 /* CardAccountViewModel.swift in Sources */,
 				66A2E1EB2B5D543800268BA6 /* CardAccountWireframe.swift in Sources */,
-				66316FBD2B627D5200616118 /* Cards.swift in Sources */,
 				66804E222B6199D900C407B9 /* View + Extension.swift in Sources */,
 				66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */,
 				66A2E1EF2B5D61EB00268BA6 /* ProfileStorageService.swift in Sources */,

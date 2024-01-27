@@ -12,15 +12,15 @@ protocol FileStorageService<TypeData> {
 
 extension FileStorageService {
     //MARK: - Defining that we save our data in the Documents folder
-    static func persistentFileURL() -> URL {
+    static func persistentFileURL(forStorage nameOfStorage: String) -> URL {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return url.appendingPathComponent("\(TypeData.self).json")
+        return url.appendingPathComponent("\(TypeData.self)\(nameOfStorage).json")
     }
     
     // MARK: Save
     func saveToStore(forObject object: TypeData) throws {
         do {
-            let url = Self.persistentFileURL()
+            let url = Self.persistentFileURL(forStorage: String())
             try JSONEncoder().encode(object).write(to: url)
         } catch {
             throw APIError.invalidDecoding("Unnabled to encode")
@@ -32,7 +32,13 @@ extension FileStorageService {
         let object: TypeData
         do {
             object = try JSONDecoder()
-                .decode(TypeData.self, from: Data(contentsOf: Self.persistentFileURL()))
+                .decode(
+                    TypeData.self, from: Data(
+                        contentsOf: Self.persistentFileURL(
+                            forStorage: String()
+                        )
+                    )
+                )
         } catch {
             throw APIError.invalidDecoding("Unnabled to decode")
         }

@@ -6,40 +6,45 @@ import SwiftUI
 
 final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
-    @Published var card: Card
     @Published var alertItem: AlertItem?
-    @Published var discardButtonDisabled = false
+    
+    var card: Card
+    var discardCard: Card = Card()
     var angularGradient: AngularGradient {
         AngularGradient(
             gradient: self.colors,
             center: .center)
     }
     
+    // MARK: Delegate
+    public var delegate: CardListViewModelDelegate?
+    
     // MARK: Private properties
     private var colors = Gradient(colors: [.red, .yellow, .green, .blue, .purple])
-    private var containerCard: Card = Card()
     private let cardStorageService: CardStorageService
     
     // MARK: Initialization
-    init(card: Card, cardStorageService: CardStorageService) {
+    init(
+        card: Card,
+        cardStorageService: CardStorageService,
+        delegate: CardListViewModelDelegate?
+    ) {
         self.card = card
         self.cardStorageService = cardStorageService
-        self.saveContainer()
+        self.delegate = delegate
+        self.discardCard = card
     }
     
     // MARK: Public methods
-    func editCurrentCard(forCards card: Card, toCards cards: Cards) {
+    func saveCurrentCard() {
         cardStorageService.editCurrentCard(forCards: card)
-        cards.cards = cardStorageService.loadFromStorageCards()
+        discardCard = card
+        delegate?.buttonSaveTapped()
         alertItem = AlertContext.userSaveSuccess
     }
     
     func discardChanges() {
-        card = containerCard
+        card = discardCard
         alertItem = AlertContext.discardCardChanges
-    }
-    
-    func saveContainer() {
-        containerCard = card
     }
 }

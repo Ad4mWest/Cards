@@ -5,11 +5,12 @@
 import SwiftUI
 
 final class CardDetailWireframe {
-    func makeCardDetail(card: Card) -> AnyView {
+    func makeCardDetail(card: Card, delegate: CardListViewModelDelegate) -> AnyView {
         let cardStorageService = CardStorageServiceImpl()
         let cardDetailViewModel = CardDetailViewModel(
             card: card,
-            cardStorageService: cardStorageService
+            cardStorageService: cardStorageService,
+            delegate: delegate
         )
         let cardDetailView = CardDetailView(viewModel: cardDetailViewModel)
         return AnyView(cardDetailView)

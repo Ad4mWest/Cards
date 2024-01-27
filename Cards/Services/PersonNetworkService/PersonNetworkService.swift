@@ -7,9 +7,9 @@ import Foundation
 
 protocol PersonNetworkService {
     func randomPerson() -> AnyPublisher<Person, Error>
-    func randomAge(name: String) throws -> AnyPublisher<AgeResponse, Never>
-    func randomGender(name: String) throws -> AnyPublisher<GenderResponse, Never>
-    func randomNationality(name: String) throws -> AnyPublisher<NationalityResponse, Never>
+    func randomAge(name: String) -> AnyPublisher<AgeResponse, Error>
+    func randomGender(name: String) -> AnyPublisher<GenderResponse, Error>
+    func randomNationality(name: String) -> AnyPublisher<NationalityResponse, Error>
 }
 
 final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
@@ -36,43 +36,42 @@ final class PersonNetworkServiceImpl: NetworkService, PersonNetworkService {
             .eraseToAnyPublisher()
     }
     
-    func randomAge(name: String) throws -> AnyPublisher<AgeResponse, Never> {
+    func randomAge(name: String) -> AnyPublisher<AgeResponse, Error> {
         guard let url = URL(string: PersonNetworkConstants.ageRequest + name) else {
-            throw NSError(
+            return Fail(error: NSError(
                 domain: "\(APIError.invalidURL("AgeRequest"))",
                 code: -10001,
-                userInfo: nil)
+                userInfo: nil))
+            .eraseToAnyPublisher()
         }
         let request = URLRequest(url: url)
         return fetchData(request: request)
-            .replaceError(with: AgeResponse())
             .eraseToAnyPublisher()
-        
     }
     
-    func randomNationality(name: String) throws -> AnyPublisher<NationalityResponse, Never> {
+    func randomNationality(name: String) -> AnyPublisher<NationalityResponse, Error> {
         guard let url = URL(string: PersonNetworkConstants.nationalityRequest + name) else {
-            throw NSError(
+            return Fail(error: NSError(
                 domain: "\(APIError.invalidURL("NationalityResponse"))",
                 code: -10001,
-                userInfo: nil)
+                userInfo: nil))
+            .eraseToAnyPublisher()
         }
         let request = URLRequest(url: url)
         return fetchData(request: request)
-            .replaceError(with: NationalityResponse())
             .eraseToAnyPublisher()
     }
     
-    func randomGender(name: String) throws -> AnyPublisher<GenderResponse, Never> {
+    func randomGender(name: String) -> AnyPublisher<GenderResponse, Error> {
         guard let url = URL(string: PersonNetworkConstants.genderRequest + name) else {
-            throw NSError(
+            return Fail(error: NSError(
                 domain: "\(APIError.invalidURL("GenderResponse"))",
                 code: -10001,
-                userInfo: nil)
+                userInfo: nil))
+            .eraseToAnyPublisher()
         }
         let request = URLRequest(url: url)
         return fetchData(request: request)
-            .replaceError(with: GenderResponse())
             .eraseToAnyPublisher()
     }
 }

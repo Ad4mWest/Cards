@@ -5,11 +5,14 @@
 import SwiftUI
 import Combine
 
-final class CardListViewModel: ObservableObject {
+protocol CardListViewModelDelegate {
+    func buttonSaveTapped()
+}
+
+final class CardListViewModel: ObservableObject, CardListViewModelDelegate {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
     @Published var cards: [Card] = []
-    var detailCard: Cards = Cards()
     
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
@@ -25,7 +28,12 @@ final class CardListViewModel: ObservableObject {
         self.cardStorageService = cardStorageService
     }
     
-    // MARK: Public methods
+    // MARK: Method of delegate
+    func buttonSaveTapped() {
+        loadFromStorage()
+    }
+    
+    // MARK: Methods of storaging
     func remove(atOffsets indexSet: IndexSet) {
         cardStorageService.deleteCard(atOffsets: indexSet)
         cards = cardStorageService.loadFromStorageCards()
@@ -40,10 +48,7 @@ final class CardListViewModel: ObservableObject {
         cards = cardStorageService.loadFromStorageCards()
     }
     
-    func saveDetailCards() {
-        detailCard.cards = cards
-    }
-    
+    // MARK: Methods of network service
     func getNewCard() {
         personNetworkService.randomPerson()
             .sink { completion in
@@ -61,20 +66,20 @@ final class CardListViewModel: ObservableObject {
         guard let personName = person.name.first.safePercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
-        do {
-            let randomAge = try personNetworkService.randomAge(name: personName)
-            let randomNationality = try personNetworkService.randomNationality(name: personName)
-            let randomGender = try personNetworkService.randomGender(name: personName)
-            
-            randomAge
-                .combineLatest(randomNationality, randomGender)
-                .sink { (age, nationality, gender) in
-                    self.createNewCard(person, age, nationality, gender)
-                }
-                .store(in: &cancellables)
-        } catch(let error) {
-            print(error)
-        }
+        
+        let randomAge = personNetworkService.randomAge(name: personName)
+            .replaceError(with: AgeResponse())
+        let randomNationality = personNetworkService.randomNationality(name: personName)
+            .replaceError(with: NationalityResponse())
+        let randomGender = personNetworkService.randomGender(name: personName)
+            .replaceError(with: GenderResponse())
+        
+        randomAge
+            .combineLatest(randomNationality, randomGender)
+            .sink { (age, nationality, gender) in
+                self.createNewCard(person, age, nationality, gender)
+            }
+            .store(in: &cancellables)
     }
     
     private func createNewCard(
