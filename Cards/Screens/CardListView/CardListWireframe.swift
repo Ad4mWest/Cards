@@ -6,8 +6,12 @@ import SwiftUI
 
 final class CardListWireframe {
     func makeCardList() -> AnyView {
+        let cardStorageService = CardStorageServiceImpl()
         let personNetworkService = PersonNetworkServiceImpl()
-        let cardListViewModel = CardListViewModel(personNetworkService: personNetworkService)
+        let cardListViewModel = CardListViewModel(
+            personNetworkService: personNetworkService,
+            cardStorageService: cardStorageService
+        )
         let cardListView = CardListView(viewModel: cardListViewModel)
         return AnyView(cardListView)
     }

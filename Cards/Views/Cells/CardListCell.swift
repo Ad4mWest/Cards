@@ -1,5 +1,5 @@
-//  AppetizerListCell.swift
-//  Appotizers
+//  CardListCell.swift
+//  Cards
 //  Created by Adam West on 11.01.2024.
 
 import SwiftUI
@@ -13,13 +13,12 @@ struct CardListCell: View {
         self.card = card
     }
     
+    // MARK: Lifecycle
     var body: some View {
-        HStack(spacing: 20)
-        {
+        HStack(spacing: 20) {
             CardRemoteImage(url: card.imageURL)
                 .frame(width: 120, height: 90)
                 .cornerRadius(8)
-            
             VStack(alignment: .leading, spacing: 5) {
                 Text(card.name)
                     .font(.title2)
@@ -41,16 +40,17 @@ struct CardListCell: View {
 
 struct CardListCell_Previews: PreviewProvider {
     static var previews: some View {
-        CardListCell(card: 
+        CardListCell(card:
                         Card(
-            id: UUID(),
-            name: "Adam",
-            imageURL: "",
-            age: 5,
-            gender: "male",
-            nationality: "Ru",
-            email: "",
-            phone: ""
-                        ))
+                            id: UUID(),
+                            name: "Adam West",
+                            imageURL: String(),
+                            age: 5,
+                            gender: "male",
+                            nationality: "Ru",
+                            email: String(),
+                            phone: String()
+                        )
+        )
     }
 }

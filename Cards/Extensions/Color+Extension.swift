@@ -1,4 +1,4 @@
-//  Color + Ext.swift
+//  Color+Extension.swift
 //  Cards
 //  Created by Adam West on 14.01.2024.
 
