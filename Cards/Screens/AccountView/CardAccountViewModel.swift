@@ -12,6 +12,7 @@ final class CardAccountViewModel: ObservableObject {
     // MARK: Private properties
     private let profileStorageService: ProfileStorageService
     
+    // MARK: Validation
     var isValidForm: Bool {
         guard !card.name.isEmpty && !card.email.isEmpty && !card.phone.isEmpty else {
             alertItem = AlertContext.invalidForm

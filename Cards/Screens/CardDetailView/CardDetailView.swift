@@ -1,5 +1,5 @@
 //  CardDetailView.swift
-//  OrderFood
+//  Cards
 //  Created by Adam West on 12.01.2024.
 
 import SwiftUI
@@ -69,10 +69,8 @@ struct CardDetailView: View {
                         .foregroundColor(.secondary)
                 }
                 HStack() {
-                    Button {
+                    Button("Discard") {
                         viewModel.discardChanges()
-                    } label: {
-                        Text("Discard")
                     }
                     .frame(width: 100, height: 50)
                     .foregroundColor(.mainAppC)
@@ -84,10 +82,8 @@ struct CardDetailView: View {
                             )
                     )
                     Spacer()
-                    Button {
+                    Button("Save") {
                         viewModel.saveCurrentCard()
-                    } label: {
-                        Text("Save")
                     }
                     .frame(width: 100, height: 50)
                     .foregroundColor(.mainAppC)
@@ -108,8 +104,9 @@ struct CardDetailView: View {
                     Alert(
                         title: alertItem.title,
                         message: alertItem.message,
-                        dismissButton: alertItem.dismissButton)
-            }
+                        dismissButton: alertItem.dismissButton
+                    )
+                }
         }
     }
 }
@@ -129,7 +126,7 @@ struct CardDetailView_Previews: PreviewProvider {
                              email: "adam.west@example.com",
                              phone: "(272) 790-0888"),
                     cardStorageService:
-                        CardStorageServiceImpl(), 
+                        CardStorageServiceImpl(),
                     delegate: nil
                 )
         )

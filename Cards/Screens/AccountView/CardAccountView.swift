@@ -19,24 +19,23 @@ struct CardAccountView: View {
             Form {
                 Section(header: Text("Personal Info")) {
                     TextField("Full name", text: $viewModel.card.name)
-                    
                     TextField("Gender", text: $viewModel.card.gender)
-                    
                     Picker(selection: $viewModel.card.nationality) {
                         ForEach(Card.nationality, id: \.self) { nationality in
                             Text(nationality)
                         }
                     } label: {
                         Text("Nationality")
-                    } .pickerStyle(.automatic)
-                    
+                    }
+                    .pickerStyle(.automatic)
                     Picker(selection: $viewModel.card.age) {
                         ForEach(0..<110, id: \.self) { age in
                             Text("\(age)")
                         }
                     } label: {
                         Text("Age")
-                    } .pickerStyle(.automatic)
+                    }
+                    .pickerStyle(.automatic)
                 }
                 Section(header: Text("Contacts")) {
                     TextField("Email", text: $viewModel.card.email)
@@ -49,10 +48,8 @@ struct CardAccountView: View {
                         .disableAutocorrection(true)
                 }
                 Section(header: Text("Contacts")) {
-                    Button {
+                    Button("Save profile") {
                         viewModel.saveChangesProfile()
-                    } label: {
-                        Text("Save profile")
                     } .foregroundColor(.mainAppC)
                 }
             }
@@ -65,10 +62,10 @@ struct CardAccountView: View {
             Alert(
                 title: alertItem.title,
                 message: alertItem.message,
-                dismissButton: alertItem.dismissButton)
+                dismissButton: alertItem.dismissButton
+            )
         }
     }
-    
 }
 
 struct CardAccountView_Previews: PreviewProvider {

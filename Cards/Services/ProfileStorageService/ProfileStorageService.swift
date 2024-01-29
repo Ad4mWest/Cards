@@ -28,7 +28,7 @@ final class ProfileStorageServiceImpl: ProfileStorageService, FileStorageService
 
 // - MARK: Private methods
 private extension ProfileStorageServiceImpl {
-    private func loadContainer() -> Card {
+    func loadContainer() -> Card {
         var container: Card
         do {
             container = try loadFromStore()
@@ -39,7 +39,7 @@ private extension ProfileStorageServiceImpl {
         }
     }
     
-    private func saveToContainer(forContainer container: Card) {
+    func saveToContainer(forContainer container: Card) {
         do {
             try saveToStore(forObject: container)
         } catch {

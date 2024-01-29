@@ -1,4 +1,4 @@
-//  RemoteImage.swift
+//  CardRemoteImage.swift
 //  Cards
 //  Created by Adam West on 12.01.2024.
 
@@ -6,7 +6,7 @@ import SwiftUI
 import Combine
 
 final class ImageProvider: ObservableObject {
-    // MARK: Private properties
+    // MARK: Public Properties
     @Published var image = UIImage(named: "labelPlaceholder")!
     
     // MARK: Private properties
@@ -22,7 +22,8 @@ final class ImageProvider: ObservableObject {
                 }
             }, receiveValue: { image in
                 self.image = image
-            })
+            }
+            )
     }
 }
 
@@ -42,6 +43,7 @@ struct CardRemoteImage: View {
     var body: some View {
         Image(uiImage: viewModel.image)
             .resizable()
+            .aspectRatio(contentMode: .fit)
             .frame(width: 225, height: 225)
             .clipShape(Circle())
             .onAppear {

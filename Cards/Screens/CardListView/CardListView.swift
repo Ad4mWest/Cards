@@ -8,12 +8,12 @@ import Combine
 struct CardListView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardListViewModel
-    private let cardListWireframe: CardDetailWireframe
+    private let cardListDetail: CardDetailWireframe
     
     // MARK: Initialization
     init(viewModel: CardListViewModel) {
         self.viewModel = viewModel
-        self.cardListWireframe = CardDetailWireframe()
+        self.cardListDetail = CardDetailWireframe()
     }
     
     // MARK: Lifecycle
@@ -23,7 +23,7 @@ struct CardListView: View {
                 List() {
                     ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(
+                            cardListDetail.makeCardDetail(
                                 card: card,
                                 delegate: viewModel
                             )

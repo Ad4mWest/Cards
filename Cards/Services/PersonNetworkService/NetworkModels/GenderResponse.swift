@@ -9,7 +9,9 @@ struct GenderResponse: Decodable {
     let name: String?
     let gender: String?
     let probability: Int?
-    
+}
+
+extension GenderResponse {
     init() {
         self.count = nil
         self.name = nil

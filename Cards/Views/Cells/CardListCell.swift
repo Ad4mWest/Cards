@@ -1,5 +1,5 @@
-//  AppetizerListCell.swift
-//  Appotizers
+//  CardListCell.swift
+//  Cards
 //  Created by Adam West on 11.01.2024.
 
 import SwiftUI
@@ -19,7 +19,6 @@ struct CardListCell: View {
             CardRemoteImage(url: card.imageURL)
                 .frame(width: 120, height: 90)
                 .cornerRadius(8)
-            
             VStack(alignment: .leading, spacing: 5) {
                 Text(card.name)
                     .font(.title2)
@@ -50,7 +49,8 @@ struct CardListCell_Previews: PreviewProvider {
                             gender: "male",
                             nationality: "Ru",
                             email: String(),
-                            phone: String())
+                            phone: String()
+                        )
         )
     }
 }

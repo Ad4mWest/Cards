@@ -1,9 +1,6 @@
-//
-//  AddingPercentEncoding.swift
+//  String+Extension.swift
 //  Cards
-//
 //  Created by Adam West on 19.01.2024.
-//
 
 import Foundation
 
@@ -19,6 +16,11 @@ extension String {
         return phonePredicate.evaluate(with: self)
     }
     
+    var isValidAge: Bool {
+        let phoneFormat = "^\\d{2}$"
+        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneFormat)
+        return phonePredicate.evaluate(with: self)
+    }
     
     func safePercentEncoding(withAllowedCharacters allowedCharacters: CharacterSet) -> String? {
         let allowedCharacters = CharacterSet(bitmapRepresentation: allowedCharacters.bitmapRepresentation)

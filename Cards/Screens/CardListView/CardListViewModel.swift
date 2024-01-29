@@ -1,15 +1,15 @@
 //  CardListViewModel.swift
-//  Appotizers
+//  Cards
 //  Created by Adam West on 11.01.2024.
 
 import SwiftUI
 import Combine
 
-protocol CardListViewModelDelegate {
+protocol CardListViewModelDelegate: AnyObject {
     func buttonSaveTapped()
 }
 
-final class CardListViewModel: ObservableObject, CardListViewModelDelegate {
+final class CardListViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
     @Published var cards: [Card] = []
@@ -26,11 +26,6 @@ final class CardListViewModel: ObservableObject, CardListViewModelDelegate {
     ) {
         self.personNetworkService = personNetworkService
         self.cardStorageService = cardStorageService
-    }
-    
-    // MARK: Method of delegate
-    func buttonSaveTapped() {
-        loadFromStorage()
     }
     
     // MARK: Methods of storaging
@@ -60,9 +55,18 @@ final class CardListViewModel: ObservableObject, CardListViewModelDelegate {
             }
             .store(in: &cancellables)
     }
-    
-    // MARK: Private methods
-    private func getPersonDescription(withPerson person: Person) {
+}
+
+// MARK: CardListViewModelDelegate
+extension CardListViewModel: CardListViewModelDelegate {
+    func buttonSaveTapped() {
+        loadFromStorage()
+    }
+}
+
+// MARK: Private methods
+private extension CardListViewModel {
+    func getPersonDescription(withPerson person: Person) {
         guard let personName = person.name.first.safePercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
@@ -82,7 +86,7 @@ final class CardListViewModel: ObservableObject, CardListViewModelDelegate {
             .store(in: &cancellables)
     }
     
-    private func createNewCard(
+    func createNewCard(
         _ person: Person,
         _ age: AgeResponse,
         _ nationality: NationalityResponse,
@@ -102,7 +106,7 @@ final class CardListViewModel: ObservableObject, CardListViewModelDelegate {
         appendNewCard(forCard: card)
     }
     
-    private func appendNewCard(forCard card: Card) {
+    func appendNewCard(forCard card: Card) {
         cardStorageService.appendNewCard(forCards: card)
         loadFromStorage()
     }

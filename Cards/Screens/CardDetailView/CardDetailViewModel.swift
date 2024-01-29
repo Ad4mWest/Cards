@@ -7,17 +7,17 @@ import SwiftUI
 final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
-    
-    var card: Card
-    var discardCard: Card = Card()
     var angularGradient: AngularGradient {
         AngularGradient(
             gradient: self.colors,
-            center: .center)
+            center: .center
+        )
     }
+    var card: Card
+    var discardCard: Card = Card()
     
     // MARK: Delegate
-    public var delegate: CardListViewModelDelegate?
+    weak var delegate: CardListViewModelDelegate?
     
     // MARK: Private properties
     private var colors = Gradient(colors: [.red, .yellow, .green, .blue, .purple])
