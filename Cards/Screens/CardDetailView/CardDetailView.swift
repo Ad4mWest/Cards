@@ -58,13 +58,13 @@ struct CardDetailView: View {
                     Text("Email")
                         .bold()
                         .font(.title2)
-                    TextField("Nationality", text: $viewModel.card.email)
+                    TextField("Email", text: $viewModel.card.email)
                         .font(.title3)
                         .foregroundColor(.gray)
                     Text("Phone")
                         .bold()
                         .font(.title2)
-                    TextField("Nationality", text: $viewModel.card.phone)
+                    TextField("Phone", text: $viewModel.card.phone)
                         .font(.title3)
                         .foregroundColor(.secondary)
                 }
@@ -74,31 +74,45 @@ struct CardDetailView: View {
                     }
                     .frame(width: 100, height: 50)
                     .foregroundColor(.mainAppC)
-                    .background(
-                        Capsule()
-                            .strokeBorder(
-                                viewModel.angularGradient,
-                                lineWidth: 3
-                            )
+                    .capsuleAnimation(
+                        viewModel.angularGradient,
+                        viewModel.angle
+                    )
+                    .hiddenConditionally(
+                        viewModel.editingButtonsHidden
                     )
                     Spacer()
                     Button("Save") {
                         viewModel.saveCurrentCard()
+                        viewModel.editingButtonsHiddens()
                     }
                     .frame(width: 100, height: 50)
                     .foregroundColor(.mainAppC)
-                    .background(
-                        Capsule()
-                            .strokeBorder(
-                                viewModel.angularGradient,
-                                lineWidth: 3
-                            )
+                    .capsuleAnimation(
+                        viewModel.angularGradient,
+                        viewModel.angle
+                    )
+                    .hiddenConditionally(
+                        viewModel.editingButtonsHidden
                     )
                 }
                 Spacer()
-            }.padding(20)
+            } .padding(20)
+                .disabled(viewModel.editingButtonsHidden)
                 .onDisappear {
                     viewModel.discardChanges()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction,
+                                content: {
+                        Button {
+                            viewModel.editingButtonsHidden = false
+                        } label: {
+                            Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                                .foregroundColor(.mainAppC)
+                        }
+                    }
+                    )
                 }
                 .alert(item: $viewModel.alertItem) { alertItem in
                     Alert(
@@ -126,7 +140,12 @@ struct CardDetailView_Previews: PreviewProvider {
                              email: "adam.west@example.com",
                              phone: "(272) 790-0888"),
                     cardStorageService:
-                        CardStorageServiceImpl(),
+                        CardStorageServiceImpl(
+                            fileStorageService:
+                                FileStorageServiceImpl(
+                                    nameOfStorage: "Cards"
+                                )
+                        ),
                     delegate: nil
                 )
         )

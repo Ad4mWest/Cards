@@ -12,3 +12,29 @@ extension View where Self == ActivityIndicator {
         )
     }
 }
+
+extension View {
+    func hiddenConditionally(_ isHidden: Bool) -> some View {
+        return isHidden ? AnyView(self.hidden()) : AnyView(self)
+    }
+    func capsuleAnimation(_ angularGradient: AngularGradient, _ angle: Double) -> some View {
+        return AnyView(
+            self.background(
+                Capsule()
+                    .strokeBorder(
+                        angularGradient,
+                        lineWidth: 3
+                    )
+                    .rotationEffect(.degrees(angle))
+                    .animation(
+                        .interpolatingSpring(
+                            mass: 1,
+                            stiffness: 1,
+                            damping: 0.5,
+                            initialVelocity: 5
+                        )
+                    )
+            )
+        )
+    }
+}

@@ -73,7 +73,12 @@ struct CardAccountView_Previews: PreviewProvider {
         CardAccountView(
             viewModel:
                 CardAccountViewModel(
-                    profileStorageService:  ProfileStorageServiceImpl()
+                    profileStorageService:
+                        ProfileStorageServiceImpl(
+                            fileStorageService: FileStorageServiceImpl(
+                                nameOfStorage: "Profile"
+                            )
+                        )
                 )
         )
     }

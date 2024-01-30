@@ -73,7 +73,11 @@ struct CardListView_Previews: PreviewProvider {
         CardListView(
             viewModel: CardListViewModel(
                 personNetworkService: PersonNetworkServiceImpl(),
-                cardStorageService: CardStorageServiceImpl()
+                cardStorageService: CardStorageServiceImpl(
+                    fileStorageService: FileStorageServiceImpl<CardContainer>(
+                        nameOfStorage: "Cards"
+                    )
+                )
             )
         )
     }

@@ -40,7 +40,18 @@
 		66AC60B12B542E8D009BE505 /* CardRemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */; };
 		66AC60B62B543746009BE505 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B52B543746009BE505 /* CardListViewModel.swift */; };
 		66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AC60B72B5462BD009BE505 /* NetworkService.swift */; };
+		66F5D5502B67E10C005F4E0B /* ProfileStorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F5D54F2B67E10C005F4E0B /* ProfileStorageServiceTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66F5D54A2B67E09C005F4E0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66AC604E2B5263C1009BE505 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66AC60552B5263C1009BE505;
+			remoteInfo = Cards;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		664EBF952B5FD094004AAE13 /* CardStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStorageService.swift; sourceTree = "<group>"; };
@@ -77,10 +88,19 @@
 		66AC60B02B542E8D009BE505 /* CardRemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRemoteImage.swift; sourceTree = "<group>"; };
 		66AC60B52B543746009BE505 /* CardListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
 		66AC60B72B5462BD009BE505 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		66F5D5462B67E09C005F4E0B /* CardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66F5D54F2B67E10C005F4E0B /* ProfileStorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStorageServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		66AC60532B5263C1009BE505 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66F5D5432B67E09C005F4E0B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				66AC60582B5263C1009BE505 /* Cards */,
+				66F5D5472B67E09C005F4E0B /* CardsTests */,
 				66AC60572B5263C1009BE505 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -145,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				66AC60562B5263C1009BE505 /* Cards.app */,
+				66F5D5462B67E09C005F4E0B /* CardsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -298,6 +320,14 @@
 			path = NetworkModels;
 			sourceTree = "<group>";
 		};
+		66F5D5472B67E09C005F4E0B /* CardsTests */ = {
+			isa = PBXGroup;
+			children = (
+				66F5D54F2B67E10C005F4E0B /* ProfileStorageServiceTests.swift */,
+			);
+			path = CardsTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,6 +348,24 @@
 			productReference = 66AC60562B5263C1009BE505 /* Cards.app */;
 			productType = "com.apple.product-type.application";
 		};
+		66F5D5452B67E09C005F4E0B /* CardsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66F5D54E2B67E09C005F4E0B /* Build configuration list for PBXNativeTarget "CardsTests" */;
+			buildPhases = (
+				66F5D5422B67E09C005F4E0B /* Sources */,
+				66F5D5432B67E09C005F4E0B /* Frameworks */,
+				66F5D5442B67E09C005F4E0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66F5D54B2B67E09C005F4E0B /* PBXTargetDependency */,
+			);
+			name = CardsTests;
+			productName = CardsTests;
+			productReference = 66F5D5462B67E09C005F4E0B /* CardsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -325,11 +373,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1510;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					66AC60552B5263C1009BE505 = {
 						CreatedOnToolsVersion = 15.1;
+					};
+					66F5D5452B67E09C005F4E0B = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 66AC60552B5263C1009BE505;
 					};
 				};
 			};
@@ -347,6 +399,7 @@
 			projectRoot = "";
 			targets = (
 				66AC60552B5263C1009BE505 /* Cards */,
+				66F5D5452B67E09C005F4E0B /* CardsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -358,6 +411,13 @@
 			files = (
 				66AC60612B5263C2009BE505 /* Preview Assets.xcassets in Resources */,
 				66AC605E2B5263C2009BE505 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66F5D5442B67E09C005F4E0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +462,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		66F5D5422B67E09C005F4E0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66F5D5502B67E10C005F4E0B /* ProfileStorageServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66F5D54B2B67E09C005F4E0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66AC60552B5263C1009BE505 /* Cards */;
+			targetProxy = 66F5D54A2B67E09C005F4E0B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		66AC60622B5263C2009BE505 /* Debug */ = {
@@ -584,6 +660,44 @@
 			};
 			name = Release;
 		};
+		66F5D54C2B67E09C005F4E0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WK3Q2J5S3B;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = adamWestCost.CardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cards.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cards";
+			};
+			name = Debug;
+		};
+		66F5D54D2B67E09C005F4E0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WK3Q2J5S3B;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = adamWestCost.CardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cards.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cards";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -601,6 +715,15 @@
 			buildConfigurations = (
 				66AC60652B5263C2009BE505 /* Debug */,
 				66AC60662B5263C2009BE505 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66F5D54E2B67E09C005F4E0B /* Build configuration list for PBXNativeTarget "CardsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66F5D54C2B67E09C005F4E0B /* Debug */,
+				66F5D54D2B67E09C005F4E0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -51,6 +51,30 @@ struct AlertContext {
         dismissButton: .default(Text("OK"))
     )
     
+    static let invalidGender = AlertItem(
+        title: Text("Invalid Gender"),
+        message: Text("Please ensure your gender is correct."),
+        dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidAge = AlertItem(
+        title: Text("Invalid Age"),
+        message: Text("Please ensure your age is correct."),
+        dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidNationality = AlertItem(
+        title: Text("Invalid Nationality"),
+        message: Text("Please ensure your nationality is correct."),
+        dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidUserData = AlertItem(
+        title: Text("Profile Error"),
+        message: Text("There was an error saving or retrieving your profile."),
+        dismissButton: .default(Text("OK"))
+    )
+    
     static let userSaveSuccess = AlertItem(
         title: Text("Profile Saved"),
         message: Text("Your profile information was successfully saved."),
@@ -61,11 +85,5 @@ struct AlertContext {
         title: Text("Changes Cancelled"),
         message: Text("Your profile information was successfully discard."),
         dismissButton: .default(Text("OK"))
-    )
-    
-    static let invalidUserData = AlertItem(
-        title: Text("Profile Error"),
-        message: Text("There was an error saving or retrieving your profile."),
-        dismissButton: .default(Text("OK"))
-    )
+    )  
 }

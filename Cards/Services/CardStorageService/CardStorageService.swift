@@ -16,8 +16,16 @@ struct CardContainer: Codable {
     var cards: [Card]
 }
 
-final class CardStorageServiceImpl: CardStorageService, FileStorageService {
+final class CardStorageServiceImpl: CardStorageService {
     typealias TypeData = CardContainer
+    
+    // MARK: Private properties
+    private var fileStorageService: any FileStorageService<TypeData>
+    
+    // MARK: Initialization
+    init(fileStorageService: any FileStorageService<TypeData>) {
+        self.fileStorageService = fileStorageService
+    }
     
     // MARK: Create
     func appendNewCard(forCards card: Card) {
@@ -60,7 +68,7 @@ private extension CardStorageServiceImpl {
     func loadContainer() -> CardContainer {
         var container: CardContainer
         do {
-            container = try loadFromStore()
+            container = try fileStorageService.loadFromStore()
             return container
         } catch {
             print(APIError.invalidDecoding("Unnabled to load").localizedDescription)
@@ -70,7 +78,7 @@ private extension CardStorageServiceImpl {
     
     func saveToContainer(forContainer container: CardContainer) {
         do {
-            try saveToStore(forObject: container)
+            try fileStorageService.saveToStore(forObject: container)
         } catch {
             print(APIError.invalidDecoding("Unnabled to save").localizedDescription)
         }
