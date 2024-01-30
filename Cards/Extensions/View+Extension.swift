@@ -17,6 +17,7 @@ extension View {
     func hiddenConditionally(_ isHidden: Bool) -> some View {
         return isHidden ? AnyView(self.hidden()) : AnyView(self)
     }
+    
     func capsuleAnimation(_ angularGradient: AngularGradient, _ angle: Double) -> some View {
         return AnyView(
             self.background(
@@ -34,6 +35,17 @@ extension View {
                             initialVelocity: 5
                         )
                     )
+            )
+        )
+    }
+    
+    func rotationAnimation( _ rotation: Double) -> some View {
+        return AnyView(self
+            .rotationEffect(.degrees(rotation))
+            .animation(
+                Animation.easeInOut(
+                    duration: 1
+                )
             )
         )
     }

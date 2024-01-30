@@ -34,7 +34,11 @@ final class CardAccountViewModel: ObservableObject {
 // MARK: - Validation
 extension CardAccountViewModel {
     var isValidForm: Bool {
-        guard !card.name.isEmpty && !card.email.isEmpty && !card.phone.isEmpty else {
+        guard
+            card.name.isNotEmpty &&
+            card.email.isNotEmpty &&
+            card.phone.isNotEmpty
+        else {
             alertItem = AlertContext.invalidForm
             return false
         }

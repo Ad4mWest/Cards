@@ -20,20 +20,16 @@ struct CardAccountView: View {
                 Section(header: Text("Personal Info")) {
                     TextField("Full name", text: $viewModel.card.name)
                     TextField("Gender", text: $viewModel.card.gender)
-                    Picker(selection: $viewModel.card.nationality) {
-                        ForEach(Card.nationality, id: \.self) { nationality in
-                            Text(nationality)
+                    Picker("Nationality", selection: $viewModel.card.nationality) {
+                        ForEach(Card.nationality, id: \.self) {
+                            Text($0)
                         }
-                    } label: {
-                        Text("Nationality")
                     }
                     .pickerStyle(.automatic)
-                    Picker(selection: $viewModel.card.age) {
-                        ForEach(0..<110, id: \.self) { age in
-                            Text("\(age)")
+                    Picker("Age", selection: $viewModel.card.age) {
+                        ForEach(0..<110, id: \.self) {
+                            Text("\($0)")
                         }
-                    } label: {
-                        Text("Age")
                     }
                     .pickerStyle(.automatic)
                 }
@@ -50,7 +46,8 @@ struct CardAccountView: View {
                 Section(header: Text("Contacts")) {
                     Button("Save profile") {
                         viewModel.saveChangesProfile()
-                    } .foregroundColor(.mainAppC)
+                    }
+                    .foregroundColor(.mainAppC)
                 }
             }
             .navigationTitle("Your Profile")
@@ -58,11 +55,11 @@ struct CardAccountView: View {
         .onAppear {
             viewModel.retrieveCardData()
         }
-        .alert(item: $viewModel.alertItem) { alertItem in
+        .alert(item: $viewModel.alertItem) {
             Alert(
-                title: alertItem.title,
-                message: alertItem.message,
-                dismissButton: alertItem.dismissButton
+                title: $0.title,
+                message: $0.message,
+                dismissButton: $0.dismissButton
             )
         }
     }

@@ -58,11 +58,11 @@ struct CardListView: View {
         .onAppear {
             viewModel.loadFromStorage()
         }
-        .alert(item: $viewModel.alertItem) { alertItem in
+        .alert(item: $viewModel.alertItem) {
             Alert(
-                title: alertItem.title,
-                message: alertItem.message,
-                dismissButton: alertItem.dismissButton
+                title: $0.title,
+                message: $0.message,
+                dismissButton: $0.dismissButton
             )
         }
     }

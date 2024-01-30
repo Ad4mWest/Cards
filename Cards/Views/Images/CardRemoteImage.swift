@@ -7,7 +7,7 @@ import Combine
 
 final class ImageProvider: ObservableObject {
     // MARK: Public Properties
-    @Published var image = UIImage(named: "labelPlaceholder")!
+    @Published var image: UIImage?
     
     // MARK: Private properties
     private var cancellable: AnyCancellable?
@@ -18,7 +18,7 @@ final class ImageProvider: ObservableObject {
         self.cancellable = imageLoader.publisher(for: url)
             .sink(receiveCompletion: { completion in
                 if case .failure = completion {
-                    self.image = UIImage(named: "labelPlaceholder")!
+                    self.image = UIImage(named: "labelPlaceholder")
                 }
             }, receiveValue: { image in
                 self.image = image
@@ -41,7 +41,7 @@ struct CardRemoteImage: View {
     
     // MARK: Lifecycle
     var body: some View {
-        Image(uiImage: viewModel.image)
+        Image(uiImage: viewModel.image ?? UIImage(named: "sticker")!)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 225, height: 225)

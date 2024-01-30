@@ -43,4 +43,8 @@ extension String {
         let allowedCharacters = CharacterSet(bitmapRepresentation: allowedCharacters.bitmapRepresentation)
         return addingPercentEncoding(withAllowedCharacters: allowedCharacters)
     }
+    
+    var isNotEmpty: Bool {
+        return !self.isEmpty
+    }
 }

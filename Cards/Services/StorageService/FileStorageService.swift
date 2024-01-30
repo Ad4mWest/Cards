@@ -22,7 +22,7 @@ final class FileStorageServiceImpl<T: Codable>: FileStorageService {
     }
     
     //MARK: - Defining that we save our data in the Documents folder
-    static func persistentFileURL(forStorage nameOfStorage: String) -> URL {
+    private func persistentFileURL(forStorage nameOfStorage: String) -> URL {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return url.appendingPathComponent("\(TypeData.self)\(nameOfStorage).json")
     }
@@ -30,7 +30,7 @@ final class FileStorageServiceImpl<T: Codable>: FileStorageService {
     // MARK: Save
     func saveToStore(forObject object: TypeData) throws {
         do {
-            let url = Self.persistentFileURL(forStorage: nameOfStorage)
+            let url = persistentFileURL(forStorage: nameOfStorage)
             try JSONEncoder().encode(object).write(to: url)
         } catch {
             throw APIError.invalidDecoding("Unnabled to encode")
@@ -44,7 +44,7 @@ final class FileStorageServiceImpl<T: Codable>: FileStorageService {
             object = try JSONDecoder()
                 .decode(
                     TypeData.self, from: Data(
-                        contentsOf: Self.persistentFileURL(
+                        contentsOf: persistentFileURL(
                             forStorage: nameOfStorage
                         )
                     )

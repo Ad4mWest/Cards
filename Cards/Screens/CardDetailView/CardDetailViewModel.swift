@@ -8,8 +8,9 @@ final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
     @Published var editingButtonsHidden = true
+    @Published var rotation: Double = 0
     @Published var angle: Double = 0
-
+    
     var card: Card
     var discardCard: Card = Card()
     
@@ -66,12 +67,14 @@ final class CardDetailViewModel: ObservableObject {
 // MARK: - Validation
 extension CardDetailViewModel {
     var isValidForm: Bool {
-        guard !card.name.isEmpty &&
-                !card.email.isEmpty &&
-                !card.phone.isEmpty &&
-                !card.gender.isEmpty &&
-                !String(card.age).isEmpty &&
-                !card.nationality.isEmpty else {
+        guard
+            card.name.isNotEmpty &&
+            card.email.isNotEmpty &&
+            card.phone.isNotEmpty &&
+            card.gender.isNotEmpty &&
+            String(card.age).isNotEmpty &&
+            card.nationality.isNotEmpty
+        else {
             alertItem = AlertContext.invalidForm
             return false
         }

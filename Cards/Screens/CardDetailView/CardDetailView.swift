@@ -21,6 +21,10 @@ struct CardDetailView: View {
                     Divider()
                     CardRemoteImage(url: viewModel.card.imageURL)
                         .shadow(color: .mainAppC, radius: 20)
+                        .rotationAnimation(viewModel.rotation)
+                        .onTapGesture {
+                            viewModel.rotation += 360
+                        }
                 }
                 TextField("Enter your Name", text: $viewModel.card.name)
                     .font(Font.title2.weight(.bold))
