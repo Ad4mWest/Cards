@@ -12,6 +12,7 @@ protocol FileStorageService<TypeData> {
 
 enum NameOfStorage: String {
     case cards = "Cards"
+    case profile = "Profile"
 }
 
 final class FileStorageServiceImpl<TypeData: Codable>: FileStorageService {

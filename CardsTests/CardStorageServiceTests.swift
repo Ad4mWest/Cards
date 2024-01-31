@@ -30,6 +30,7 @@ final class CardStorageServiceTests: XCTestCase {
         return cardStorageService
     }
     
+    // MARK: Append new Card
     func testSuccessfulAppendNewCard() {
         // Given (Arrange)
         var card = Card()
@@ -49,15 +50,15 @@ final class CardStorageServiceTests: XCTestCase {
         XCTAssertEqual(cardName, "Adam")
     }
     
+    // MARK: Load from storage
     func testUnsuccessfulLoadFromStorageCards() {
         // Given (Arrange)
         var card = Card()
         card.name = "Adam"
         let cardStorageService = cardStorageService()
-        
-        // When (Act)
         cardStorageService.appendNewCard(forCards: card)
         
+        // When (Act)
         let cardStorage = cardStorageService.loadFromStorageCards()
         guard let cardName = cardStorage.first?.name else {
             XCTAssertThrowsError("The storage is empty. Cannot get value.")
@@ -68,6 +69,7 @@ final class CardStorageServiceTests: XCTestCase {
         XCTAssertNotEqual(cardName, "El Guja")
     }
     
+    // MARK: Change card position
     func testSuccessfulChangePositionOfCards() {
         // Given (Arrange)
         var cardOne = Card()
@@ -94,6 +96,7 @@ final class CardStorageServiceTests: XCTestCase {
         XCTAssertEqual(cardAge, 2)
     }
     
+    // MARK: Delete card
     func testSuccessfulDeleteCard() {
         // Given (Arrange)
         var cardOne = Card()
@@ -114,6 +117,7 @@ final class CardStorageServiceTests: XCTestCase {
         XCTAssertEqual(cardStorageCount, 1)
     }
     
+    // MARK: Edit current card 
     func testSuccessfulEditCurrentCard() {
         // Given (Arrange)
         var card = Card()
