@@ -34,7 +34,10 @@ final class CardListViewModel: ObservableObject {
         cards = cardStorageService.loadFromStorageCards()
     }
     
-    func onMove(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
+    func onMove(
+        fromOffsets indices: IndexSet,
+        toOffset newOffset: Int
+    ) {
         cardStorageService.changePositionOfCards(fromOffsets: indices, toOffset: newOffset)
         cards = cardStorageService.loadFromStorageCards()
     }

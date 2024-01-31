@@ -18,7 +18,14 @@ extension View {
         return isHidden ? AnyView(self.hidden()) : AnyView(self)
     }
     
-    func capsuleAnimation(_ angularGradient: AngularGradient, _ angle: Double) -> some View {
+    func capsuleAnimation(_ angle: Double) -> some View {
+        let colors = Gradient(colors: [.red, .yellow, .green, .blue, .purple])
+        var angularGradient: AngularGradient {
+            AngularGradient(
+                gradient: colors,
+                center: .center
+            )
+        }
         return AnyView(
             self.background(
                 Capsule()

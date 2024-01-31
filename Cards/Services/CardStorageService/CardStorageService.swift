@@ -31,7 +31,7 @@ final class CardStorageServiceImpl: CardStorageService {
     func appendNewCard(forCards card: Card) {
         var container = loadContainer()
         container.cards.append(card)
-        saveToContainer(forContainer: container)
+        saveToContainer(forContainer: container) 
     }
     
     // MARK: Read
@@ -59,6 +59,12 @@ final class CardStorageServiceImpl: CardStorageService {
     func deleteCard(atOffsets indexSet: IndexSet) {
         var container = loadContainer()
         container.cards.remove(atOffsets: indexSet)
+        saveToContainer(forContainer: container)
+    }
+    
+    func deleteAllCards() {
+        var container = loadContainer()
+        container.cards.removeAll()
         saveToContainer(forContainer: container)
     }
 }

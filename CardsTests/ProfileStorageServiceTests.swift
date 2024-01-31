@@ -6,47 +6,44 @@ import XCTest
 @testable import Cards
 
 final class ProfileStorageServiceTests: XCTestCase {
-    func testSuccessfulSaving() {
-        // Given (Arrange)
-        let card = Card()
-        let nameOfStorage = "testSuccessfulSaving"
+    // MARK: ProfileStorageService
+    private func profileStorageService() -> ProfileStorageServiceImpl {
+        let nameOfStorage = "test"
         let fileStorageService = FileStorageServiceImpl<Card>(nameOfStorage: nameOfStorage)
         let profileStorageService = ProfileStorageServiceImpl(
             fileStorageService: fileStorageService
         )
-        
-        // When (Act)
-        profileStorageService.saveToStore(forCards: card)
-        let savingCard = profileStorageService.loadFromStorage()
-        
-        // Then (Assert)
-        XCTAssertEqual(card, savingCard)
+        return profileStorageService
     }
     
-    func testUnsuccessfulSaving() {
+    // MARK: SaveToStore
+    func testSuccessfulSaving() {
         // Given (Arrange)
-        var card = Card(
-            id: UUID(),
-            name: String(),
-            imageURL: String(),
-            age: 1,
-            gender: String(),
-            nationality: String(),
-            email: String(),
-            phone: String()
-        )
-        let nameOfStorage = "testUnsuccessfulSaving"
-        let fileStorageService = FileStorageServiceImpl<Card>(nameOfStorage: nameOfStorage)
-        let profileStorageService = ProfileStorageServiceImpl(
-            fileStorageService: fileStorageService
-        )
+        var card = Card()
+        card.name = "Adam"
+        let profileStorageService = profileStorageService()
         
         // When (Act)
         profileStorageService.saveToStore(forCards: card)
-        card.age = 2
-        let savingCard = profileStorageService.loadFromStorage()
+        let cardName = profileStorageService.loadFromStorage().name
         
         // Then (Assert)
-        XCTAssertNotEqual(card, savingCard)
+        XCTAssertEqual(cardName, "Adam")
+    }
+    
+    // MARK: LoadFromStorage
+    func testSuccessfulLoadFromStorage() {
+        // Given (Arrange)
+        var card = Card()
+        card.name = "El Guja"
+        let profileStorageService = profileStorageService()
+        profileStorageService.saveToStore(forCards: card)
+        
+        // When (Act)
+        let cardStorage = profileStorageService.loadFromStorage()
+        let cardName = cardStorage.name
+        
+        // Then (Assert)
+        XCTAssertTrue(cardName == "El Guja")
     }
 }

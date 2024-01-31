@@ -10,9 +10,11 @@ protocol FileStorageService<TypeData> {
     func loadFromStore() throws -> TypeData
 }
 
-final class FileStorageServiceImpl<T: Codable>: FileStorageService {
-    typealias TypeData = T
-    
+enum NameOfStorage: String {
+    case cards = "Cards"
+}
+
+final class FileStorageServiceImpl<TypeData: Codable>: FileStorageService {
     // MARK: Private properties
     private var nameOfStorage: String
     

@@ -7,6 +7,7 @@ import SwiftUI
 struct CardDetailView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardDetailViewModel
+    @State private var rotation: Double = 0
     
     // MARK: Initialization
     init(viewModel: CardDetailViewModel) {
@@ -21,9 +22,9 @@ struct CardDetailView: View {
                     Divider()
                     CardRemoteImage(url: viewModel.card.imageURL)
                         .shadow(color: .mainAppC, radius: 20)
-                        .rotationAnimation(viewModel.rotation)
+                        .rotationAnimation(rotation)
                         .onTapGesture {
-                            viewModel.rotation += 360
+                            rotation += 360
                         }
                 }
                 TextField("Enter your Name", text: $viewModel.card.name)
@@ -43,7 +44,11 @@ struct CardDetailView: View {
                         Text("Age")
                             .bold()
                             .font(.title2)
-                        TextField("Age", value: $viewModel.card.age, formatter: NumberFormatter())
+                        TextField(
+                            "Age",
+                            value: $viewModel.card.age,
+                            formatter: NumberFormatter()
+                        )
                             .font(.title3)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -78,10 +83,7 @@ struct CardDetailView: View {
                     }
                     .frame(width: 100, height: 50)
                     .foregroundColor(.mainAppC)
-                    .capsuleAnimation(
-                        viewModel.angularGradient,
-                        viewModel.angle
-                    )
+                    .capsuleAnimation(rotation)
                     .hiddenConditionally(
                         viewModel.editingButtonsHidden
                     )
@@ -92,22 +94,21 @@ struct CardDetailView: View {
                     }
                     .frame(width: 100, height: 50)
                     .foregroundColor(.mainAppC)
-                    .capsuleAnimation(
-                        viewModel.angularGradient,
-                        viewModel.angle
-                    )
+                    .capsuleAnimation(rotation)
                     .hiddenConditionally(
                         viewModel.editingButtonsHidden
                     )
                 }
                 Spacer()
-            } .padding(20)
+            } 
+            .padding(20)
                 .disabled(viewModel.editingButtonsHidden)
                 .onDisappear {
                     viewModel.discardChanges()
                 }
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction,
+                    ToolbarItem(
+                        placement: .primaryAction,
                                 content: {
                         Button {
                             viewModel.editingButtonsHidden = false

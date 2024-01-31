@@ -7,10 +7,7 @@ import SwiftUI
 final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
-    @Published var editingButtonsHidden = true
-    @Published var rotation: Double = 0
-    @Published var angle: Double = 0
-    
+    @Published var editingButtonsHidden = true    
     var card: Card
     var discardCard: Card = Card()
     
@@ -18,7 +15,6 @@ final class CardDetailViewModel: ObservableObject {
     weak var delegate: CardListViewModelDelegate?
     
     // MARK: Private properties
-    private var colors = Gradient(colors: [.red, .yellow, .green, .blue, .purple])
     private let cardStorageService: CardStorageService
     
     // MARK: Initialization
@@ -48,13 +44,7 @@ final class CardDetailViewModel: ObservableObject {
     
     func discardChanges() {
         card = discardCard
-        DispatchQueue.main.async {
-            self.angle += 30
-            self.alertItem = AlertContext.discardCardChanges
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.angle = 0
-        }
+        self.alertItem = AlertContext.discardCardChanges
     }
     
     func editingButtonsHiddens() {
@@ -69,11 +59,11 @@ extension CardDetailViewModel {
     var isValidForm: Bool {
         guard
             card.name.isNotEmpty &&
-            card.email.isNotEmpty &&
-            card.phone.isNotEmpty &&
-            card.gender.isNotEmpty &&
-            String(card.age).isNotEmpty &&
-            card.nationality.isNotEmpty
+                card.email.isNotEmpty &&
+                card.phone.isNotEmpty &&
+                card.gender.isNotEmpty &&
+                String(card.age).isNotEmpty &&
+                card.nationality.isNotEmpty
         else {
             alertItem = AlertContext.invalidForm
             return false
@@ -99,13 +89,5 @@ extension CardDetailViewModel {
             return false
         }
         return true
-    }
-    
-    // MARK: Gradient
-    var angularGradient: AngularGradient {
-        AngularGradient(
-            gradient: self.colors,
-            center: .center
-        )
     }
 }
