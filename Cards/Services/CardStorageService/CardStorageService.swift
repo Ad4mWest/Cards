@@ -19,8 +19,8 @@ struct CardContainer: Codable {
 final class CardStorageServiceImpl: CardStorageService {
     typealias TypeData = CardContainer
     
-    // MARK: Private properties
-    private var fileStorageService: any FileStorageService<TypeData>
+    // MARK: Public Properties
+    private let fileStorageService: any FileStorageService<TypeData>
     
     // MARK: Initialization
     init(fileStorageService: any FileStorageService<TypeData>) {
@@ -61,12 +61,11 @@ final class CardStorageServiceImpl: CardStorageService {
         container.cards.remove(atOffsets: indexSet)
         saveToContainer(forContainer: container)
     }
-    
-    func deleteAllCards() {
-        var container = loadContainer()
-        container.cards.removeAll()
-        saveToContainer(forContainer: container)
-    }
+}
+
+// MARK: - Name of storage
+extension CardStorageServiceImpl {
+    static let nameOfStorage: String = "Cards"
 }
 
 // - MARK: Private methods

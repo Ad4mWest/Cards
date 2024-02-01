@@ -12,8 +12,8 @@ protocol ProfileStorageService {
 final class ProfileStorageServiceImpl: ProfileStorageService {
     typealias TypeData = Card
     
-    // MARK: Private properties
-    private var fileStorageService: any FileStorageService<TypeData>
+    // MARK: Public Properties
+    private let fileStorageService: any FileStorageService<TypeData>
     
     // MARK: Initialization
     init(fileStorageService: any FileStorageService<TypeData>) {
@@ -32,6 +32,11 @@ final class ProfileStorageServiceImpl: ProfileStorageService {
         let container = loadContainer()
         return container
     }
+}
+
+// MARK: - Name of storage
+extension ProfileStorageServiceImpl {
+    static let nameOfStorage: String = "Profile"
 }
 
 // - MARK: Private methods

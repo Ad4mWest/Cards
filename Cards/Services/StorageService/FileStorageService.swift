@@ -10,11 +10,6 @@ protocol FileStorageService<TypeData> {
     func loadFromStore() throws -> TypeData
 }
 
-enum NameOfStorage: String {
-    case cards = "Cards"
-    case profile = "Profile"
-}
-
 final class FileStorageServiceImpl<TypeData: Codable>: FileStorageService {
     // MARK: Private properties
     private var nameOfStorage: String
@@ -56,5 +51,15 @@ final class FileStorageServiceImpl<TypeData: Codable>: FileStorageService {
             throw APIError.invalidDecoding("Unnabled to decode")
         }
         return object
+    }
+    
+    // MARK: Clear persistent storage
+    func clearPersistentStorage() {
+        let url = persistentFileURL(forStorage: nameOfStorage)
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            print("Impossible to clear storage.")
+        }
     }
 }

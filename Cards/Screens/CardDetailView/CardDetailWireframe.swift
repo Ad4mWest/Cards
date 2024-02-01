@@ -6,7 +6,7 @@ import SwiftUI
 
 final class CardDetailWireframe {
     func makeCardDetail(card: Card, delegate: CardListViewModelDelegate) -> AnyView {
-        let nameOfStorage = NameOfStorage.cards.rawValue
+        let nameOfStorage = CardStorageServiceImpl.nameOfStorage
         let storageService = FileStorageServiceImpl<CardContainer>(
             nameOfStorage: nameOfStorage
         )

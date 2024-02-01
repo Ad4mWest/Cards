@@ -6,8 +6,20 @@ import XCTest
 @testable import Cards
 
 final class ProfileStorageServiceTests: XCTestCase {
-    // MARK: ProfileStorageService
-    private func profileStorageService() -> ProfileStorageServiceImpl {
+    override func tearDown() {
+        super.tearDown()
+        clearStorage()
+    }
+    
+    // MARK: Clear storage
+    private func clearStorage() {
+        let nameOfStorage = "test"
+        let fileStorageService = FileStorageServiceImpl<Card>(nameOfStorage: nameOfStorage)
+        fileStorageService.clearPersistentStorage()
+    }
+    
+    // MARK: Profile storage service
+    private var profileStorageService: ProfileStorageServiceImpl {
         let nameOfStorage = "test"
         let fileStorageService = FileStorageServiceImpl<Card>(nameOfStorage: nameOfStorage)
         let profileStorageService = ProfileStorageServiceImpl(
@@ -15,35 +27,19 @@ final class ProfileStorageServiceTests: XCTestCase {
         )
         return profileStorageService
     }
-    
-    // MARK: SaveToStore
+        
+    // MARK: Save to store
     func testSuccessfulSaving() {
         // Given (Arrange)
         var card = Card()
         card.name = "Adam"
-        let profileStorageService = profileStorageService()
         
         // When (Act)
         profileStorageService.saveToStore(forCards: card)
-        let cardName = profileStorageService.loadFromStorage().name
-        
-        // Then (Assert)
-        XCTAssertEqual(cardName, "Adam")
-    }
-    
-    // MARK: LoadFromStorage
-    func testSuccessfulLoadFromStorage() {
-        // Given (Arrange)
-        var card = Card()
-        card.name = "El Guja"
-        let profileStorageService = profileStorageService()
-        profileStorageService.saveToStore(forCards: card)
-        
-        // When (Act)
         let cardStorage = profileStorageService.loadFromStorage()
-        let cardName = cardStorage.name
         
         // Then (Assert)
-        XCTAssertTrue(cardName == "El Guja")
+        XCTAssertEqual(cardStorage.name, "Adam")
+        XCTAssertNotEqual(cardStorage.name, "El Guja")
     }
 }

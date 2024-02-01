@@ -9,25 +9,29 @@ final class CardStorageServiceTests: XCTestCase {
     // MARK: Resset storage after each test
     override func setUp() {
         super.setUp()
-        let cardStorageService = cardStorageService()
-        cardStorageService.deleteAllCards()
-    }
-    override func tearDown() {
-        super.tearDown()
-        let cardStorageService = cardStorageService()
-        cardStorageService.deleteAllCards()
+        clearStorage()
     }
     
-    // MARK: CardStorageService
-    private func cardStorageService() -> CardStorageServiceImpl {
+    override func tearDown() {
+        super.tearDown()
+        clearStorage()
+    }
+    
+    // MARK: Clear storage
+    private func clearStorage() {
         let nameOfStorage = "test"
-        let fileStorageService = FileStorageServiceImpl<CardContainer>(
-            nameOfStorage: nameOfStorage
-        )
-        let cardStorageService = CardStorageServiceImpl(
+        let fileStorageService = FileStorageServiceImpl<CardContainer>(nameOfStorage: nameOfStorage)
+        fileStorageService.clearPersistentStorage()
+    }
+    
+    // MARK: Profile storage service
+    private var cardStorageService: CardStorageServiceImpl {
+        let nameOfStorage = "test"
+        let fileStorageService = FileStorageServiceImpl<CardContainer>(nameOfStorage: nameOfStorage)
+        let profileStorageService = CardStorageServiceImpl(
             fileStorageService: fileStorageService
         )
-        return cardStorageService
+        return profileStorageService
     }
     
     // MARK: Append new Card
@@ -35,19 +39,13 @@ final class CardStorageServiceTests: XCTestCase {
         // Given (Arrange)
         var card = Card()
         card.name = "Adam"
-        let cardStorageService = cardStorageService()
         
         // When (Act)
         cardStorageService.appendNewCard(forCards: card)
-        
         let cardStorage = cardStorageService.loadFromStorageCards()
-        guard let cardName = cardStorage.first?.name else {
-            XCTAssertThrowsError("The storage is empty. Cannot get value.")
-            return
-        }
-        
+
         // Then (Assert)
-        XCTAssertEqual(cardName, "Adam")
+        XCTAssertEqual(cardStorage.first?.name, "Adam")
     }
     
     // MARK: Load from storage
@@ -55,18 +53,13 @@ final class CardStorageServiceTests: XCTestCase {
         // Given (Arrange)
         var card = Card()
         card.name = "Adam"
-        let cardStorageService = cardStorageService()
         cardStorageService.appendNewCard(forCards: card)
         
         // When (Act)
         let cardStorage = cardStorageService.loadFromStorageCards()
-        guard let cardName = cardStorage.first?.name else {
-            XCTAssertThrowsError("The storage is empty. Cannot get value.")
-            return
-        }
 
         // Then (Assert)
-        XCTAssertNotEqual(cardName, "El Guja")
+        XCTAssertNotEqual(cardStorage.first?.name, "El Guja")
     }
     
     // MARK: Change card position
@@ -80,20 +73,16 @@ final class CardStorageServiceTests: XCTestCase {
         let indexSet = IndexSet(integer: 1)
         let offset = 0
         
-        let cardStorageService = cardStorageService()
         cardStorageService.appendNewCard(forCards: cardOne)
         cardStorageService.appendNewCard(forCards: cardTwo)
         
         // When (Act)
         cardStorageService.changePositionOfCards(fromOffsets: indexSet, toOffset: offset)
         let cardStorage = cardStorageService.loadFromStorageCards()
-        guard let cardAge = cardStorage.first?.age else {
-            XCTAssertThrowsError("The storage is empty. Cannot get value.")
-            return
-        }
         
         // Then (Assert)
-        XCTAssertEqual(cardAge, 2)
+        XCTAssertEqual(cardStorage[0].age, 2)
+        XCTAssertEqual(cardStorage[1].age, 1)
     }
     
     // MARK: Delete card
@@ -105,7 +94,6 @@ final class CardStorageServiceTests: XCTestCase {
         cardTwo.age = 2
         let indexSet = IndexSet(integer: 1)
         
-        let cardStorageService = cardStorageService()
         cardStorageService.appendNewCard(forCards: cardOne)
         cardStorageService.appendNewCard(forCards: cardTwo)
         
@@ -122,20 +110,14 @@ final class CardStorageServiceTests: XCTestCase {
         // Given (Arrange)
         var card = Card()
         card.name = "Adam"
-        let cardStorageService = cardStorageService()
+        cardStorageService.appendNewCard(forCards: card)
         
         // When (Act)
-        cardStorageService.appendNewCard(forCards: card)
         card.name = "El Guja"
         cardStorageService.editCurrentCard(forCards: card)
-        
         let cardStorage = cardStorageService.loadFromStorageCards()
-        guard let cardName = cardStorage.first?.name else {
-            XCTAssertThrowsError("The storage is empty. Cannot get value.")
-            return
-        }
 
         // Then (Assert)
-        XCTAssertEqual(cardName, "El Guja")
+        XCTAssertEqual(cardStorage.first?.name, "El Guja")
     }
 }
