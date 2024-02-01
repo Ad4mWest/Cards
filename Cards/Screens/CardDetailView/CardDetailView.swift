@@ -31,60 +31,35 @@ struct CardDetailView: View {
                     .font(Font.title2.weight(.bold))
                     .multilineTextAlignment(.center)
                 HStack() {
-                    VStack(spacing: 5) {
-                        Text("Gender")
-                            .bold()
-                            .font(.title2)
-                        TextField("Gender", text: $viewModel.card.gender)
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    VStack(spacing: 5) {
-                        Text("Age")
-                            .bold()
-                            .font(.title2)
-                        TextField(
-                            "Age",
-                            value: $viewModel.card.age,
-                            formatter: NumberFormatter()
-                        )
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    VStack(spacing: 5) {
-                        Text("Nationality")
-                            .bold()
-                            .font(.title2)
-                        TextField("Nationality", text: $viewModel.card.nationality)
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
+                    CardDetailParametersView(
+                        name: "Gender",
+                        parameterString: $viewModel.card.gender
+                    )
+                    CardDetailParametersView(
+                        name: "Age",
+                        parameterInt: $viewModel.card.age
+                    )
+                    CardDetailParametersView(
+                        name: "Nationality",
+                        parameterString: $viewModel.card.nationality
+                    )
                 }
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Email")
-                        .bold()
-                        .font(.title2)
-                    TextField("Email", text: $viewModel.card.email)
-                        .font(.title3)
-                        .foregroundColor(.gray)
-                    Text("Phone")
-                        .bold()
-                        .font(.title2)
-                    TextField("Phone", text: $viewModel.card.phone)
-                        .font(.title3)
-                        .foregroundColor(.secondary)
+                    CardDetailPhoneMailView(
+                        name: "Email",
+                        value: $viewModel.card.email
+                    )
+                    CardDetailPhoneMailView(
+                        name: "Phone",
+                        value: $viewModel.card.phone
+                    )
                 }
                 HStack() {
                     Button("Discard") {
                         viewModel.discardChanges()
                     }
-                    .frame(width: 100, height: 50)
-                    .foregroundColor(.mainAppC)
-                    .capsuleAnimation(rotation)
-                    .hiddenConditionally(
+                    .configurationDetailButton(
+                        rotation,
                         viewModel.editingButtonsHidden
                     )
                     Spacer()
@@ -92,24 +67,22 @@ struct CardDetailView: View {
                         viewModel.saveCurrentCard()
                         viewModel.editingButtonsHiddens()
                     }
-                    .frame(width: 100, height: 50)
-                    .foregroundColor(.mainAppC)
-                    .capsuleAnimation(rotation)
-                    .hiddenConditionally(
+                    .configurationDetailButton(
+                        rotation,
                         viewModel.editingButtonsHidden
                     )
                 }
                 Spacer()
-            } 
+            }
             .padding(20)
-                .disabled(viewModel.editingButtonsHidden)
-                .onDisappear {
-                    viewModel.discardChanges()
-                }
-                .toolbar {
-                    ToolbarItem(
-                        placement: .primaryAction,
-                                content: {
+            .disabled(viewModel.editingButtonsHidden)
+            .onDisappear {
+                viewModel.discardChanges()
+            }
+            .toolbar {
+                ToolbarItem(
+                    placement: .primaryAction,
+                    content: {
                         Button {
                             viewModel.editingButtonsHidden = false
                         } label: {
@@ -117,15 +90,15 @@ struct CardDetailView: View {
                                 .foregroundColor(.mainAppC)
                         }
                     }
-                    )
-                }
-                .alert(item: $viewModel.alertItem) { alertItem in
-                    Alert(
-                        title: alertItem.title,
-                        message: alertItem.message,
-                        dismissButton: alertItem.dismissButton
-                    )
-                }
+                )
+            }
+            .alert(item: $viewModel.alertItem) { alertItem in
+                Alert(
+                    title: alertItem.title,
+                    message: alertItem.message,
+                    dismissButton: alertItem.dismissButton
+                )
+            }
         }
     }
 }
