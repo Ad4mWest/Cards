@@ -75,7 +75,8 @@ struct CardListView_Previews: PreviewProvider {
                 personNetworkService: PersonNetworkServiceImpl(),
                 cardStorageService: CardStorageServiceImpl(
                     fileStorageService: FileStorageServiceImpl<CardContainer>(
-                        nameOfStorage: "Cards"
+                        nameOfStorage: "Cards", 
+                        logingService: LoggingServiceImpl()
                     )
                 )
             )

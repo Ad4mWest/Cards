@@ -14,13 +14,17 @@ struct CardTabView: View {
         TabView {
             cardList.makeCardList()
                 .tabItem {
-                    Image(systemName: "lanyardcard.fill")
-                    Text("Cards")
+                    Label(
+                        "Cards",
+                        systemImage: "lanyardcard.fill"
+                    )
                 }
             cardAccount.makeAccountView()
                 .tabItem {
-                    Image(systemName: "person.text.rectangle")
-                    Text("Account")
+                    Label(
+                        "Account",
+                        systemImage: "person.text.rectangle"
+                    )
                 }
         }
         .accentColor(Color.mainAppC)

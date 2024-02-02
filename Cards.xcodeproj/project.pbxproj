@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		660D821F2B6CF56300776070 /* LoggingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660D821E2B6CF56300776070 /* LoggingService.swift */; };
+		660D82212B6D0E8D00776070 /* MockLoggingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660D82202B6D0E8D00776070 /* MockLoggingService.swift */; };
 		6637D8BE2B6BE1F300D3E944 /* CardDetailParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6637D8BD2B6BE1F300D3E944 /* CardDetailParametersView.swift */; };
 		6637D8C02B6BF24600D3E944 /* CardDetailPhoneMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6637D8BF2B6BF24600D3E944 /* CardDetailPhoneMailView.swift */; };
 		6637D8C22B6BF4A500D3E944 /* DetailButtonsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6637D8C12B6BF4A500D3E944 /* DetailButtonsModifier.swift */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		660D821E2B6CF56300776070 /* LoggingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingService.swift; sourceTree = "<group>"; };
+		660D82202B6D0E8D00776070 /* MockLoggingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoggingService.swift; sourceTree = "<group>"; };
 		6637D8BD2B6BE1F300D3E944 /* CardDetailParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailParametersView.swift; sourceTree = "<group>"; };
 		6637D8BF2B6BF24600D3E944 /* CardDetailPhoneMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailPhoneMailView.swift; sourceTree = "<group>"; };
 		6637D8C12B6BF4A500D3E944 /* DetailButtonsModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailButtonsModifier.swift; sourceTree = "<group>"; };
@@ -120,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		660D821D2B6CF54A00776070 /* LoggingService */ = {
+			isa = PBXGroup;
+			children = (
+				660D821E2B6CF56300776070 /* LoggingService.swift */,
+			);
+			path = LoggingService;
+			sourceTree = "<group>";
+		};
 		66316FBB2B6269A300616118 /* ProfileStorageService */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +288,7 @@
 		66AC60A62B542B1D009BE505 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				660D821D2B6CF54A00776070 /* LoggingService */,
 				66A2E1ED2B5D61CA00268BA6 /* StorageService */,
 				664EBF942B5FD02A004AAE13 /* CardStorageService */,
 				66316FBB2B6269A300616118 /* ProfileStorageService */,
@@ -339,6 +352,7 @@
 			children = (
 				66F5D54F2B67E10C005F4E0B /* ProfileStorageServiceTests.swift */,
 				66FE83D22B69349C00A943B9 /* CardStorageServiceTests.swift */,
+				660D82202B6D0E8D00776070 /* MockLoggingService.swift */,
 			);
 			path = CardsTests;
 			sourceTree = "<group>";
@@ -466,6 +480,7 @@
 				66A2E1EB2B5D543800268BA6 /* CardAccountWireframe.swift in Sources */,
 				66804E222B6199D900C407B9 /* View+Extension.swift in Sources */,
 				66AC60B82B5462BD009BE505 /* NetworkService.swift in Sources */,
+				660D821F2B6CF56300776070 /* LoggingService.swift in Sources */,
 				66A2E1EF2B5D61EB00268BA6 /* ProfileStorageService.swift in Sources */,
 				665F738B2B591AD8005279CD /* GenderResponse.swift in Sources */,
 				66AC605A2B5263C1009BE505 /* CardsApp.swift in Sources */,
@@ -486,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66F5D5502B67E10C005F4E0B /* ProfileStorageServiceTests.swift in Sources */,
+				660D82212B6D0E8D00776070 /* MockLoggingService.swift in Sources */,
 				66FE83D32B69349C00A943B9 /* CardStorageServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

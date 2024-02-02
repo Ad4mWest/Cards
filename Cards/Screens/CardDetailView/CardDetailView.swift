@@ -121,7 +121,8 @@ struct CardDetailView_Previews: PreviewProvider {
                         CardStorageServiceImpl(
                             fileStorageService:
                                 FileStorageServiceImpl(
-                                    nameOfStorage: "Cards"
+                                    nameOfStorage: "Cards",
+                                    logingService: LoggingServiceImpl()
                                 )
                         ),
                     delegate: nil

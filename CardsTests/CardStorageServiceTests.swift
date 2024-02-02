@@ -15,19 +15,30 @@ final class CardStorageServiceTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         clearStorage()
+        logingService = MockLoggingServiceImpl()
     }
     
     // MARK: Clear storage
     private func clearStorage() {
-        let nameOfStorage = "test"
-        let fileStorageService = FileStorageServiceImpl<CardContainer>(nameOfStorage: nameOfStorage)
         fileStorageService.clearPersistentStorage()
+    }
+    
+    // MARK: Mock logging service
+    private var logingService = MockLoggingServiceImpl()
+    
+    // MARK: File storage service
+    private var fileStorageService: FileStorageServiceImpl<CardContainer> {
+        let nameOfStorage = "test"
+        let logingService = logingService
+        let fileStorageService = FileStorageServiceImpl<CardContainer>(
+            nameOfStorage: nameOfStorage,
+            logingService: logingService
+        )
+        return fileStorageService
     }
     
     // MARK: Profile storage service
     private var cardStorageService: CardStorageServiceImpl {
-        let nameOfStorage = "test"
-        let fileStorageService = FileStorageServiceImpl<CardContainer>(nameOfStorage: nameOfStorage)
         let profileStorageService = CardStorageServiceImpl(
             fileStorageService: fileStorageService
         )
@@ -43,9 +54,14 @@ final class CardStorageServiceTests: XCTestCase {
         // When (Act)
         cardStorageService.appendNewCard(forCards: card)
         let cardStorage = cardStorageService.loadFromStorageCards()
+        
+        logingService.logRead()
+        logingService.logWrite()
 
         // Then (Assert)
         XCTAssertEqual(cardStorage.first?.name, "Adam")
+        XCTAssertTrue(logingService.logReadCalled)
+        XCTAssertTrue(logingService.logWriteCalled)
     }
     
     // MARK: Load from storage
@@ -57,9 +73,14 @@ final class CardStorageServiceTests: XCTestCase {
         
         // When (Act)
         let cardStorage = cardStorageService.loadFromStorageCards()
+        
+        logingService.logRead()
+        logingService.logWrite()
 
         // Then (Assert)
         XCTAssertNotEqual(cardStorage.first?.name, "El Guja")
+        XCTAssertTrue(logingService.logReadCalled)
+        XCTAssertTrue(logingService.logWriteCalled)
     }
     
     // MARK: Change card position
@@ -80,9 +101,14 @@ final class CardStorageServiceTests: XCTestCase {
         cardStorageService.changePositionOfCards(fromOffsets: indexSet, toOffset: offset)
         let cardStorage = cardStorageService.loadFromStorageCards()
         
+        logingService.logRead()
+        logingService.logWrite()
+        
         // Then (Assert)
         XCTAssertEqual(cardStorage[0].age, 2)
         XCTAssertEqual(cardStorage[1].age, 1)
+        XCTAssertTrue(logingService.logReadCalled)
+        XCTAssertTrue(logingService.logWriteCalled)
     }
     
     // MARK: Delete card
@@ -101,8 +127,13 @@ final class CardStorageServiceTests: XCTestCase {
         cardStorageService.deleteCard(atOffsets: indexSet)
         let cardStorageCount = cardStorageService.loadFromStorageCards().count
         
+        logingService.logRead()
+        logingService.logWrite()
+        
         // Then (Assert)
         XCTAssertEqual(cardStorageCount, 1)
+        XCTAssertTrue(logingService.logReadCalled)
+        XCTAssertTrue(logingService.logWriteCalled)
     }
     
     // MARK: Edit current card 
@@ -116,8 +147,13 @@ final class CardStorageServiceTests: XCTestCase {
         card.name = "El Guja"
         cardStorageService.editCurrentCard(forCards: card)
         let cardStorage = cardStorageService.loadFromStorageCards()
+        
+        logingService.logRead()
+        logingService.logWrite()
 
         // Then (Assert)
         XCTAssertEqual(cardStorage.first?.name, "El Guja")
+        XCTAssertTrue(logingService.logReadCalled)
+        XCTAssertTrue(logingService.logWriteCalled)
     }
 }

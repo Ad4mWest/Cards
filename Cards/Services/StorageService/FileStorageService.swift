@@ -13,10 +13,15 @@ protocol FileStorageService<TypeData> {
 final class FileStorageServiceImpl<TypeData: Codable>: FileStorageService {
     // MARK: Private properties
     private var nameOfStorage: String
+    private var logingService: LoggingService
     
     // MARK: Initialization
-    init(nameOfStorage: String) {
+    init(
+        nameOfStorage: String,
+        logingService: LoggingService
+    ) {
         self.nameOfStorage = nameOfStorage
+        self.logingService = logingService
     }
     
     //MARK: - Defining that we save our data in the Documents folder
@@ -30,6 +35,7 @@ final class FileStorageServiceImpl<TypeData: Codable>: FileStorageService {
         do {
             let url = persistentFileURL(forStorage: nameOfStorage)
             try JSONEncoder().encode(object).write(to: url)
+            logingService.logWrite()
         } catch {
             throw APIError.invalidDecoding("Unnabled to encode")
         }
@@ -47,6 +53,7 @@ final class FileStorageServiceImpl<TypeData: Codable>: FileStorageService {
                         )
                     )
                 )
+            logingService.logRead()
         } catch {
             throw APIError.invalidDecoding("Unnabled to decode")
         }

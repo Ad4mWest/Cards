@@ -9,19 +9,30 @@ final class ProfileStorageServiceTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         clearStorage()
+        logingService = MockLoggingServiceImpl()
     }
     
     // MARK: Clear storage
     private func clearStorage() {
-        let nameOfStorage = "test"
-        let fileStorageService = FileStorageServiceImpl<Card>(nameOfStorage: nameOfStorage)
         fileStorageService.clearPersistentStorage()
+    }
+    
+    // MARK: Mock logging service
+    private var logingService = MockLoggingServiceImpl()
+    
+    // MARK: File storage service
+    private var fileStorageService: FileStorageServiceImpl<Card> {
+        let nameOfStorage = "test"
+        let logingService = logingService
+        let fileStorageService = FileStorageServiceImpl<Card>(
+            nameOfStorage: nameOfStorage,
+            logingService: logingService
+        )
+        return fileStorageService
     }
     
     // MARK: Profile storage service
     private var profileStorageService: ProfileStorageServiceImpl {
-        let nameOfStorage = "test"
-        let fileStorageService = FileStorageServiceImpl<Card>(nameOfStorage: nameOfStorage)
         let profileStorageService = ProfileStorageServiceImpl(
             fileStorageService: fileStorageService
         )
@@ -38,8 +49,13 @@ final class ProfileStorageServiceTests: XCTestCase {
         profileStorageService.saveToStore(forCards: card)
         let cardStorage = profileStorageService.loadFromStorage()
         
+        logingService.logRead()
+        logingService.logWrite()
+
         // Then (Assert)
         XCTAssertEqual(cardStorage.name, "Adam")
         XCTAssertNotEqual(cardStorage.name, "El Guja")
+        XCTAssertTrue(logingService.logReadCalled)
+        XCTAssertTrue(logingService.logWriteCalled)
     }
 }

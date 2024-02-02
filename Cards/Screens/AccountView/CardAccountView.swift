@@ -73,7 +73,8 @@ struct CardAccountView_Previews: PreviewProvider {
                     profileStorageService:
                         ProfileStorageServiceImpl(
                             fileStorageService: FileStorageServiceImpl(
-                                nameOfStorage: "Profile"
+                                nameOfStorage: "Profile", 
+                                logingService: LoggingServiceImpl()
                             )
                         )
                 )

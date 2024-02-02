@@ -7,7 +7,10 @@ import SwiftUI
 final class CardAccountWireframe {
     func makeAccountView() -> AnyView {
         let nameOfStorage = ProfileStorageServiceImpl.nameOfStorage
-        let storageService = FileStorageServiceImpl<Card>(nameOfStorage: nameOfStorage)
+        let logingService = LoggingServiceImpl()
+        let storageService = FileStorageServiceImpl<Card>(
+            nameOfStorage: nameOfStorage,
+            logingService: logingService)
         let profileStorageService = ProfileStorageServiceImpl(
             fileStorageService: storageService
         )
