@@ -44,7 +44,7 @@ final class CardStorageServiceTests: XCTestCase {
         return fileStorageService
     }
     
-    // MARK: Profile storage service
+    // MARK: Card storage service
     private var cardStorageService: CardStorageServiceImpl {
         let profileStorageService = CardStorageServiceImpl(
             fileStorageService: fileStorageService

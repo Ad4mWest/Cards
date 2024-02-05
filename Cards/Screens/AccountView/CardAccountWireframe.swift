@@ -10,7 +10,8 @@ final class CardAccountWireframe {
         let logingService = LoggingServiceImpl()
         let storageService = FileStorageServiceImpl<Card>(
             nameOfStorage: nameOfStorage,
-            logingService: logingService)
+            logingService: logingService
+        )
         let profileStorageService = ProfileStorageServiceImpl(
             fileStorageService: storageService
         )

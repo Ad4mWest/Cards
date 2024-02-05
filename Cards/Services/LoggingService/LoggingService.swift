@@ -10,6 +10,7 @@ public protocol LoggingService {
 }
 
 final class LoggingServiceImpl: LoggingService {
+    // MARK: Public methods
     func logRead() {
         print("logRead")
     }

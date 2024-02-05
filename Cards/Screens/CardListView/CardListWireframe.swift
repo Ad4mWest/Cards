@@ -10,7 +10,7 @@ final class CardListWireframe {
         let logingService = LoggingServiceImpl()
         let storageService = FileStorageServiceImpl<CardContainer>(
             nameOfStorage: nameOfStorage, 
-            logingService: LoggingServiceImpl()
+            logingService: logingService
         )
         let cardStorageService = CardStorageServiceImpl(fileStorageService: storageService)
         let personNetworkService = PersonNetworkServiceImpl()

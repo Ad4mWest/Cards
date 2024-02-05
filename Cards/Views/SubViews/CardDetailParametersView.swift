@@ -5,10 +5,12 @@
 import SwiftUI
 
 struct CardDetailParametersView: View {
+    // MARK: Private properties
     @Binding private var parameterString: String
     @Binding private var parameterInt: Int
     private let name: String
     
+    // MARK: Initialization
     init(
         name: String,
         parameterString: Binding<String> = .constant(String()),
@@ -19,15 +21,17 @@ struct CardDetailParametersView: View {
         self._parameterInt = parameterInt
     }
     
+    // MARK: Lifecycle
     var body: some View {
         if name == "Age" {
             VStack(spacing: 5) {
                 Text(name)
                     .bold()
                     .font(.title2)
-                TextField(name,
-                          value: $parameterInt,
-                          formatter: NumberFormatter()
+                TextField(
+                    name,
+                    value: $parameterInt,
+                    formatter: NumberFormatter()
                 )
                 .font(.title3)
                 .foregroundColor(.secondary)

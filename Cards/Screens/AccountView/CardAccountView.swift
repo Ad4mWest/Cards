@@ -17,7 +17,9 @@ struct CardAccountView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Personal Info")) {
+                Section(
+                    header: Text("Personal Info")
+                ) {
                     TextField("Full name", text: $viewModel.card.name)
                     TextField("Gender", text: $viewModel.card.gender)
                     Picker("Nationality", selection: $viewModel.card.nationality) {
@@ -33,7 +35,9 @@ struct CardAccountView: View {
                     }
                     .pickerStyle(.automatic)
                 }
-                Section(header: Text("Contacts")) {
+                Section(
+                    header: Text("Contacts")
+                ) {
                     TextField("Email", text: $viewModel.card.email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
@@ -43,7 +47,9 @@ struct CardAccountView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                 }
-                Section(header: Text("Contacts")) {
+                Section(
+                    header: Text("Contacts")
+                ) {
                     Button("Save profile") {
                         viewModel.saveChangesProfile()
                     }
@@ -73,7 +79,7 @@ struct CardAccountView_Previews: PreviewProvider {
                     profileStorageService:
                         ProfileStorageServiceImpl(
                             fileStorageService: FileStorageServiceImpl(
-                                nameOfStorage: "Profile", 
+                                nameOfStorage: "Profile",
                                 logingService: LoggingServiceImpl()
                             )
                         )

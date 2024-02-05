@@ -3,7 +3,6 @@
 //  Created by Adam West on 13.01.2024.
 
 import SwiftUI
-import Combine
 
 struct CardListView: View {
     // MARK: Private properties
@@ -75,7 +74,7 @@ struct CardListView_Previews: PreviewProvider {
                 personNetworkService: PersonNetworkServiceImpl(),
                 cardStorageService: CardStorageServiceImpl(
                     fileStorageService: FileStorageServiceImpl<CardContainer>(
-                        nameOfStorage: "Cards", 
+                        nameOfStorage: "Cards",
                         logingService: LoggingServiceImpl()
                     )
                 )
