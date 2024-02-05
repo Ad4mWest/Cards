@@ -3,38 +3,39 @@
 //  Created by Adam West on 13.01.2024.
 
 import SwiftUI
-import Combine
 
 struct CardListView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardListViewModel
-    
-    private let cardListWireframe = CardDetailWireframe()
+    private let cardListDetail: CardDetailWireframe
     
     // MARK: Initialization
     init(viewModel: CardListViewModel) {
         self.viewModel = viewModel
+        self.cardListDetail = CardDetailWireframe()
     }
     
     // MARK: Lifecycle
     var body: some View {
-        ZStack {
-            NavigationView {
-                List {
+        NavigationView {
+            ZStack {
+                List() {
                     ForEach(viewModel.cards, id: \.self) { card in
                         NavigationLink {
-                            cardListWireframe.makeCardDetail(card: card)
+                            cardListDetail.makeCardDetail(
+                                card: card,
+                                delegate: viewModel
+                            )
                         } label: {
                             CardListCell(card: card)
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        viewModel.cards.remove(atOffsets: indexSet)
+                        viewModel.remove(atOffsets: indexSet)
                     })
                     .onMove(perform: { indices, newOffset in
-                        viewModel.cards.move(fromOffsets: indices, toOffset: newOffset)
+                        viewModel.onMove(fromOffsets: indices, toOffset: newOffset)
                     })
-                    
                 }
                 .navigationTitle("Generate cards")
                 .toolbar {
@@ -48,11 +49,20 @@ struct CardListView: View {
                         }
                     })
                 }
+                if viewModel.cards.isEmpty {
+                    EmptyCardView()
+                }
             }
-            
-            if viewModel.cards.isEmpty {
-                EmptyCardView()
-            }
+        }
+        .onAppear {
+            viewModel.loadFromStorage()
+        }
+        .alert(item: $viewModel.alertItem) {
+            Alert(
+                title: $0.title,
+                message: $0.message,
+                dismissButton: $0.dismissButton
+            )
         }
     }
 }
@@ -61,7 +71,14 @@ struct CardListView_Previews: PreviewProvider {
     static var previews: some View {
         CardListView(
             viewModel: CardListViewModel(
-                personNetworkService: PersonNetworkServiceImpl()
-            ))
+                personNetworkService: PersonNetworkServiceImpl(),
+                cardStorageService: CardStorageServiceImpl(
+                    fileStorageService: FileStorageServiceImpl<CardContainer>(
+                        nameOfStorage: "Cards",
+                        logingService: LoggingServiceImpl()
+                    )
+                )
+            )
+        )
     }
 }

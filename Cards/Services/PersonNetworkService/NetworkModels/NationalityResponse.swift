@@ -14,8 +14,22 @@ struct NationalityResponse: Decodable {
             case countryId = "country_id"
             case probability
         }
+        
         let countryId: String
         let probability: Double
+    }
+}
+
+extension NationalityResponse {
+    init() {
+        self.count = Int()
+        self.name = String()
+        self.country = [
+            Country(
+                countryId: "RU",
+                probability: Double()
+            )
+        ]
     }
 }
 

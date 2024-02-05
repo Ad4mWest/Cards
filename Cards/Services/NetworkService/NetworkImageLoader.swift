@@ -11,11 +11,14 @@ class NetworkImageLoader {
     private let cache: NSCache<NSURL, UIImage>
     
     // MARK: Initialization
-    init(urlSession: URLSession = .shared,
-         cache: NSCache<NSURL, UIImage> = .init()) {
+    init(
+        urlSession: URLSession = .shared,
+        cache: NSCache<NSURL, UIImage> = .init()
+    ) {
         self.urlSession = urlSession
         self.cache = cache
     }
+    
     // MARK: Public methods
     func publisher(for url: URL) -> AnyPublisher<UIImage, Error> {
         if let image = cache.object(forKey: url as NSURL) {
@@ -29,16 +32,20 @@ class NetworkImageLoader {
                 .map(\.data)
                 .tryMap { data in
                     guard let image = UIImage(data: data) else {
-                        throw URLError(.badServerResponse, userInfo: [
-                            NSURLErrorFailingURLErrorKey: url
-                        ])
+                        throw URLError(
+                            .badServerResponse, userInfo: [
+                                NSURLErrorFailingURLErrorKey: url
+                            ]
+                        )
                     }
                     return image
                 }
                 .receive(on: DispatchQueue.main)
-                .handleEvents(receiveOutput: { [cache] image in
-                    cache.setObject(image, forKey: url as NSURL)
-                })
+                .handleEvents(
+                    receiveOutput: { [cache] image in
+                        cache.setObject(image, forKey: url as NSURL)
+                    }
+                )
                 .eraseToAnyPublisher()
         }
     }

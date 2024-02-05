@@ -10,4 +10,12 @@ struct AgeResponse: Decodable {
     let age: Int
 }
 
+extension AgeResponse {
+    init() {
+        self.count = 0
+        self.name = String()
+        self.age = 33
+    }
+}
+
 

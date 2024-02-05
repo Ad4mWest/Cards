@@ -1,5 +1,5 @@
 //  CardDetailView.swift
-//  OrderFood
+//  Cards
 //  Created by Adam West on 12.01.2024.
 
 import SwiftUI
@@ -7,6 +7,7 @@ import SwiftUI
 struct CardDetailView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardDetailViewModel
+    @State private var rotation: Double = 0
     
     // MARK: Initialization
     init(viewModel: CardDetailViewModel) {
@@ -15,34 +16,89 @@ struct CardDetailView: View {
     
     // MARK: Lifecycle
     var body: some View {
-        VStack(spacing: 30) {
-            ZStack {
-                Divider()
-                CardRemoteImage(url: viewModel.card.imageURL)
-                    .frame(width: 225, height: 225)
-                    .clipShape(Circle())
-                    .shadow(color: .mainAppC, radius: 20)
-            }
-            Text(viewModel.card.name)
-                .font(.title2)
-                .fontWeight(.semibold)
-            
-            VStack(spacing: 20) {
-                HStack(spacing: 20) {                    CardInfoView(title: "Gender",
-                                 text: "\(viewModel.card.gender)")
-                    CardInfoView(title: "Age",
-                                 text: "\(viewModel.card.age)")
-                    CardInfoView(title: "Nationality",
-                                 text: "\(viewModel.card.nationality)")
+        HStack {
+            VStack(spacing: 25) {
+                ZStack {
+                    Divider()
+                    CardRemoteImage(url: viewModel.card.imageURL)
+                        .shadow(color: .mainAppC, radius: 20)
+                        .rotationAnimation(rotation)
+                        .onTapGesture {
+                            rotation += 360
+                        }
+                }
+                TextField("Enter your Name", text: $viewModel.card.name)
+                    .font(Font.title2.weight(.bold))
+                    .multilineTextAlignment(.center)
+                HStack() {
+                    CardDetailParametersView(
+                        name: "Gender",
+                        parameterString: $viewModel.card.gender
+                    )
+                    CardDetailParametersView(
+                        name: "Age",
+                        parameterInt: $viewModel.card.age
+                    )
+                    CardDetailParametersView(
+                        name: "Nationality",
+                        parameterString: $viewModel.card.nationality
+                    )
+                }
+                VStack(alignment: .leading, spacing: 5) {
+                    CardDetailPhoneMailView(
+                        name: "Email",
+                        value: $viewModel.card.email
+                    )
+                    CardDetailPhoneMailView(
+                        name: "Phone",
+                        value: $viewModel.card.phone
+                    )
+                }
+                HStack() {
+                    Button("Discard") {
+                        viewModel.discardChanges()
+                    }
+                    .configurationDetailButton(
+                        rotation,
+                        viewModel.editingButtonsHidden
+                    )
+                    Spacer()
+                    Button("Save") {
+                        viewModel.saveCurrentCard()
+                        viewModel.editingButtonsHiddens()
+                    }
+                    .configurationDetailButton(
+                        rotation,
+                        viewModel.editingButtonsHidden
+                    )
                 }
                 Spacer()
-                VStack(alignment: .leading) {
-                    CardPhoneEmailView(
-                        email: viewModel.card.email,
-                        phone: viewModel.card.phone)
-                }
             }
-            Spacer()
+            .padding(20)
+            .disabled(viewModel.editingButtonsHidden)
+            .onDisappear {
+                viewModel.discardChanges()
+            }
+            .toolbar {
+                ToolbarItem(
+                    placement: .primaryAction,
+                    content: {
+                        Button {
+                            viewModel.editingButtonsHidden = false
+                        } label: {
+                            Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                                .foregroundColor(.mainAppC)
+                        }
+                    }
+                )
+            }
+            .alert(item: $viewModel.alertItem) {
+                Alert(
+                    title: $0.title,
+                    message: $0.message,
+                    dismissButton: $0.dismissButton
+                )
+            }
         }
     }
 }
@@ -54,12 +110,23 @@ struct CardDetailView_Previews: PreviewProvider {
                 CardDetailViewModel(
                     card:
                         Card(id: UUID(),
-                             name: "Adam",
+                             name: "Adam West",
                              imageURL: "",
                              age: 5,
                              gender: "male",
                              nationality: "Ru",
                              email: "adam.west@example.com",
-                             phone: "(272) 790-0888")))
+                             phone: "(272) 790-0888"),
+                    cardStorageService:
+                        CardStorageServiceImpl(
+                            fileStorageService:
+                                FileStorageServiceImpl(
+                                    nameOfStorage: "Cards",
+                                    logingService: LoggingServiceImpl()
+                                )
+                        ),
+                    delegate: nil
+                )
+        )
     }
 }
