@@ -7,12 +7,7 @@ import SwiftUI
 final class CardDetailViewModel: ObservableObject {
     // MARK: Public Properties
     @Published var alertItem: AlertItem?
-    var angularGradient: AngularGradient {
-        AngularGradient(
-            gradient: self.colors,
-            center: .center
-        )
-    }
+    @Published var editingButtonsHidden = true    
     var card: Card
     var discardCard: Card = Card()
     
@@ -20,7 +15,6 @@ final class CardDetailViewModel: ObservableObject {
     weak var delegate: CardListViewModelDelegate?
     
     // MARK: Private properties
-    private var colors = Gradient(colors: [.red, .yellow, .green, .blue, .purple])
     private let cardStorageService: CardStorageService
     
     // MARK: Initialization
@@ -37,14 +31,63 @@ final class CardDetailViewModel: ObservableObject {
     
     // MARK: Public methods
     func saveCurrentCard() {
+        guard isValidForm else {
+            return
+        }
         cardStorageService.editCurrentCard(forCards: card)
         discardCard = card
         delegate?.buttonSaveTapped()
-        alertItem = AlertContext.userSaveSuccess
+        DispatchQueue.main.async {
+            self.alertItem = AlertContext.userSaveSuccess
+        }
     }
     
     func discardChanges() {
         card = discardCard
-        alertItem = AlertContext.discardCardChanges
+        self.alertItem = AlertContext.discardCardChanges
+    }
+    
+    func editingButtonsHiddens() {
+        if isValidForm {
+            editingButtonsHidden = true
+        }
+    }
+}
+
+// MARK: - Validation
+extension CardDetailViewModel {
+    var isValidForm: Bool {
+        guard
+            card.name.isNotEmpty &&
+                card.email.isNotEmpty &&
+                card.phone.isNotEmpty &&
+                card.gender.isNotEmpty &&
+                String(card.age).isNotEmpty &&
+                card.nationality.isNotEmpty
+        else {
+            alertItem = AlertContext.invalidForm
+            return false
+        }
+        
+        guard card.gender.isValidGender else {
+            alertItem = AlertContext.invalidGender
+            return false
+        }
+        
+        guard String(card.age).isValidAge else {
+            alertItem = AlertContext.invalidAge
+            return false
+        }
+        
+        guard card.nationality.isValidNationality else {
+            alertItem = AlertContext.invalidNationality
+            return false
+        }
+        
+        guard card.email.isValidEmail else {
+            alertItem = AlertContext.invalidEmail
+            return false
+        }
+        return true
     }
 }

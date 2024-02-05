@@ -7,6 +7,7 @@ import SwiftUI
 struct CardDetailView: View {
     // MARK: Private properties
     @ObservedObject private var viewModel: CardDetailViewModel
+    @State private var rotation: Double = 0
     
     // MARK: Initialization
     init(viewModel: CardDetailViewModel) {
@@ -21,92 +22,83 @@ struct CardDetailView: View {
                     Divider()
                     CardRemoteImage(url: viewModel.card.imageURL)
                         .shadow(color: .mainAppC, radius: 20)
+                        .rotationAnimation(rotation)
+                        .onTapGesture {
+                            rotation += 360
+                        }
                 }
                 TextField("Enter your Name", text: $viewModel.card.name)
                     .font(Font.title2.weight(.bold))
                     .multilineTextAlignment(.center)
                 HStack() {
-                    VStack(spacing: 5) {
-                        Text("Gender")
-                            .bold()
-                            .font(.title2)
-                        TextField("Gender", text: $viewModel.card.gender)
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    VStack(spacing: 5) {
-                        Text("Age")
-                            .bold()
-                            .font(.title2)
-                        TextField("Age", value: $viewModel.card.age, formatter: NumberFormatter())
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    VStack(spacing: 5) {
-                        Text("Nationality")
-                            .bold()
-                            .font(.title2)
-                        TextField("Nationality", text: $viewModel.card.nationality)
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
+                    CardDetailParametersView(
+                        name: "Gender",
+                        parameterString: $viewModel.card.gender
+                    )
+                    CardDetailParametersView(
+                        name: "Age",
+                        parameterInt: $viewModel.card.age
+                    )
+                    CardDetailParametersView(
+                        name: "Nationality",
+                        parameterString: $viewModel.card.nationality
+                    )
                 }
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Email")
-                        .bold()
-                        .font(.title2)
-                    TextField("Nationality", text: $viewModel.card.email)
-                        .font(.title3)
-                        .foregroundColor(.gray)
-                    Text("Phone")
-                        .bold()
-                        .font(.title2)
-                    TextField("Nationality", text: $viewModel.card.phone)
-                        .font(.title3)
-                        .foregroundColor(.secondary)
+                    CardDetailPhoneMailView(
+                        name: "Email",
+                        value: $viewModel.card.email
+                    )
+                    CardDetailPhoneMailView(
+                        name: "Phone",
+                        value: $viewModel.card.phone
+                    )
                 }
                 HStack() {
                     Button("Discard") {
                         viewModel.discardChanges()
                     }
-                    .frame(width: 100, height: 50)
-                    .foregroundColor(.mainAppC)
-                    .background(
-                        Capsule()
-                            .strokeBorder(
-                                viewModel.angularGradient,
-                                lineWidth: 3
-                            )
+                    .configurationDetailButton(
+                        rotation,
+                        viewModel.editingButtonsHidden
                     )
                     Spacer()
                     Button("Save") {
                         viewModel.saveCurrentCard()
+                        viewModel.editingButtonsHiddens()
                     }
-                    .frame(width: 100, height: 50)
-                    .foregroundColor(.mainAppC)
-                    .background(
-                        Capsule()
-                            .strokeBorder(
-                                viewModel.angularGradient,
-                                lineWidth: 3
-                            )
+                    .configurationDetailButton(
+                        rotation,
+                        viewModel.editingButtonsHidden
                     )
                 }
                 Spacer()
-            }.padding(20)
-                .onDisappear {
-                    viewModel.discardChanges()
-                }
-                .alert(item: $viewModel.alertItem) { alertItem in
-                    Alert(
-                        title: alertItem.title,
-                        message: alertItem.message,
-                        dismissButton: alertItem.dismissButton
-                    )
-                }
+            }
+            .padding(20)
+            .disabled(viewModel.editingButtonsHidden)
+            .onDisappear {
+                viewModel.discardChanges()
+            }
+            .toolbar {
+                ToolbarItem(
+                    placement: .primaryAction,
+                    content: {
+                        Button {
+                            viewModel.editingButtonsHidden = false
+                        } label: {
+                            Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                                .foregroundColor(.mainAppC)
+                        }
+                    }
+                )
+            }
+            .alert(item: $viewModel.alertItem) {
+                Alert(
+                    title: $0.title,
+                    message: $0.message,
+                    dismissButton: $0.dismissButton
+                )
+            }
         }
     }
 }
@@ -126,7 +118,13 @@ struct CardDetailView_Previews: PreviewProvider {
                              email: "adam.west@example.com",
                              phone: "(272) 790-0888"),
                     cardStorageService:
-                        CardStorageServiceImpl(),
+                        CardStorageServiceImpl(
+                            fileStorageService:
+                                FileStorageServiceImpl(
+                                    nameOfStorage: "Cards",
+                                    logingService: LoggingServiceImpl()
+                                )
+                        ),
                     delegate: nil
                 )
         )

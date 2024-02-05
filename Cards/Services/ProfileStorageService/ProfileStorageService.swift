@@ -9,8 +9,16 @@ protocol ProfileStorageService {
     func loadFromStorage() -> Card
 }
 
-final class ProfileStorageServiceImpl: ProfileStorageService, FileStorageService  {
+final class ProfileStorageServiceImpl: ProfileStorageService {
     typealias TypeData = Card
+    
+    // MARK: Public Properties
+    private let fileStorageService: any FileStorageService<TypeData>
+    
+    // MARK: Initialization
+    init(fileStorageService: any FileStorageService<TypeData>) {
+        self.fileStorageService = fileStorageService
+    }
     
     // MARK: Save
     func saveToStore(forCards card: Card) {
@@ -26,12 +34,17 @@ final class ProfileStorageServiceImpl: ProfileStorageService, FileStorageService
     }
 }
 
+// MARK: - Name of storage
+extension ProfileStorageServiceImpl {
+    static let nameOfStorage: String = "Profile"
+}
+
 // - MARK: Private methods
 private extension ProfileStorageServiceImpl {
     func loadContainer() -> Card {
         var container: Card
         do {
-            container = try loadFromStore()
+            container = try fileStorageService.loadFromStore()
             return container
         } catch {
             print(APIError.invalidDecoding("Unnabled to load").localizedDescription)
@@ -41,7 +54,7 @@ private extension ProfileStorageServiceImpl {
     
     func saveToContainer(forContainer container: Card) {
         do {
-            try saveToStore(forObject: container)
+            try fileStorageService.saveToStore(forObject: container)
         } catch {
             print(APIError.invalidDecoding("Unnabled to save").localizedDescription)
         }

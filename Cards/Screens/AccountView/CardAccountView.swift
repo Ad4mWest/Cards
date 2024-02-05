@@ -17,27 +17,27 @@ struct CardAccountView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Personal Info")) {
+                Section(
+                    header: Text("Personal Info")
+                ) {
                     TextField("Full name", text: $viewModel.card.name)
                     TextField("Gender", text: $viewModel.card.gender)
-                    Picker(selection: $viewModel.card.nationality) {
-                        ForEach(Card.nationality, id: \.self) { nationality in
-                            Text(nationality)
+                    Picker("Nationality", selection: $viewModel.card.nationality) {
+                        ForEach(Card.nationality, id: \.self) {
+                            Text($0)
                         }
-                    } label: {
-                        Text("Nationality")
                     }
                     .pickerStyle(.automatic)
-                    Picker(selection: $viewModel.card.age) {
-                        ForEach(0..<110, id: \.self) { age in
-                            Text("\(age)")
+                    Picker("Age", selection: $viewModel.card.age) {
+                        ForEach(0..<110, id: \.self) {
+                            Text("\($0)")
                         }
-                    } label: {
-                        Text("Age")
                     }
                     .pickerStyle(.automatic)
                 }
-                Section(header: Text("Contacts")) {
+                Section(
+                    header: Text("Contacts")
+                ) {
                     TextField("Email", text: $viewModel.card.email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
@@ -47,10 +47,13 @@ struct CardAccountView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                 }
-                Section(header: Text("Contacts")) {
+                Section(
+                    header: Text("Contacts")
+                ) {
                     Button("Save profile") {
                         viewModel.saveChangesProfile()
-                    } .foregroundColor(.mainAppC)
+                    }
+                    .foregroundColor(.mainAppC)
                 }
             }
             .navigationTitle("Your Profile")
@@ -58,11 +61,11 @@ struct CardAccountView: View {
         .onAppear {
             viewModel.retrieveCardData()
         }
-        .alert(item: $viewModel.alertItem) { alertItem in
+        .alert(item: $viewModel.alertItem) {
             Alert(
-                title: alertItem.title,
-                message: alertItem.message,
-                dismissButton: alertItem.dismissButton
+                title: $0.title,
+                message: $0.message,
+                dismissButton: $0.dismissButton
             )
         }
     }
@@ -73,7 +76,13 @@ struct CardAccountView_Previews: PreviewProvider {
         CardAccountView(
             viewModel:
                 CardAccountViewModel(
-                    profileStorageService:  ProfileStorageServiceImpl()
+                    profileStorageService:
+                        ProfileStorageServiceImpl(
+                            fileStorageService: FileStorageServiceImpl(
+                                nameOfStorage: "Profile",
+                                logingService: LoggingServiceImpl()
+                            )
+                        )
                 )
         )
     }

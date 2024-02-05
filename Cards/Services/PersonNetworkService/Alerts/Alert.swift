@@ -12,7 +12,7 @@ struct AlertItem: Identifiable {
 }
 
 struct AlertContext {
-    //MARK: - Network Alerts
+    //MARK: Network Alerts
     static let invalidData = AlertItem(
         title: Text("Server Error"),
         message: Text("The data received from the server was invalid. Please contact support."),
@@ -38,7 +38,7 @@ struct AlertContext {
     )
     
     
-    //MARK: - Account Alerts
+    //MARK: Account Alerts
     static let invalidForm = AlertItem(
         title: Text("Invalid Form"),
         message: Text("Please ensure all fields in the form have been filled out."),
@@ -48,6 +48,30 @@ struct AlertContext {
     static let invalidEmail = AlertItem(
         title: Text("Invalid Email"),
         message: Text("Please ensure your email is correct."),
+        dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidGender = AlertItem(
+        title: Text("Invalid Gender"),
+        message: Text("Please ensure your gender is correct."),
+        dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidAge = AlertItem(
+        title: Text("Invalid Age"),
+        message: Text("Please ensure your age is correct."),
+        dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidNationality = AlertItem(
+        title: Text("Invalid Nationality"),
+        message: Text("Please ensure your nationality is correct."),
+        dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidUserData = AlertItem(
+        title: Text("Profile Error"),
+        message: Text("There was an error saving or retrieving your profile."),
         dismissButton: .default(Text("OK"))
     )
     
@@ -61,11 +85,5 @@ struct AlertContext {
         title: Text("Changes Cancelled"),
         message: Text("Your profile information was successfully discard."),
         dismissButton: .default(Text("OK"))
-    )
-    
-    static let invalidUserData = AlertItem(
-        title: Text("Profile Error"),
-        message: Text("There was an error saving or retrieving your profile."),
-        dismissButton: .default(Text("OK"))
-    )
+    )  
 }

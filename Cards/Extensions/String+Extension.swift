@@ -16,14 +16,35 @@ extension String {
         return phonePredicate.evaluate(with: self)
     }
     
+    var isValidGender: Bool {
+        let genders = [
+            "male", "female", "transgender", "gender neutral", "non-binary", "agender", "pangender", "genderqueer", "two-spirit", "third gender", "none"
+        ]
+        return genders.contains { $0 == self.lowercased() }
+    }
+    
     var isValidAge: Bool {
-        let phoneFormat = "^\\d{2}$"
-        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneFormat)
-        return phonePredicate.evaluate(with: self)
+        guard let value = Int(self) else {
+            return false
+        }
+        switch value {
+        case 0...150: return true
+        default: return false
+        }
+    }
+    
+    var isValidNationality: Bool {
+        let nationalityFormat = "^[A-Za-z][A-Za-z]$"
+        let nationalityPredicate = NSPredicate(format: "SELF MATCHES %@", nationalityFormat)
+        return nationalityPredicate.evaluate(with: self)
     }
     
     func safePercentEncoding(withAllowedCharacters allowedCharacters: CharacterSet) -> String? {
         let allowedCharacters = CharacterSet(bitmapRepresentation: allowedCharacters.bitmapRepresentation)
         return addingPercentEncoding(withAllowedCharacters: allowedCharacters)
+    }
+    
+    var isNotEmpty: Bool {
+        return !self.isEmpty
     }
 }

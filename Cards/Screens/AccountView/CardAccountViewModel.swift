@@ -12,25 +12,6 @@ final class CardAccountViewModel: ObservableObject {
     // MARK: Private properties
     private let profileStorageService: ProfileStorageService
     
-    // MARK: Validation
-    var isValidForm: Bool {
-        guard !card.name.isEmpty && !card.email.isEmpty && !card.phone.isEmpty else {
-            alertItem = AlertContext.invalidForm
-            return false
-        }
-        
-        guard card.email.isValidEmail else {
-            alertItem = AlertContext.invalidEmail
-            return false
-        }
-        
-        guard card.phone.isValidPhone else {
-            alertItem = AlertContext.invalidForm
-            return false
-        }
-        return true
-    }
-    
     // MARK: Initialization
     init(profileStorageService: ProfileStorageService) {
         self.profileStorageService = profileStorageService
@@ -47,5 +28,30 @@ final class CardAccountViewModel: ObservableObject {
         }
         profileStorageService.saveToStore(forCards: card)
         alertItem = AlertContext.userSaveSuccess
+    }
+}
+
+// MARK: - Validation
+extension CardAccountViewModel {
+    var isValidForm: Bool {
+        guard
+            card.name.isNotEmpty &&
+            card.email.isNotEmpty &&
+            card.phone.isNotEmpty
+        else {
+            alertItem = AlertContext.invalidForm
+            return false
+        }
+        
+        guard card.email.isValidEmail else {
+            alertItem = AlertContext.invalidEmail
+            return false
+        }
+        
+        guard card.phone.isValidPhone else {
+            alertItem = AlertContext.invalidForm
+            return false
+        }
+        return true
     }
 }
