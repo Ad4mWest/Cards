@@ -9,7 +9,13 @@ final class ProfileStorageServiceTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         clearStorage()
-        logingService = MockLoggingServiceImpl()
+        setupLogingService()
+    }
+    
+    // MARK: Setup loging service
+    private func setupLogingService() {
+        logingService.logReadCalled = false
+        logingService.logWriteCalled = false
     }
     
     // MARK: Clear storage
@@ -48,9 +54,6 @@ final class ProfileStorageServiceTests: XCTestCase {
         // When (Act)
         profileStorageService.saveToStore(forCards: card)
         let cardStorage = profileStorageService.loadFromStorage()
-        
-        logingService.logRead()
-        logingService.logWrite()
 
         // Then (Assert)
         XCTAssertEqual(cardStorage.name, "Adam")

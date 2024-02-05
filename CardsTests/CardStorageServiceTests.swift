@@ -6,16 +6,23 @@ import XCTest
 @testable import Cards
 
 final class CardStorageServiceTests: XCTestCase {
-    // MARK: Resset storage after each test
+    // MARK: Resset storage before/after each test
     override func setUp() {
         super.setUp()
         clearStorage()
+        setupLogingService()
     }
     
     override func tearDown() {
         super.tearDown()
         clearStorage()
-        logingService = MockLoggingServiceImpl()
+        setupLogingService()
+    }
+    
+    // MARK: Setup loging service
+    private func setupLogingService() {
+        logingService.logReadCalled = false
+        logingService.logWriteCalled = false
     }
     
     // MARK: Clear storage
@@ -54,9 +61,6 @@ final class CardStorageServiceTests: XCTestCase {
         // When (Act)
         cardStorageService.appendNewCard(forCards: card)
         let cardStorage = cardStorageService.loadFromStorageCards()
-        
-        logingService.logRead()
-        logingService.logWrite()
 
         // Then (Assert)
         XCTAssertEqual(cardStorage.first?.name, "Adam")
@@ -73,9 +77,6 @@ final class CardStorageServiceTests: XCTestCase {
         
         // When (Act)
         let cardStorage = cardStorageService.loadFromStorageCards()
-        
-        logingService.logRead()
-        logingService.logWrite()
 
         // Then (Assert)
         XCTAssertNotEqual(cardStorage.first?.name, "El Guja")
@@ -101,9 +102,6 @@ final class CardStorageServiceTests: XCTestCase {
         cardStorageService.changePositionOfCards(fromOffsets: indexSet, toOffset: offset)
         let cardStorage = cardStorageService.loadFromStorageCards()
         
-        logingService.logRead()
-        logingService.logWrite()
-        
         // Then (Assert)
         XCTAssertEqual(cardStorage[0].age, 2)
         XCTAssertEqual(cardStorage[1].age, 1)
@@ -127,9 +125,6 @@ final class CardStorageServiceTests: XCTestCase {
         cardStorageService.deleteCard(atOffsets: indexSet)
         let cardStorageCount = cardStorageService.loadFromStorageCards().count
         
-        logingService.logRead()
-        logingService.logWrite()
-        
         // Then (Assert)
         XCTAssertEqual(cardStorageCount, 1)
         XCTAssertTrue(logingService.logReadCalled)
@@ -147,9 +142,6 @@ final class CardStorageServiceTests: XCTestCase {
         card.name = "El Guja"
         cardStorageService.editCurrentCard(forCards: card)
         let cardStorage = cardStorageService.loadFromStorageCards()
-        
-        logingService.logRead()
-        logingService.logWrite()
 
         // Then (Assert)
         XCTAssertEqual(cardStorage.first?.name, "El Guja")

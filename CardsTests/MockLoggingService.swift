@@ -12,12 +12,10 @@ public class MockLoggingServiceImpl: LoggingService {
     
     // MARK: Public methods
     public func logRead() {
-        print("logRead")
         logReadCalled = true
     }
     
     public func logWrite() {
-        print("logWrite")
         logWriteCalled = true
     }
 }
